@@ -1,0 +1,104 @@
+1661 populations (Mortimer, 13, 56)
+    total: 5.14 million
+    
+    London: ~410,000
+
+1670 (Mortimer, 41-2)
+    total: ~4,980,000
+    
+    London: ~475,000
+    Norwich: ~20,000
+    Bristol: ~20,000
+    York: ~12,000
+    Newcastle: ~12,000
+    Colchester: ~9,000
+    Exeter: ~9,000
+    Chester: ~8,000
+    Ipswich: ~8,000
+    Great Yarmouth: ~8,000
+    Plymouth: ~8,000
+    Worcester: ~8,000
+    Coventry: ~7,000
+    King's Lynn: ~7,000
+    Manchester: ~6,000
+    Canterbury: ~6,000
+    Leeds: ~6,000
+    Birmingham: ~6,000
+    Cambridge: ~6,000
+    Kingston upon Hill: ~6,000
+    Salisbury: ~6,000
+    Bury St Edmunds: ~5,000
+    Leicester: ~5,000
+    Oxford: ~5,000
+    Shrewsbury: ~5,000
+    Gloucester: ~5,000
+    
+    towns of more than 5,000: ~680,000 or 13.6% of the population
+    towns of less than 5,000 or rural areas: ~4,320,000 or 86.4% of the population
+    
+1680 (Mortimer, 56)
+    infant mortality: 21+%
+    children who die before 15: 37%
+    children under 15: 30% of total population
+    people over 60: 10%
+    
+1695 (Mortimer, 57)
+    this is from a bar chart
+    0-9: 27%
+    10-19: 20%
+    20-29: 15%
+    30-39: 12%
+    40-49: 8%
+    50-59: 6%
+    60-69: 5%
+    70-79: 4%
+    80+: 3%
+    
+age group most impacted by plague deaths (Slack, 182)
+	10-35
+
+marriage (Mortimer, 56-7)
+    minimum female: 12
+    minimum male: 14
+    average female: 24
+    average male: 28
+    
+Gregory King's scheme of income, 1688 (Mortimer, 59)
+    number of households    rank    ppl per household incl servants     avg annual household income
+    160                     peers of the realm                  40              £2,800
+    26                      prelates                            20              £1,300
+    800                     baronets                            16              £880
+    600                     knights                             13              £650
+    
+    3,000                   esquires                            10              £450
+    2,000                   greater merchants/traders by sea    8               £400
+    12,000                  gentlemen                           8               £280
+    5,000                   men in greater admin offices        8               £240
+    
+    8,000                   lesser merchants/traders by sea     6               £200
+    10,000                  lawyers                             7               £140
+    5,000                   men in lesser admin offices         6               £120
+    40,000                  greater freeholders                 7               £84
+    2,000                   greater clergy                      6               £60
+    16,000                  men in sciences/liberal arts        5               £60
+    5,000                   naval officers                      4               £80
+    4,000                   military officers                   4               £60
+    140,000                 lesser freeholders                  5               £50
+    8,000                   lesser clergy                       5               £45
+    
+    40,000                  shopkeepers and tradesmen           4.5             £45
+    60,000                  artisans and handcraft workers      4               £45
+    
+    150,000                 farmers                             5               £44
+    
+    50,000                  common seamen                       3               £20
+    35,000                  common soldiers                     2               £14
+    364,000                 labouring people, outservants       3.5             £15
+    400,000                 cottagers and paupers               3.25            £6.5
+    
+    30,000              vagrants, gypsies, thieves, beggars     1               £2
+
+side note on coinage
+    £1 = 20 shillings
+    1 shilling = 12 pence
+    1 penny = 4 farthings

@@ -1,0 +1,105 @@
+Exeter Freedom Admissions, 1659-99 (Mortimer, 68-9)
+    trade   number of freemen
+    fuller  289
+    grocer  144
+    tailor  129
+    gentleman   127
+    mercer/merchant 117
+    cordwainer  104
+    butcher 76
+    joiner  75
+    weaver  66
+    carpenter   61
+    baker   60
+    silk weaver 57
+    woolcomber  57
+    hellier 55
+    goldsmith   53
+    clothier    52
+    cooper  45
+    apothecary  39
+    chandler    38
+    barber  36
+    ironmonger  31
+    locksmith   31
+    brewer  29
+    haberdasher 29
+    mason   23
+    cutler  22
+    saddler 22
+    fellmonger  21
+    glover  20
+    blacksmith  18
+    pewterer    16
+    woollen draper  15
+    feltmaker   13
+    painter 13
+    currier 10
+    tobacco pipe-maker  10
+    upholsterer 10
+    worsted-comber  10
+    bookseller  8
+    capper  8
+    glazier 8
+    linen draper    8
+    needle-maker    8
+    sleigh-maker    8
+    druggist    7
+    stationer   7
+    vintner 7
+    cook    6
+    hosier  6
+    plumber 6
+    trunk-maker 6
+    horner  5
+    musician    5
+    point-maker 5
+    tinplate-maker  5
+    pressman    4
+    distiller   4
+    comb-maker  3
+    paviour 3
+    pin-maker   3
+    serge weaver    3
+    tobacconist 3
+    tobacco cutter  3
+    barber-surgeon  2
+    basket-maker    2
+    bookbinder  2
+    brazier 2
+    cotton-weaver   2
+    counsel-at-law  2
+    dyer    2
+    fletcher    2
+    gunsmith    2
+    instrument-maker    2
+    milliner    2
+    petty chapman   2
+    retailer    2
+    scrivener   2
+    surgeon 2
+    surveyor of port of exeter  2
+    watchmaker  2
+    woolman 2
+    bellfounder 1
+    bricklayer 1
+    carver 1
+    comber 1
+    confectioner 1
+    coroner 1
+    doctor 1
+    girdler 1
+    innkeeper 1
+    lantern-maker 1
+    leather-dresser 1
+    leather-dresser 1
+    maltmaker 1
+    mariner 1
+    plasterer 1
+    shoemaker 1
+    silk dyer 1
+    soapmaker 1
+    turner 1
+    wool stapler 1
+    
+    total: 2,089

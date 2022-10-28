@@ -1,0 +1,57 @@
+1638 richest parishes, highest downward (Slack, 171)
+    St. John Evangelist
+    Allhallows Honey Lane
+    St Stephen Walbrook
+    Allhallows Bread Street
+    St Mary Woolnoth
+    St Matthew Friday Street
+    St Bennet Gracechurch
+    St Bennet Sherehog
+    St Mary Le Bow
+    St Peter Westcheap
+    St Mildred Poultry
+    St Antholin (half the wealth of St. John Evangelist)
+    
+1638 poorest parishes, lowest upward (Slack, 171)
+    St Botolph without Bishopsgate (1/10 the wealth of St. John Evangelist)
+    St Botolph without Aldgate
+    St Mary Mounthaw
+    St Katherine Coleman
+    St Martin Vintry
+    Allhallows London Wall (half St Antholin)
+    Allhallows Staining
+    St Andrew by the Wardrobe
+    St Mary Magdalen Old Fish Street
+    St Mary Somerset
+    St Ethelburga
+    St Mary Staining (a little more than half St Antholin but not much so)
+    
+1695 richest parishes, highest downward (Slack, 171)
+    St Matthew Friday Street
+    St John Evangelist
+    Allhallows Bread Street
+    St Mary Le Bow
+    St Antholin
+    St Mildred Poultry
+    St Benet Gracechurch
+    St Michael Bassishaw
+    St Benet Sherehog
+    Allhallows Honey Lane (2/3 of St John Evangelist)
+    
+1695 poorest parishes, lowest upward (Slack, 171)
+    St Botolph without Bishopsgate (1/10 of St John Evangelist)
+    St Mary Somerset
+    St Andrew by the Wardrobe
+    St Mary Staining
+    St Botolph without Aldgate
+    Allhallows London Wall
+    St Anne Aldersgate (1/6 of St John Evangelist, 1/4 of Allhallows Honey Lane)
+    St Mary Mouthaw
+    St Mary Magdalen Old Fish Street
+    St Martin Vintry
+    Allhallows Staining
+    St Andrew Hubbard
+    St Ethelburga
+    St KAtherine Coleman (1/2 of Allhallows Honey Lane)
+    
+    
