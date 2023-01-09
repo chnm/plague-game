@@ -1,0 +1,49 @@
+options:
+
+$married - single, married, widowed
+$age - child, adolescent, young adult, middle-aged adult, elderly adult
+$gender - female, male, non-binary
+
+$church - COE, dissident, Catholic
+$socio - day labourer, servant, artisan, merchant, noble (gentry?), beggar
+
+$origin - London, countryside, town/city, Scotland, Ireland, France, Dutch, somewhere else
+$location - inside walls, outside walls, Middlesex/Surrey, Westminster
+
+
+single child/adolescent - fine
+single young adult - trying to save up for marriage, average age of marriage is 24-28
+    unless gentry/noble in which case behind the curve
+single middle-aged/elderly adult - not usual, need to think about this
+
+married child - not legal to get married before 12/14 but wardship and engaged to be married ok
+married adolescent - can get married at 12/14, more common among elites, women
+married middle-aged adult, elderly adult - yep, this is normal, run a variable indicating if first or second or third marriage
+
+widowed child - not legal to get married before 12/14 but wardship and engaged to be married ok, so yours died and you consider yourself widowed but not really
+widowed adolescent - can get married at 12/14, more common among elites, women, very bad luck to be widowed so young
+widowed middle-aged adult, elderly adult - common, chose not to remarry for x y z reason
+
+COE day anything - cool, cool
+dissident day labourer/beggar - keep opinions to yourself otherwise can't get money/work
+dissident servant - work for a dissident master/mistress, limits work options but couldn't be in COE household
+dissident artisan - occasional conformity to avoid financial penalties b/c can't pay them
+dissident merchant/noble - pay financial penalties but can bear it, faith more important!
+    or maybe occasional conformity to avoid social hit to reputation (another variable here???)
+Catholic day labourer/beggar/artisan - keep mouth SHUT and hidden
+Catholic servant - either work for Catholics so okay or keep mouth SUPER SHUT and hidden
+Catholic merchant - increasingly okay at higher circles, but keep a low profile when possible
+Catholic noble - flaunt it, despite the haters, gets good traction at Court
+
+from London, any social group, great
+from England/Scot/Ireland, beggars - have to avoid being deported
+    servants - don't have a huge social network, but it's upwardly mobile thing to do
+    day labourer - came in search of opportunity, not starving at home
+    artisans - hope to be Free of the city? rise in prestige
+    merchants - this is where the money and power are
+    nobles - have country estate, of course, but come to London for Court, power, prestige
+from France, Protestant - come for religious freedom, opportunity
+from France, Catholic - Restoration, hope for advancement?
+from Dutch Republic, Protestant - come for financial advancement, stuck since now at war, keep head down
+from Dutch Republic, Catholic - ditto, with religious complexity, believed C2 when said freedom of conscience
+somewhere else - do we want to preserve this as an option?
