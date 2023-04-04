@@ -261,7 +261,7 @@ You live in [[London]], the greatest city in all the British Isles.
 
 You are originally from &lt;&lt;set _origin = [&quot;London&quot;, &quot;the English countryside&quot;, &quot;another English town or city&quot;, &quot;Scotland&quot;, &quot;Ireland&quot;, &quot;the Dutch Republic&quot;, &quot;France&quot;, &quot;somewhere else&quot;]&gt;&gt;&lt;&lt;listbox &quot;$origin&quot;&gt;&gt;&lt;&lt;optionsfrom _origin&gt;&gt;&lt;&lt;/listbox&gt;&gt; and have made your home in London since the Restoration of the monarchy. You now live &lt;&lt;set _location = [&quot;inside the City walls&quot;, &quot;in the western suburbs, specifically Westminster&quot;, &quot;in another part of the western suburbs&quot;, &quot;in the northern suburbs&quot;, &quot;in the eastern suburbs&quot;, &quot;across the river in the southern suburbs&quot;]&gt;&gt;&lt;&lt;listbox &quot;$location&quot;&gt;&gt;&lt;&lt;optionsfrom _location&gt;&gt;&lt;&lt;/listbox&gt;&gt;.
 
-If someone were to write your biography, it would read a bit [[like this-&gt;bio]].</tw-passagedata><tw-passagedata pid="13" name="Sickness" tags="" position="1975,200" size="100,100">&lt;&lt;widget &quot;sickness&quot;&gt;&gt;You take to your sickbed. &lt;&lt;linkreplace &quot;Twenty-four long hours pass.&quot; t8n&gt;&gt;\
+If someone were to write your biography, it would read a bit [[like this-&gt;bio]].</tw-passagedata><tw-passagedata pid="13" name="Sickness" tags="" position="1975,200" size="100,100">You take to your sickbed. &lt;&lt;linkreplace &quot;Twenty-four long hours pass.&quot; t8n&gt;&gt;\
 &lt;&lt;if random(1,2) is 1&gt;&gt;By the second day, your condition declines rapidly. &lt;&lt;if $reputation lte 0&gt;&gt;Unfortunately, because you were such a jerk earlier, no one cares and wants to help you. Sucks to be you.&lt;&lt;elseif $reputation gte 1&gt;&gt;Your friends bring aid in the form of food, helping not only you, but your family.&lt;&lt;/if&gt;&gt;
 
 [[You can feel the fever spreading...-&gt;death]]
@@ -269,33 +269,36 @@ If someone were to write your biography, it would read a bit [[like this-&gt;bio
 &lt;&lt;else&gt;&gt;You&#39;re miserable. You hope you can hold on for one more day. &lt;&lt;if $reputation gte 2&gt;&gt;Your friends send aid and food to your household, and vow to provide any assistant later.&lt;&lt;elseif $reputation eq 1&gt;&gt;Your get just OK care.&lt;&lt;elseif $reputation lte 0&gt;&gt;You&#39;re left alone to rot, because you were such a jerk earlier.&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $plagueInfection to 2&gt;&gt;&lt;&lt;return&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="inside-city" tags="infection-rates" position="375,1525" size="100,100">/* infection code - London
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="inside-city" tags="infection-rates" position="375,1525" size="100,100">/* infection code - London
 /* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
 &lt;&lt;elseif $plays eq 9&gt;&gt;
-    &lt;&lt;if random(1,500) eq 1&gt;&gt;
+    &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 10&gt;&gt;
-    &lt;&lt;if random(1,100) lte 4&gt;&gt;
+    &lt;&lt;if random(1,12) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 11&gt;&gt;
-    &lt;&lt;if random(1,100) lte 7&gt;&gt;
+    &lt;&lt;if random(1,7) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;&lt;
 &lt;&lt;elseif $plays eq 12&gt;&gt;
-    &lt;&lt;if random(1,100) lte 5&gt;&gt;
+    &lt;&lt;if random(1,10) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 13&gt;&gt;
-    &lt;&lt;if random(1,100) lte 2&gt;&gt;
+    &lt;&lt;if random(1,75) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+  &lt;&lt;elseif $plays gt 13&gt;&gt;
+  	&lt;&lt;if random(1,1000) eq 1&gt;&gt;
+  	&lt;&lt;set $plagueInfection to 1&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Westminster-infection" tags="infection-rates" position="500,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
@@ -304,34 +307,34 @@ If someone were to write your biography, it would read a bit [[like this-&gt;bio
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
 &lt;&lt;elseif $plays eq 8&gt;&gt;
-    &lt;&lt;if random(1,10000) eq 1&gt;&gt;
+    &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;elseif $plays eq 9&gt;&gt;
-    &lt;&lt;if random(1,100) eq 3&gt;&gt;
+    &lt;&lt;if random(1,20) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 10&gt;&gt;
-    &lt;&lt;if random(1,100) lte 11&gt;&gt;
+    &lt;&lt;if random(1,4) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 11&gt;&gt;
-    &lt;&lt;if random(1,100) lte 16&gt;&gt;
+    &lt;&lt;if random(1,3) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 12&gt;&gt;
-    &lt;&lt;if random(1,100) lte 10&gt;&gt;
+    &lt;&lt;if random(1,5) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;elseif $plays eq 13&gt;&gt;
-    &lt;&lt;if random(1,100) lte 3&gt;&gt;
+    &lt;&lt;if random(1,20) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 14 and $plays lte 19&gt;&gt;
+    &lt;&lt;elseif $plays eq 14&gt;&gt;
     &lt;&lt;if random(1,100) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 20 and $plays lte 25&gt;&gt;
+    &lt;&lt;elseif $plays gt 14&gt;&gt;
     &lt;&lt;if random(1,1000) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -510,17 +513,13 @@ You can do noble things in noble places now in [[May 1665]].
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;set $plays += 1&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plays gte 5&gt;&gt;&lt;&lt;include [[Date-Location]]&gt;&gt; reputation: $reputation; money/resources: $wealth; plays: $plays&lt;&lt;/if&gt;&gt;&lt;br&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="bundle" tags="" position="2200,100" size="100,100">You poke through the bundle and find &lt;&lt;= $bundle.join(&#39; and &#39;)&gt;&gt;. 
-
-You now have &lt;&lt;= $inventory.join(&#39;, &#39;)&gt;&gt;&lt;&lt;if $food gte 0&gt;&gt;, and enough food for $food days.&lt;&lt;else&gt;&gt; and only a little food. You&#39;ll need to find more in the next few days if you want to keep up your strength.&lt;&lt;/if&gt;&gt;
-
-[[Okay.|previous()]]</tw-passagedata><tw-passagedata pid="23" name="previous()" tags="" position="2325,100" size="100,100"></tw-passagedata><tw-passagedata pid="24" name="Old London" tags="" position="275,1000" size="100,100">You complete your business.
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="Old London" tags="" position="275,1000" size="100,100">You complete your business.
 
 [[Go back home-&gt;Noble-4]]
-</tw-passagedata><tw-passagedata pid="25" name="At Court" tags="" position="125,1000" size="100,100">&lt;&lt;if $plagueInfection eq 1&gt;&gt;[[You don&#39;t feel so good...-&gt;Sickness]]
+</tw-passagedata><tw-passagedata pid="23" name="At Court" tags="" position="125,1000" size="100,100">&lt;&lt;if $plagueInfection eq 1&gt;&gt;[[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;else&gt;&gt;You attend to your duties, lalala.&lt;&lt;/if&gt;&gt;
 
-[[Go back home-&gt;Noble-Home][$plays +=1]] </tw-passagedata><tw-passagedata pid="26" name="Noble-Home" tags="" position="300,675" size="100,100">&lt;&lt;if $plagueInfection eq 1&gt;&gt;[[You don&#39;t feel so good...-&gt;Sickness]]
+[[Go back home-&gt;Noble-Home][$plays +=1]] </tw-passagedata><tw-passagedata pid="24" name="Noble-Home" tags="" position="300,675" size="100,100">&lt;&lt;if $plagueInfection eq 1&gt;&gt;[[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;else&gt;&gt;&lt;&lt;if $plays gte 10&gt;&gt;What&#39;s that smell...-&gt;Noble-4]]&lt;&lt;/if&gt;&gt;
 &lt;&lt;else&gt;&gt;
 &lt;&lt;if $reputation gte 2&gt;&gt;Your loyalty to your duties and household are noticed. You are able to maintain your relationships and complete your duties.
@@ -531,7 +530,7 @@ You now have &lt;&lt;= $inventory.join(&#39;, &#39;)&gt;&gt;&lt;&lt;if $food gte
 [[You decide it&#39;s best to pack up now and flee to the countryside.-&gt;Off to the Countryside]]
 [[It&#39;s going to be rough, but you decide to stick it out for now and attend to your duties. You visit Old London.-&gt;Old London][$reputation += 2]]
 [[You decide to stay in town, but safely at home-&gt;Noble-Home]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="Noble-4" tags="" position="275,1125" size="100,100">&lt;&lt;if $plays gt 10 lt 12&gt;&gt;What&#39;s that smell?
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Noble-4" tags="" position="275,1125" size="100,100">&lt;&lt;if $plays gt 10 lt 12&gt;&gt;What&#39;s that smell?
 
 Oh no, everything is on fire.
 
@@ -540,7 +539,7 @@ Oh no, everything is on fire.
 [[Return to court-&gt;Court-2]]
 [[Pay a visit to a friend-&gt;Location 3]]
 [[Head back to the countryside-&gt;Countryside-2]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Countryside-2" tags="" position="275,1250" size="100,100">Ain&#39;t thems the breaks.
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Countryside-2" tags="" position="275,1250" size="100,100">Ain&#39;t thems the breaks.
 
 You survived the plague this long but lost most of your possessions. 
 
@@ -551,12 +550,12 @@ You survived the plague this long but lost most of your possessions.
 You [[reluctantly pack your things to return home-&gt;Noble-Home-Fire]]
 You [[decide to hide here forever-&gt;Noble-Bad]]
 &lt;&lt;else&gt;&gt;[[remain here-&gt;Countryside-2]] or [[go back home and try to rebuild-&gt;Noble-Home-Fire]]&lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="29" name="Noble-Home-Fire" tags="" position="225,1400" size="100,100">&lt;silent&gt;&lt;&lt;include London-infection&gt;&gt;&lt;/silent&gt;
+</tw-passagedata><tw-passagedata pid="27" name="Noble-Home-Fire" tags="" position="225,1400" size="100,100">&lt;silent&gt;&lt;&lt;include London-infection&gt;&gt;&lt;/silent&gt;
 
 It&#39;s all ashes, but you&#39;ve got the means to rebuild.
 
 [[Rebuild and have a party-&gt;Noble-rebuilt]]
-[[Decide to leave and head back from whence you came-&gt;Countryside-2]] </tw-passagedata><tw-passagedata pid="30" name="Noble-rebuilt" tags="" position="200,1600" size="100,100">Seems like you&#39;ve made it after all. Congratulations.</tw-passagedata><tw-passagedata pid="31" name="Court-2" tags="" position="400,1250" size="100,100">&lt;&lt;if $plays gt 10 lt 12&gt;&gt;What&#39;s that smell?
+[[Decide to leave and head back from whence you came-&gt;Countryside-2]] </tw-passagedata><tw-passagedata pid="28" name="Noble-rebuilt" tags="" position="200,1600" size="100,100">Seems like you&#39;ve made it after all. Congratulations.</tw-passagedata><tw-passagedata pid="29" name="Court-2" tags="" position="400,1250" size="100,100">&lt;&lt;if $plays gt 10 lt 12&gt;&gt;What&#39;s that smell?
 
 Oh no, everything is on fire.
 
@@ -565,7 +564,7 @@ Oh no, everything is on fire.
 [[Return home-&gt;Noble-4]]
 [[Pay a visit to a friend-&gt;Location 3]]
 [[Head back to the countryside-&gt;Countryside-2]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="Location 3" tags="" position="150,1250" size="100,100">&lt;&lt;if $plays gt 10 lt 12&gt;&gt;What&#39;s that smell?
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Location 3" tags="" position="150,1250" size="100,100">&lt;&lt;if $plays gt 10 lt 12&gt;&gt;What&#39;s that smell?
 
 Oh no, everything is on fire.
 
@@ -573,89 +572,85 @@ Oh no, everything is on fire.
 &lt;&lt;else&gt;&gt;Things are a mess, but you still have work to do.
 [[Return home-&gt;Noble-4]]
 [[Head back to the countryside-&gt;Countryside-2]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="Noble-Bad" tags="" position="50,1575" size="100,100">Wow, you were bad at your job and no one likes you anymore. You survived, but at what cost?</tw-passagedata><tw-passagedata pid="34" name="Western-infection" tags="" position="1150,1525" size="100,100">&lt;silently&gt;/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 5 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events. */
-&lt;&lt;nobr&gt;&gt;
-&lt;&lt;silently&gt;&gt;
-&lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
-    &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 7&gt;&gt;
-    &lt;&lt;if random(1,10000) lte 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays eq 8&gt;&gt;
-    &lt;&lt;if random(1,100) lte 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays eq 9&gt;&gt;
-    &lt;&lt;if random(1,100) lte 4&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
-    &lt;&lt;if random(1,100) lte 15&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
-    &lt;&lt;if random(1,100) lte 11&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
-    &lt;&lt;if random(1,100) lte 5&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays eq 13&gt;&gt;
-    &lt;&lt;if random(1,100) lte 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 14 and $plays lte 19&gt;&gt;
-    &lt;&lt;if random(1,100) lte 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 21 and $plays lte 24&gt;&gt;
-    &lt;&lt;if random(1,1000) lte 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="eastern-infection" tags="infection-rates" position="775,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Noble-Bad" tags="" position="50,1575" size="100,100">Wow, you were bad at your job and no one likes you anymore. You survived, but at what cost?</tw-passagedata><tw-passagedata pid="32" name="Western-infection" tags="" position="1150,1525" size="100,100">&lt;silently&gt;/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 5 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events. */
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
 &lt;&lt;elseif $plays eq 8&gt;&gt;
-    &lt;&lt;if random(1,1000) eq 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays eq 9&gt;&gt;
     &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;elseif $plays eq 9&gt;&gt;
+    &lt;&lt;if random(1,13) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 10&gt;&gt;
-    &lt;&lt;if random(1,100) lte 16&gt;&gt;
+    &lt;&lt;if random(1,4) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 11&gt;&gt;
-    &lt;&lt;if random(1,100) lte 25&gt;&gt;
+    &lt;&lt;if random(1,20) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 12&gt;&gt;
-    &lt;&lt;if random(1,100) lte 10&gt;&gt;
+    &lt;&lt;if random(1,10) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;elseif $plays eq 13&gt;&gt;
-    &lt;&lt;if random(1,100) lte 3&gt;&gt;
+    &lt;&lt;if random(1,50) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 14 and $plays lte 19&gt;&gt;
+    &lt;&lt;elseif $plays eq 14&gt;&gt;
+    &lt;&lt;if random(1,500) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;elseif $plays gt 14&gt;&gt;
+    &lt;&lt;if random(1,1000) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="eastern-infection" tags="infection-rates" position="775,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;silently&gt;&gt;
+&lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
+    &lt;&lt;set $plagueinfection to 2&gt;&gt;
+&lt;&lt;elseif $plays eq 8&gt;&gt;
+    &lt;&lt;if random(1,500) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;elseif $plays eq 9&gt;&gt;
+    &lt;&lt;if random(1,50) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif $plays eq 10&gt;&gt;
+    &lt;&lt;if random(1,3) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif $plays eq 11&gt;&gt;
+    &lt;&lt;if random(1,2) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif $plays eq 12&gt;&gt;
+    &lt;&lt;if random(1,5) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;elseif $plays eq 13&gt;&gt;
+    &lt;&lt;if random(1,30) eq 1&gt;&gt;
+    &lt;&lt;set $plagueInfection to 1&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;elseif $plays eq 14&gt;&gt;
     &lt;&lt;if random(1,100) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 20 and $plays lte 24&gt;&gt;
+    &lt;&lt;elseif $plays gt 14&gt;&gt;
     &lt;&lt;if random(1,1000) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="Date-Location" tags="" position="1050,0" size="100,100">&lt;&lt;if $plays eq 5&gt;&gt;December 1664, $location
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Date-Location" tags="" position="1050,0" size="100,100">&lt;&lt;if $plays eq 5&gt;&gt;December 1664, $location
 &lt;&lt;elseif $plays eq 6&gt;&gt;Late Winter and Spring 1665, $location
 &lt;&lt;elseif $plays eq 7&gt;&gt;May 1665, $location
 &lt;&lt;elseif $plays eq 8&gt;&gt;June 1665, $location
@@ -676,7 +671,7 @@ Oh no, everything is on fire.
 &lt;&lt;elseif $plays eq 23&gt;&gt;September 1666, $location
 &lt;&lt;elseif $plays eq 24&gt;&gt;October 1666, $location
 &lt;&lt;elseif $plays eq 25&gt;&gt;November 1666, $location
-&lt;&lt;elseif $plays eq 26&gt;&gt;December 1666, $location&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="widgets" tags="widget" position="500,0" size="100,100">/* add family members based on age
+&lt;&lt;elseif $plays eq 26&gt;&gt;December 1666, $location&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="widgets" tags="widget" position="500,0" size="100,100">/* add family members based on age
 
 &lt;&lt;widget &quot;addNPC&quot;&gt;&gt;
  &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;
@@ -768,7 +763,7 @@ Oh no, everything is on fire.
 &lt;&lt;silently&gt;&gt;&lt;&lt;nobr&gt;&gt;
 &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
 &lt;&lt;if $NPCs[_i].health is &quot;uninfected&quot;&gt;&gt;
-&lt;&lt;if random(1,10) lte 5&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+&lt;&lt;if random(1,10) lte 2&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
@@ -779,7 +774,7 @@ Oh no, everything is on fire.
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;&lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="I&#39;m Impressed" tags="" position="1900,350" size="100,100">/* Impressed into service
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="I&#39;m Impressed" tags="" position="1900,350" size="100,100">/* Impressed into service
 /*(impressed for able bodied male/non-binary of right age range); if impressed, go to war (game over); if not from London and imprisoned, expelled to home parish or deported; can go home (game over) or try to return; if second time through, transported to New World as indentured servant; if make money, get food but decreases reputation; if don&#39;t, you continue to be cold/hungry but not starving to death yet I don&#39;t think
 
 /* if origin not British Isles, can petition to not be impressed */ 
@@ -832,7 +827,7 @@ You got caught!
 &lt;&lt;elseif hasVisited(&quot;May 1665-Beggar&quot;)&gt;&gt;[[Continue on your way|June 1665][$reputation -=1]]
 &lt;&lt;elseif hasVisited(&quot;January 1665-Beggar&quot;)&gt;&gt;[[Continue on your way|May 1665][$reputation -=1]]
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Throw Away the Key" tags="" position="2100,450" size="100,100"></tw-passagedata><tw-passagedata pid="40" name="May 1665" tags="beggar" position="1100,575" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="Throw Away the Key" tags="" position="2100,450" size="100,100"></tw-passagedata><tw-passagedata pid="38" name="May 1665" tags="beggar" position="1100,575" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -851,7 +846,7 @@ As if war wasn&#39;t bad enough, you begin to hear rumors around the city that s
 &lt;&lt;/if&gt;&gt;&lt;br&gt;
 [[You decide not to take your chances and see what you can get from the streets.|June 1665][$reputation +=1; $wealth -=1]]
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="June 1665" tags="beggar" position="1225,575" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="June 1665" tags="beggar" position="1225,575" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -878,9 +873,9 @@ That is the last good day of the month, though. The plague grows worse and the s
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="August 1665" tags="beggar" position="975,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="August 1665" tags="beggar" position="975,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
-&lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
+&lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
 &lt;br&gt;
 People are dying so fast now that burials have to happen night and day to keep corpses from piling up throughout the city. &lt;br&gt;
@@ -888,7 +883,7 @@ People are dying so fast now that burials have to happen night and day to keep c
 &lt;&lt;if $role is &quot;corpsebearer&quot;&gt;&gt;As you take the dead to the graveyards,
 &lt;&lt;elseif $role is &quot;searcher&quot;&gt;&gt;Almost all the bodies you inspect are of plague victims and
 &lt;&lt;elseif $role is &quot;nurse&quot;&gt;&gt;Your patients die almost as fast as you are assigned to care for them and&lt;&lt;/if&gt;&gt;
-you marvel at how much money is being wasted through the clothing that is buried with them. It’s illegal to take goods off the dead [and you know it’s dangerous as well/but you figure no one will notice and you need the money.] So many people are sick and shut up in their houses that the city has imposed a 9pm curfew for healthy people, so that the sick can go out for a bit of air. There is sickness in the fleet and everyone worries what that means for the war.&lt;&lt;/nobr&gt;&gt;
+you marvel at how much money is being wasted through the clothing that is buried with them. It’s illegal to take goods off the dead [and you know it’s dangerous as well/but you figure no one will notice and you need the money.] So many people are sick and shut up in their houses that the city has imposed a 9pm curfew for healthy people, so that the sick can go out for a bit of air. There is sickness in the fleet and everyone worries what that means for the war.
 
 The city has ordered public fasts and prayers to help combat the plague. [if Presbyterian]You attempt to join a private meeting of your fellow Presbyterians in Covent Garden but are too poor and turned away, which is lucky for you because everyone who attends the meeting is arrested. They are told they can be released if they pay £5 each to help care for the poor of the city, but they refuse and so are imprisoned[/] 
 
@@ -898,23 +893,21 @@ The city has ordered public fasts and prayers to help combat the plague. [if Pre
 
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="43" name="September 1665" tags="beggar" position="1100,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="41" name="September 1665" tags="beggar" position="1100,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
-&lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
+&lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
 &lt;br&gt;
 
-smuggling children from plague houses, fires burn throughout the city on Lord Mayor&#39;s orders, trying to smoke out the plague
-
-in the height of it, how bold people there were, to go in sport to one another’s burials; and in spite too, ill people would breathe in the faces (out of their windows) of well people going by.
+Bad things happen everywhere.
 
 [[October 1665]] 
-
-&lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="44" name="October 1665" tags="beggar" position="1225,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="October 1665" tags="beggar" position="1225,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
-&lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
+&lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
+&lt;br&gt;
 
 October:
 
@@ -923,7 +916,7 @@ sick people out and about, plague numbers starting to come down but still high, 
 [[November 1665]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="November 1665" tags="beggar" position="1350,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="November 1665" tags="beggar" position="1350,725" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -934,7 +927,7 @@ bad weather and plague numbers coming down, people start to return to town
 [[December 1665]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="December 1665" tags="beggar" position="975,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="December 1665" tags="beggar" position="975,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -946,7 +939,7 @@ plague up despite two great frosts, hope it&#39;s last gasp, close out the year 
 [[January 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="January 1666" tags="" position="1100,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="January 1666" tags="" position="1100,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -957,7 +950,7 @@ plague down! nobles coaches coming back, porters everywhere, begging of beggars 
 [[February 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="February 1666" tags="beggar" position="1225,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="February 1666" tags="beggar" position="1225,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -968,7 +961,7 @@ king returns to town, people going back to church Feb 4: great snow the night be
 [[March 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="March 1666" tags="beggar" position="1350,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="March 1666" tags="beggar" position="1350,875" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -980,7 +973,7 @@ plague numbers starting to go up
 [[April 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="April 1666" tags="" position="975,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="April 1666" tags="" position="975,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -991,7 +984,7 @@ yep, plague definitely going up again, Sweden declares for England against Dutch
 [[May 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="May 1666" tags="beggar" position="1100,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="May 1666" tags="beggar" position="1100,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1000,7 +993,7 @@ May: plague increasing, celebration of king&#39;s birthday/Restoration with bonf
 [[June 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="June 1666" tags="beggar" position="1225,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="June 1666" tags="beggar" position="1225,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1009,7 +1002,7 @@ June: fleets engaging again, arguing over whether hear gunfire or thunder for fo
 
 [[July 1666]] 
 
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="July 1666" tags="beggar" position="1350,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="July 1666" tags="beggar" position="1350,1025" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1019,7 +1012,7 @@ July: poor women bewailing impressed sailors, unruly about being shipped off, he
 [[August 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="August 1666" tags="beggar" position="975,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="August 1666" tags="beggar" position="975,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1028,7 +1021,7 @@ August: more plague! burning of Dutch ships
 [[September 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="September 1666" tags="beggar fire" position="1100,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="September 1666" tags="beggar fire" position="1100,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1038,7 +1031,7 @@ September: fire
 [[October 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="October 1666" tags="beggar" position="1225,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="October 1666" tags="beggar" position="1225,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1048,7 +1041,7 @@ October: rainy weather, theatres to reopen
 [[November 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="November 1666" tags="beggar" position="1350,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="November 1666" tags="beggar" position="1350,1175" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1057,7 +1050,7 @@ November: Whitehall and Horse Guards catch fire, official thanksgiving for end o
 [[December 1666]] 
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="December 1666" tags="beggar" position="1175,1350" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="December 1666" tags="beggar" position="1175,1350" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;npcInfection&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif $infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1065,7 +1058,7 @@ November: Whitehall and Horse Guards catch fire, official thanksgiving for end o
 December: another fire in cellar in Tower street, trouble in Scotland, end year on a sad note about many late lamentable deaths?
 
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="Untitled Passage 2" tags="" position="225,25" size="100,100">&lt;&lt;set $gender to &quot;non-binary&quot;&gt;&gt;&lt;&lt;playerName&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="Untitled Passage 2" tags="" position="225,25" size="100,100">&lt;&lt;set $gender to &quot;non-binary&quot;&gt;&gt;&lt;&lt;playerName&gt;&gt;
 Your name is $name.
 &lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $fRelationships = {
 	sister: 80,
@@ -1089,42 +1082,42 @@ a $NPCs[_i].relationship, $NPCs[_i].name;&lt;&lt;else&gt;&gt; a $NPCs[_i].relati
 &lt;&lt;if $socio is &quot;beggars&quot; and $disabilities eq 1&gt;&gt;[add text about ability/disability]&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="60" name="northern-infection" tags="infection-rates" position="900,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
+</tw-passagedata><tw-passagedata pid="58" name="northern-infection" tags="infection-rates" position="900,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
 &lt;&lt;elseif $plays eq 8&gt;&gt;
-    &lt;&lt;if random(1,30000) lte 13&gt;&gt;
+    &lt;&lt;if random(1,500) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 9&gt;&gt;
-    &lt;&lt;if random(1,100) lte 3&gt;&gt;
+    &lt;&lt;if random(1,18) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 10&gt;&gt;
-    &lt;&lt;if random(1,100) lte 15&gt;&gt;
+    &lt;&lt;if random(1,3) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;elseif $plays eq 11&gt;&gt;
-    &lt;&lt;if random(1,100) lte 11&gt;&gt;
+    &lt;&lt;if random(1,5) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 12&gt;&gt;
-    &lt;&lt;if random(1,100) lte 3&gt;&gt;
+    &lt;&lt;if random(1,15) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 13 and $plays lte 19&gt;&gt;
+    &lt;&lt;elseif $plays eq 13&gt;&gt;
     &lt;&lt;if random(1,100) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 21 and $plays lte 24&gt;&gt;
-    &lt;&lt;if random(1,100) lte 1&gt;&gt;
+    &lt;&lt;elseif $plays gt 13&gt;&gt;
+    &lt;&lt;if random(1,1000) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="southern-infection" tags="infection-rates" position="1025,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="southern-infection" tags="infection-rates" position="1025,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
@@ -1138,63 +1131,43 @@ a $NPCs[_i].relationship, $NPCs[_i].name;&lt;&lt;else&gt;&gt; a $NPCs[_i].relati
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 10&gt;&gt;
-    &lt;&lt;if random(1,100) lte 6&gt;&gt;
+    &lt;&lt;if random(1,8) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 11&gt;&gt;
-    &lt;&lt;if random(1,100) lte 14&gt;&gt;
+    &lt;&lt;if random(1,4) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;elseif $plays eq 12&gt;&gt;
-    &lt;&lt;if random(1,100) lte 8&gt;&gt;
+    &lt;&lt;if random(1,6) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;elseif $plays eq 13&gt;&gt;
-    &lt;&lt;if random(1,100) lte 2&gt;&gt;
+    &lt;&lt;if random(1,25) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 14 and $plays lte 19&gt;&gt;
-    &lt;&lt;if random(1,100) lte 1&gt;&gt;
+    &lt;&lt;elseif $plays eq 14&gt;&gt;
+    &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gte 21 and $plays lte 23&gt;&gt;
-    &lt;&lt;if random(1,1000) lte 1&gt;&gt;
+    &lt;&lt;elseif $plays gt 14&gt;&gt;
+    &lt;&lt;if random(1,1000) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="countryside-infection" tags="infection-rates" position="625,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="countryside-infection" tags="infection-rates" position="625,1525" size="100,100">/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 6&gt;&gt;
-    &lt;&lt;if random(1,10) eq 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays gt 6 and $plays lte 9&gt;&gt;
-    &lt;&lt;if random(1,10) eq 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays gt 9 and $plays lte 12&gt;&gt;
-    &lt;&lt;if random(1,10) eq 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;&lt;
-&lt;&lt;elseif $plays gt 12 and $plays lte 15&gt;&gt;
-    &lt;&lt;if random(1,10) eq 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays gt 15 and $plays lte 19&gt;&gt;
-    &lt;&lt;if random(1,10) eq 1&gt;&gt;
-    &lt;&lt;set $plagueInfection to 1&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;elseif $plays gt 19&gt;&gt;&lt;&lt;set $randomnumber to random(1,2)&gt;&gt;
-    &lt;&lt;if random(1,10) eq 1&gt;&gt;
+&lt;&lt;elseif $plays gt 6&gt;&gt;
+    &lt;&lt;if random(1,1000) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Work Refusal" tags="" position="1900,475" size="100,100">if refuse to search/nurse/haul corpses: imprisoned/sent to countryside/deported/etc. sequence</tw-passagedata><tw-passagedata pid="64" name="Sent to the Americas" tags="" position="2100,575" size="100,100"></tw-passagedata><tw-passagedata pid="65" name="July 1665" tags="" position="1350,575" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Work Refusal" tags="" position="1900,475" size="100,100">if refuse to search/nurse/haul corpses: imprisoned/sent to countryside/deported/etc. sequence</tw-passagedata><tw-passagedata pid="62" name="Sent to the Americas" tags="" position="2100,575" size="100,100"></tw-passagedata><tw-passagedata pid="63" name="July 1665" tags="" position="1350,575" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;npcInfection&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;Oh no. [[You don&#39;t feel so good...-&gt;Sickness]]
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -1211,68 +1184,7 @@ The graveyards are beginning to overflow and corpses are being flung into the op
 
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="66" name="NPCScreen" tags="" position="1725,25" size="100,100">&lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
-    NPC #_i: Name = $NPCs[_i].name, $NPCs[_i].age $NPCs[_i].relationship&lt;br&gt;
-    Health status: $NPCs[_i].health&lt;br&gt;
-&lt;&lt;/for&gt;&gt;
-
-&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
-&lt;&lt;set $infectedFamily = []&gt;&gt;
-&lt;&lt;for _idx, _household range $NPCs&gt;&gt;
-	&lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
-    	&lt;&lt;set $infectedFamily.push(_idx)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-
-&lt;&lt;set $deceasedFamily = []&gt;&gt;
-&lt;&lt;for _z, _household range $NPCs&gt;&gt;
-&lt;&lt;if _household.health is &quot;deceased&quot;&gt;&gt;
-&lt;&lt;set $deceasedFamily.push(_z)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-
-&lt;&lt;set $recoveredFamily = []&gt;&gt;
-&lt;&lt;for _y, _household range $NPCs&gt;&gt;
-&lt;&lt;if _household.health is &quot;recovered&quot;&gt;&gt;
-&lt;&lt;set $recoveredFamily.push(_y)&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-
-&lt;&lt;/silently&gt;&gt;
-&lt;&lt;if $infectedFamily.length eq 0&gt;&gt;Your household is healthy.
-&lt;&lt;elseif $infectedFamily.length eq 1&gt;&gt;
-A member of your household, your $NPCs[_idx].relationship $NPCs[_idx].name, has fallen ill.&lt;br&gt;
- [[You and your household decide to quarantine together.-&gt;Quarantine]]
- [[Your decide to send your sick family members to the pesthouse.-&gt;Pesthouse]]&lt;br&gt;
-&lt;&lt;elseif $infectedFamily.length gt 1&gt;&gt;Members of your family have fallen ill.
-&lt;&lt;for _n, _idx range $infectedFamily&gt;&gt;
-	 &lt;&lt;if _n &lt; $infectedFamily.length - 1&gt;&gt;$NPCs[_idx].name, &lt;&lt;else&gt;&gt;and $NPCs[_idx].name have begun showing symptoms of the plague.
-    &lt;&lt;/if&gt;&gt;
-   &lt;&lt;/for&gt;&gt;
-    [[You and your household decide to quarantine together.-&gt;Quarantine]]&lt;br&gt;
- [[Your decide to send your sick family members to the pesthouse.-&gt;Pesthouse]]
-   &lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $recoveredFamily.length eq 0&gt;&gt;No members of your family have yet recovered from the plague.
-&lt;&lt;else&gt;&gt; 
-&lt;&lt;for _n, _y range $infectedFamily&gt;&gt;
-	 &lt;&lt;if _n &lt; $infectedFamily.length - 1&gt;&gt;$NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].name survived their plague infection.&lt;br&gt;
-     &lt;&lt;/if&gt;&gt;
-   &lt;&lt;/for&gt;&gt;
-   &lt;&lt;/if&gt;&gt;
-   
-   &lt;&lt;if $deceasedFamily.length eq 0&gt;&gt;No members of your household have died  from the plague.&lt;br&gt;
-&lt;&lt;else&gt;&gt; 
-&lt;&lt;for _n, _z range $deceasedFamily&gt;&gt;
-	 &lt;&lt;if _n &lt; $deceasedFamily.length - 1&gt;&gt;$NPCs[_z].name, &lt;&lt;else&gt;&gt;and $NPCs[_z].name died from their plague infection.
-     &lt;&lt;/if&gt;&gt;
-   &lt;&lt;/for&gt;&gt;
-   &lt;&lt;/if&gt;&gt;
-   
-   &lt;&lt;/nobr&gt;&gt;
-   
- 
-  </tw-passagedata><tw-passagedata pid="67" name="Untitled Passage" tags="" position="475,425" size="100,100">/* If a family member is infected, insert code to give you options to send them to the sickhouse or quarantine together
+</tw-passagedata><tw-passagedata pid="64" name="Untitled Passage" tags="" position="475,425" size="100,100">/* If a family member is infected, insert code to give you options to send them to the sickhouse or quarantine together
 
 &lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
 &lt;&lt;set $infectedFamily&gt;&gt;
@@ -1291,57 +1203,17 @@ A member of your household, your $NPCs.relationship $NPCs.name, has fallen ill.
     &lt;&lt;/if&gt;&gt;
    &lt;&lt;/for&gt;
    
-   &lt;&lt;/if&gt;</tw-passagedata><tw-passagedata pid="68" name="Quarantine" tags="" position="1650,175" size="100,100">You quarantine with your family for many days. It&#39;s a terrible time.
-
-Dead family:&lt;&lt;silently&gt;&gt;
-&lt;&lt;set _deadFamily = []&gt;&gt;
-&lt;&lt;for _idx, _household range $NPCs&gt;&gt;
-	&lt;&lt;if _household.health is &quot;deceased&quot;&gt;&gt;
-    &lt;&lt;set _deadFamily.push(_idx)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/for&gt;&gt;
-    &lt;&lt;/silently&gt;&gt;
-   &lt;&lt;nobr&gt;&gt;
-&lt;&lt;if _deadFamily.length eq 0&gt;&gt;Miraculously, no one in your family died.
-	&lt;&lt;elseif _deadFamily.length eq 1&gt;&gt;
-    &lt;&lt;for _n, _idx range _deadFamily&gt;&gt;
-    	Despite treatments, your $NPCs[_idx].relationship, $NPCs[_idx].name has died.
-        &lt;&lt;/for&gt;&gt;
-	&lt;&lt;else&gt;&gt;Despite treatments, your
-        &lt;&lt;for _n, _idx range _deadFamily&gt;&gt;
-			&lt;&lt;if _n &lt; _deadFamily.length -1&gt;&gt;$NPCs[_idx].relationship, $NPCs[_idx].name,
-            &lt;&lt;else&gt;&gt;and $NPCs[_idx].relationship, $NPCs[_idx].name
-            &lt;&lt;/if&gt;&gt;
-	&lt;&lt;/for&gt;&gt;died.
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
-
-Recovered family:&lt;&lt;silently&gt;&gt;
-&lt;&lt;set _recoveredFamily = []&gt;&gt;
-&lt;&lt;for _y, _household range $NPCs&gt;&gt;
-	&lt;&lt;if _household.health is &quot;deceased&quot;&gt;&gt;
-    &lt;&lt;set _recoveredFamily.push(_y)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/for&gt;&gt;
-    &lt;&lt;/silently&gt;&gt;
-   &lt;&lt;nobr&gt;&gt;
-&lt;&lt;if _recoveredFamily.length eq 1&gt;&gt;&lt;&lt;for _x, _y range _recoveredFamily&gt;&gt;
-    	Thanks to your treatments, your $NPCs[_y].relationship, $NPCs[_y].name survived.
-	&lt;&lt;else&gt;&gt;Thanks to your treatments, your
-        &lt;&lt;for _x, _y range _recoveredFamily&gt;&gt;
-			&lt;&lt;if _x &lt; _recoveredFamily.length -1&gt;&gt;$NPCs[_y].relationship, $NPCs[_idx].name,
-            &lt;&lt;else&gt;&gt;and $NPCs[_y].relationship, $NPCs[_y].name
-            &lt;&lt;/if&gt;&gt;
-	&lt;&lt;/for&gt;&gt;survived.
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
+   &lt;&lt;/if&gt;</tw-passagedata><tw-passagedata pid="65" name="Quarantine" tags="" position="1650,175" size="100,100">You quarantine with your family for many days. It&#39;s a terrible time.
 
 Family status after quarantine:
 &lt;&lt;for _z, _idx range $NPCs&gt;&gt;
 $NPCs[_z].relationship, $NPCs[_z].name, $NPCs[_z].health
 &lt;&lt;/for&gt;&gt;
 
-&lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="Pesthouse" tags="" position="1775,175" size="100,100"></tw-passagedata><tw-passagedata pid="70" name="Sick Family" tags="widget" position="1500,175" size="100,100">&lt;&lt;widget &quot;sickFam&quot;&gt;&gt;
+&lt;&lt;if random(1,2) eq 1&gt;&gt;&lt;&lt;set $plagueinfection to 1&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="Pesthouse" tags="" position="1775,175" size="100,100"></tw-passagedata><tw-passagedata pid="67" name="Sick Family" tags="widget" position="1700,25" size="100,100">&lt;&lt;widget &quot;sickFam&quot;&gt;&gt;
 As morning dawns, a terrible realization settles over your household.
 &lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
 &lt;&lt;set _infectedFamily = []&gt;&gt;
@@ -1367,7 +1239,7 @@ $NPCs[_idx].name is $NPCs[_idx].health.&lt;br&gt;
     
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
-</tw-passagedata><tw-passagedata pid="71" name="return to the story" tags="widget" position="1900,600" size="100,100">&lt;&lt;widget &quot;storyline-return&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="68" name="return to the story" tags="widget" position="1900,600" size="100,100">&lt;&lt;widget &quot;storyline-return&quot;&gt;&gt;
 &lt;&lt;if hasVisited(&quot;November 1666&quot;)&gt;&gt;[[Continue on your way|December 1666]]
 &lt;&lt;elseif hasVisited(&quot;October 1666&quot;)&gt;&gt;[[Continue on your way|November 1666][$reputation -=1]]
 &lt;&lt;elseif hasVisited(&quot;September 1666&quot;)&gt;&gt;[[Continue on your way|October 1666][$reputation -=1]]
@@ -1389,7 +1261,7 @@ $NPCs[_idx].name is $NPCs[_idx].health.&lt;br&gt;
 &lt;&lt;elseif hasVisited(&quot;May 1665&quot;)&gt;&gt;[[Continue on your way|June 1665][$reputation -=1]]
 &lt;&lt;elseif hasVisited(&quot;January 1665&quot;)&gt;&gt;[[Continue on your way|May 1665][$reputation -=1]]
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="Untitled Passage 1" tags="" position="2400,275" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set $age to &quot;young adult&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="Untitled Passage 1" tags="" position="2400,275" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set $age to &quot;young adult&quot;&gt;&gt;
 &lt;&lt;addNPC&gt;&gt;&lt;&lt;addNPC&gt;&gt;&lt;&lt;addNPC&gt;&gt;&lt;&lt;addNPC&gt;&gt;&lt;&lt;addNPC&gt;&gt;&lt;&lt;/silently&gt;&gt;
 Family: 
 &lt;&lt;for _i, _idx range $NPCs&gt;&gt;
