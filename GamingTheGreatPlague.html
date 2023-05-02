@@ -171,9 +171,9 @@ a $NPCs[_i].relationship, $NPCs[_i].name;&lt;&lt;else&gt;&gt; a $NPCs[_i].relati
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;Your household also includes $servants servants.&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $socio is &quot;beggars&quot; and $disabilities eq 1&gt;&gt;[add text about ability/disability]&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;
 
-If that sounds right, let&#39;s [[begin our story-&gt;day1]].
+If that sounds right, [[click this link to begin our story-&gt;day1]].
 
-If that doesn&#39;t sound right, let&#39;s [[try again-&gt;identity]].</tw-passagedata><tw-passagedata pid="2" name="day1" tags="" position="500,325" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;nobr&gt;&gt;
+If that doesn&#39;t sound right, [[click this link to try again-&gt;identity]].</tw-passagedata><tw-passagedata pid="2" name="day1" tags="" position="500,325" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;&lt;&lt;set $reputation to 5&gt;&gt;&lt;&lt;set $wealth to 10&gt;&gt;
 &lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $reputation to 5&gt;&gt;&lt;&lt;set $wealth to 7&gt;&gt;
 &lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $reputation to 5&gt;&gt;&lt;&lt;set $wealth to 5&gt;&gt;
@@ -188,7 +188,7 @@ Not everything is perfect, though. Rumors swirl throughout the city about the po
 
 But those are worries for the future! For now, it is time to eat, drink, and play games with dice and cards to celebrate the Christmas season. &lt;&lt;if $religion is &quot;member of the Church of England&quot;&gt;&gt;You look forward to gathering with your neighbors in the parish church to celebrate the birth of Jesus Christ.&lt;&lt;else&gt;&gt;As a god-fearing dissenter/Catholic, you might not be able to celebrate as openly as a member of the Church of England, but you will still enjoy the holidays in the comfort and privacy of your home.&lt;&lt;/if&gt;&gt;
 
-On Christmas Eve, you see a comet in the sky and you wonder if it is a sign of good [[things to come-&gt;January 1665]].</tw-passagedata><tw-passagedata pid="3" name="beggar-start" tags="" position="975,300" size="100,100">&lt;&lt;silently&gt;&gt;
+On Christmas Eve, you see a comet in the sky and you wonder if it is [[a sign of good things to come-&gt;January 1665]].</tw-passagedata><tw-passagedata pid="3" name="beggar-start" tags="" position="975,300" size="100,100">&lt;&lt;silently&gt;&gt;
 /* [Put in a random checker to see if you&#39;re disabled or not. Non-binary is going to mostly play as male, when possible, because of benefits, but can gender switch as need be.]] */
 
 /* disabled = &quot;deserving poor&quot; */
@@ -215,8 +215,9 @@ But enough about the king! [[What about you-&gt;identity]]?</tw-passagedata><tw-
 
 As a devout &lt;&lt;set _religion = [&quot;member of the Church of England&quot;, &quot;member of a dissident Protestant church&quot;, &quot;Catholic&quot;]&gt;&gt;&lt;&lt;listbox &quot;$religion&quot;&gt;&gt;&lt;&lt;optionsfrom _religion&gt;&gt;&lt;&lt;/listbox&gt;&gt;, you know God loves all His children, but sometimes you think he loves people like you - &lt;&lt;set _socio = [&quot;day labourers&quot;, &quot;servants&quot;, &quot;artisans&quot;, &quot;merchants&quot;, &quot;nobles&quot;, &quot;beggars&quot;]&gt;&gt;&lt;&lt;listbox &quot;$socio&quot;&gt;&gt;&lt;&lt;optionsfrom _socio&gt;&gt;&lt;&lt;/listbox&gt;&gt; - a bit more than others.
 
-You live in [[London]], the greatest city in all the British Isles.
-</tw-passagedata><tw-passagedata pid="6" name="death" tags="" position="1950,100" size="100,100">Send not to know for whom the church bells toll. They toll for you.
+You are originally from &lt;&lt;set _origin = [&quot;London&quot;, &quot;the English countryside&quot;, &quot;another English town or city&quot;, &quot;Scotland&quot;, &quot;Ireland&quot;, &quot;the Dutch Republic&quot;, &quot;France&quot;, &quot;somewhere else&quot;]&gt;&gt;&lt;&lt;listbox &quot;$origin&quot;&gt;&gt;&lt;&lt;optionsfrom _origin&gt;&gt;&lt;&lt;/listbox&gt;&gt; and currently live in London, the greatest city in all the British Isles. It is a diverse city, with people of all ages, origins, and socioeconomic statuses living in 97 parishes (explain parishes) within its ancient walls.  There are also more parishes spread out around those walls that can be considered part of its suburbs. This includes people living in the city of Westminster and those living across the river Thames, which can only be crossed by boat or by the London Bridge. Your home is &lt;&lt;set _location = [&quot;inside the City walls&quot;, &quot;in the western suburbs, specifically Westminster&quot;, &quot;in another part of the western suburbs&quot;, &quot;in the northern suburbs&quot;, &quot;in the eastern suburbs&quot;, &quot;across the river in the southern suburbs&quot;]&gt;&gt;&lt;&lt;listbox &quot;$location&quot;&gt;&gt;&lt;&lt;optionsfrom _location&gt;&gt;&lt;&lt;/listbox&gt;&gt;.
+
+[[Click this link to read your biography-&gt;bio]].</tw-passagedata><tw-passagedata pid="6" name="death" tags="" position="1950,100" size="100,100">Send not to know for whom the church bells toll. They toll for you.
 
 NTS: Insert conditionals in here to deal with religious variation, esp. the Catholics.
 
@@ -457,7 +458,7 @@ The Christmas festivities end with a great snowfall.  It&#39;s bitterly cold and
 /* Noble Story */
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;As a minor nobleman, you spend much of your time inside at the royal Court of King Charles II and are very glad to have access to the king as well as plenty of money to buy the latest fashions. But you can’t help but worry about how the war will impact your life.&lt;&lt;/if&gt;&gt;
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;if $origin isnot &quot;the Dutch republic&quot;&gt;&gt;It&#39;s almost a relief when war officially breaks out on March 4th.&lt;&lt;else&gt;&gt;Things go from bad to worse for you when war officially breaks out on March 4th.&lt;&lt;/if&gt;&gt; &lt;&lt;linkappend &quot;Men pass back and forth through London, headed for the fleet—some voluntarily, some after having been impressed and forced into service.&quot;&gt;&gt; 
+&lt;&lt;if $origin isnot &quot;the Dutch republic&quot;&gt;&gt;It&#39;s almost a relief when war officially breaks out on March 4th.&lt;&lt;else&gt;&gt;Things go from bad to worse for you when war officially breaks out on March 4th.&lt;&lt;/if&gt;&gt; Men pass back and forth through London, headed for the fleet—some voluntarily, some after having been impressed and forced into service. 
 &lt;br&gt;
 &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;highway&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -530,7 +531,6 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;br&gt;
 [[keep yourself out of the fray and focus on your own needs-&gt;May 1665][$reputation -=1; $wealth +=10]]?
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="StoryInit" tags="" position="650,25" size="100,100">&lt;&lt;set $reputation to 0&gt;&gt;
 &lt;&lt;set $wealth to 0&gt;&gt;
 &lt;&lt;set $food to 0&gt;&gt;
