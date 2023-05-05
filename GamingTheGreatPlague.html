@@ -604,7 +604,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;set $healthyFamily = []&gt;&gt;
 &lt;&lt;set $deadFamily = []&gt;&gt;
 </tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="800,25" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
-&lt;&lt;if $plays gte 6&gt;&gt;&lt;&lt;infection-program&gt;&gt;
+&lt;&lt;if $plays gte 5&gt;&gt;&lt;&lt;infection-program&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;set $plays += 1&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plays gte 4&gt;&gt;&lt;&lt;include [[Date-Location]]&gt;&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Western-infection" tags="infection-rates" position="425,900" size="100,100">&lt;silently&gt;/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 5 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events. */
 &lt;&lt;nobr&gt;&gt;
