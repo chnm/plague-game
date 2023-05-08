@@ -154,26 +154,35 @@ window.weightedEither = function (types, ignore) {
 
 &lt;&lt;if $religion is &quot;member of a dissident Protestant church&quot;&gt;&gt;
 &lt;&lt;set $religion to &quot;Presbyterian&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/silently&gt;&gt;&lt;&lt;/nobr&gt;&gt;
-Your name is $name and you are $agenum years old. You are proud to have been born and raised in &lt;&lt;if $origin eq &quot;London&quot;&gt;&gt;London.&lt;&lt;else&gt;&gt;$origin, though you now make your home in London.&lt;&lt;/if&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+Your name is $name and you are $agenum years old. You are proud to have been born and raised in &lt;&lt;if $origin eq &quot;London&quot;&gt;&gt;London.&lt;&lt;else&gt;&gt;$origin, though you now make your home in London.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
-You currently live in the parish of $parish, which is $location.
+You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;nobr&gt;&gt;
-&lt;&lt;silently&gt;&gt;&lt;&lt;set _x to random(1,5)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addNPC&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/silently&gt;&gt; 
+&lt;&lt;silently&gt;&gt;&lt;&lt;set _x to random(0,5)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addFamilyNPC&gt;&gt;&lt;&lt;/for&gt;&gt;
+&lt;&lt;addParentNPC&gt;&gt;
+&lt;&lt;NPCarticle&gt;&gt;
+&lt;&lt;NPCpronouns&gt;&gt;
+&lt;&lt;/silently&gt;&gt; 
 
+&lt;&lt;if $NPCs.length gt 0&gt;&gt;
 Your family includes
 &lt;&lt;for _i, _idx range $NPCs&gt;&gt;
-&lt;&lt;if _i &lt; $NPCs.length - 1&gt;&gt;
-a $NPCs[_i].relationship, $NPCs[_i].name;&lt;&lt;else&gt;&gt; a $NPCs[_i].relationship, $NPCs[_i].name.
+&lt;&lt;if $NPCs.length eq 1&gt;&gt;$NPCs[_i].article $NPCs[_i].relationship, $NPCs[_i].name.
+&lt;&lt;elseif _i &lt; $NPCs.length - 1&gt;&gt;
+$NPCs[_i].article $NPCs[_i].relationship, $NPCs[_i].name;&lt;&lt;else&gt;&gt; and $NPCs[_i].article $NPCs[_i].relationship, $NPCs[_i].name.
 &lt;&lt;/if&gt;&gt; 
-&lt;&lt;/for&gt;&gt;&lt;br /&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;elseif $NPCs.length eq 0&gt;&gt;
+You have no family.
+&lt;&lt;/if&gt;&gt;&lt;br&gt;
+&lt;&lt;silently&gt;&gt;&lt;&lt;addServantNPC&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;Your household also includes $servants servants.&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $socio is &quot;beggars&quot; and $disabilities eq 1&gt;&gt;[add text about ability/disability]&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;
 
 If that sounds right, [[click this link to begin our story-&gt;day1]].
 
-If that doesn&#39;t sound right, [[click this link to try again-&gt;identity]].</tw-passagedata><tw-passagedata pid="2" name="day1" tags="" position="500,325" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;nobr&gt;&gt;
+If that doesn&#39;t sound right, &lt;&lt;click &quot;click this link to try again&quot;&gt;&gt;&lt;&lt;script&gt;&gt;state.restart()&lt;&lt;/script&gt;&gt;&lt;&lt;/click&gt;&gt;.</tw-passagedata><tw-passagedata pid="2" name="day1" tags="" position="500,325" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;&lt;&lt;set $reputation to 5&gt;&gt;&lt;&lt;set $wealth to 10&gt;&gt;
 &lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $reputation to 5&gt;&gt;&lt;&lt;set $wealth to 7&gt;&gt;
 &lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $reputation to 5&gt;&gt;&lt;&lt;set $wealth to 5&gt;&gt;
@@ -603,7 +612,9 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;set $deceasedFamily = []&gt;&gt;
 &lt;&lt;set $healthyFamily = []&gt;&gt;
 &lt;&lt;set $deadFamily = []&gt;&gt;
-</tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="800,25" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
+&lt;&lt;set $article to [&quot;a&quot;, &quot;an&quot;]&gt;&gt;
+&lt;&lt;set $heshe to [&quot;he&quot;, &quot;she&quot;, &quot;they&quot;]&gt;&gt;
+&lt;&lt;set $hishers to [&quot;his&quot;, &quot;hers&quot;, &quot;theirs&quot;]&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="PassageHeader" tags="" position="800,25" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
 &lt;&lt;if $plays gte 5&gt;&gt;&lt;&lt;infection-program&gt;&gt;
 &lt;&lt;/if&gt;&gt;&lt;&lt;set $plays += 1&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;if $plays gte 4&gt;&gt;&lt;&lt;include [[Date-Location]]&gt;&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Western-infection" tags="infection-rates" position="425,900" size="100,100">&lt;silently&gt;/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 5 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events. */
@@ -796,30 +807,51 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;/for&gt;&gt;
 
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Date-Location" tags="" position="950,25" size="100,100">&lt;&lt;if $plays eq 5&gt;&gt;December 1664, $location
-&lt;&lt;elseif $plays eq 6&gt;&gt;Late Winter and Spring 1665, $location
-&lt;&lt;elseif $plays eq 7&gt;&gt;May 1665, $location
-&lt;&lt;elseif $plays eq 8&gt;&gt;June 1665, $location
-&lt;&lt;elseif $plays eq 9&gt;&gt;July 1665, $location
-&lt;&lt;elseif $plays eq 10&gt;&gt;August 1665, $location
-&lt;&lt;elseif $plays eq 11&gt;&gt;September 1665, $location
-&lt;&lt;elseif $plays eq 12&gt;&gt;October 1665, $location
-&lt;&lt;elseif $plays eq 13&gt;&gt;November 1665, $location
-&lt;&lt;elseif $plays eq 14&gt;&gt;December 1665, $location
-&lt;&lt;elseif $plays eq 15&gt;&gt;January 1666, $location
-&lt;&lt;elseif $plays eq 16&gt;&gt;February 1666, $location
-&lt;&lt;elseif $plays eq 17&gt;&gt;March 1666, $location
-&lt;&lt;elseif $plays eq 18&gt;&gt;April 1666, $location
-&lt;&lt;elseif $plays eq 19&gt;&gt;May 1666, $location
-&lt;&lt;elseif $plays eq 20&gt;&gt;June 1666, $location
-&lt;&lt;elseif $plays eq 21&gt;&gt;July 1666, $location
-&lt;&lt;elseif $plays eq 22&gt;&gt;August 1666, $location
-&lt;&lt;elseif $plays eq 23&gt;&gt;September 1666, $location
-&lt;&lt;elseif $plays eq 24&gt;&gt;October 1666, $location
-&lt;&lt;elseif $plays eq 25&gt;&gt;November 1666, $location
-&lt;&lt;elseif $plays eq 26&gt;&gt;December 1666, $location&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="char-gen-widgets" tags="widget" position="250,775" size="100,100">/* add family members based on age */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Date-Location" tags="" position="950,25" size="100,100">&lt;&lt;if $plays eq 4&gt;&gt;December 1664, $location
+&lt;&lt;elseif $plays eq 5&gt;&gt;Late Winter and Spring 1665, $location
+&lt;&lt;elseif $plays eq 6&gt;&gt;May 1665, $location
+&lt;&lt;elseif $plays eq 7&gt;&gt;June 1665, $location
+&lt;&lt;elseif $plays eq 8&gt;&gt;July 1665, $location
+&lt;&lt;elseif $plays eq 9&gt;&gt;August 1665, $location
+&lt;&lt;elseif $plays eq 10&gt;&gt;September 1665, $location
+&lt;&lt;elseif $plays eq 11&gt;&gt;October 1665, $location
+&lt;&lt;elseif $plays eq 12&gt;&gt;November 1665, $location
+&lt;&lt;elseif $plays eq 13&gt;&gt;December 1665, $location
+&lt;&lt;elseif $plays eq 14&gt;&gt;January 1666, $location
+&lt;&lt;elseif $plays eq 15&gt;&gt;February 1666, $location
+&lt;&lt;elseif $plays eq 16&gt;&gt;March 1666, $location
+&lt;&lt;elseif $plays eq 17&gt;&gt;April 1666, $location
+&lt;&lt;elseif $plays eq 18&gt;&gt;May 1666, $location
+&lt;&lt;elseif $plays eq 19&gt;&gt;June 1666, $location
+&lt;&lt;elseif $plays eq 20&gt;&gt;July 1666, $location
+&lt;&lt;elseif $plays eq 21&gt;&gt;August 1666, $location
+&lt;&lt;elseif $plays eq 22&gt;&gt;September 1666, $location
+&lt;&lt;elseif $plays eq 23&gt;&gt;October 1666, $location
+&lt;&lt;elseif $plays eq 24&gt;&gt;November 1666, $location
+&lt;&lt;elseif $plays eq 25&gt;&gt;December 1666, $location&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="char-gen-widgets" tags="widget" position="250,775" size="100,100">/* add family members based on age */
+&lt;&lt;widget &quot;addParentNPC&quot;&gt;&gt;
+  &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;
+    &lt;&lt;if random(1,4) lte 3&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), relationship: &quot;mother&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 3&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($mNames), relationship: &quot;father&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;widget &quot;addNPC&quot;&gt;&gt;
+  &lt;&lt;if $age is &quot;young adult&quot;&gt;&gt;
+    &lt;&lt;if random(1,4) lte 2&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), relationship: &quot;mother&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 3&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($mNames), relationship: &quot;father&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
+
+  &lt;&lt;if $age is &quot;middle-aged adult&quot;&gt;&gt;
+    &lt;&lt;if random(1,4) lte 2&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), relationship: &quot;mother&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 1&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($mNames), relationship: &quot;father&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
+
+  &lt;&lt;if $age is &quot;elderly adult&quot;&gt;&gt;
+    &lt;&lt;if random(1,4) lte 1&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), relationship: &quot;mother&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 1&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($mNames), relationship: &quot;father&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;addFamilyNPC&quot;&gt;&gt;
  &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;
  &lt;&lt;if random(1,2) eq 1&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;), relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
  &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;), relationship: weightedEither($mRelationships), health: &quot;uninfected&quot;})&gt;&gt;
@@ -834,9 +866,11 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;if random(1,2) eq 1&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
 &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: weightedEither($mRelationships), health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
 
-/* add household members for upper class
+/* add household members for upper class */
 
+&lt;&lt;widget &quot;addServantNPC&quot;&gt;&gt;
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
   &lt;&lt;set $servants to random(8,15)&gt;&gt;
 &lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;
@@ -904,6 +938,26 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
             &lt;&lt;/capture&gt;&gt;
         &lt;&lt;/for&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+
+&lt;&lt;widget &quot;NPCarticle&quot;&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCs[_i].relationship is &quot;aunt&quot; or $NPCs[_i].relationship is &quot;uncle&quot;&gt;&gt;
+    &lt;&lt;set $NPCs[_i].article to &quot;an&quot;&gt;&gt;
+    &lt;&lt;elseif $NPCs[_i].relationship is &quot;mother&quot; or $NPCs[_i].relationship is &quot;father&quot;&gt;&gt;&lt;&lt;set $NPCs[_i].article to &quot;your&quot;&gt;&gt;
+    &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs[_i].article to &quot;a&quot;&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;NPCpronouns&quot;&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
+&lt;&lt;if $NPCs[_i].relationship is &quot;aunt&quot; or $NPCs[_i].relationship is &quot;mother&quot; or $NPCs[_i].relationship is &quot;sister&quot;&gt;&gt;
+    &lt;&lt;set $NPCs[_i].hishers to &quot;her&quot;&gt;&gt;&lt;&lt;set $NPCs[_i].heshe to &quot;she&quot;&gt;&gt;
+    &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs[_i].hishers to &quot;his&quot;&gt;&gt;&lt;&lt;set $NPCs[_i].heshe to &quot;he&quot;&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;npcInfection&quot;&gt;&gt;
