@@ -1,0 +1,27 @@
+annual income
+
+beggars £6 = 10 shillings/month alms (standard neighborhood begging), 0p disposable
+	any additional money begged off highways is disposable
+day laborers £15 = 25 shillings/month income, 
+£1/month food & shelter, 5s/month disposable
+servant
+no room and board: £15 = 25 shillings/month
+	£1/month food & shelter, 5s/month disposable
+	servant, live-in, male: £4 = 6s 8p / month disposable
+	servant, live-in, female: £3 = 5 shillings/month disposable
+artisan £40 = £3 ⅓ / month
+	assume twice expense of day laborer or £2/month food & shelter
+		plus 1 servant’s wages at 5s/month in wages
+	£1/month disposable
+merchant £200 = £16 ⅔ / month
+	assume five times expense of artisan or £10/month food & shelter
+		plus 3 servants’ wages at 16s 8p / month
+	£5/month disposable
+	baronet £880 = £880 = £73 ⅓ /month
+		assume four times expense of merchant or £40/month food & shelter
+			plus 10 servants at 25 shillings/month = £12.5/month wages
+			(some made more, some less, so using average)
+		£20/month disposable
+		
+12 pennies = 1 shilling
+20 shillings = 1 pound
