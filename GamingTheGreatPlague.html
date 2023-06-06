@@ -986,7 +986,7 @@ If that doesn&#39;t sound right, &lt;&lt;click &quot;click this link to try agai
 
 Not everything is perfect, though. Rumors swirl throughout the city about the possibility of a coming war with the Dutch Republic after several Dutch ships were captured and brought into Portsmouth as prizes. &lt;&lt;if $origin is &quot;the Dutch Republic&quot;&gt;&gt;You make merry with your neighbors even while you fear they will turn against you in the months ahead. &lt;&lt;/if&gt;&gt;Worse, it is common knowledge that plague has been spreading in the Dutch fleet for months, though it hasn&#39;t yet reached English shores.&lt;br&gt;&lt;br&gt;
 
-But those are worries for the future! For now, it is time to eat, drink, and play games with dice and cards to celebrate the Christmas season. &lt;&lt;if $religion is &quot;member of the Church of England&quot;&gt;&gt;You look forward to gathering with your neighbors in the parish church to celebrate the birth of Jesus Christ.&lt;&lt;else&gt;&gt;As a god-fearing dissenter/Catholic, you might not be able to celebrate as openly as a member of the Church of England, but you will still enjoy the holidays in the comfort and privacy of your home.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+But those are worries for the future! For now, it is time to eat, drink, and play games with dice and cards to celebrate the Christmas season. &lt;&lt;if $religion is &quot;member of the Church of England&quot;&gt;&gt;You look forward to gathering with your neighbors in the parish church to celebrate the birth of Jesus Christ.&lt;&lt;elif $religion is &quot;Catholic&quot;&gt;&gt; You enjoy gathering with your fellow Catholics at the magnificent chapel attached to Somerset House, the Queen Mother Henrietta Maria&#39;s London home. &lt;&lt;else&gt;&gt;You might not be able to celebrate as openly as a conforming member of the Church of England, or the papists who flock to the chapels of the Catholic Queen Catherine and Queen Mother Henrietta Maria, but you will still enjoy the holidays in the comfort and privacy of your home.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
 On Christmas Eve, you see a comet in the sky and you wonder if it is [[a sign of good things to come-&gt;January 1665]].
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="start" tags="" position="100,100" size="100,100">The year is 1664 and you are a resident of the great city of London in England. After decades of civil war and experimental government, the merry monarch King Charles II was restored to the thrones of England, Scotland, and Ireland just four years ago and (most of) the kingdoms rejoiced.
@@ -1245,7 +1245,7 @@ The Christmas festivities end with a great snowfall.  It&#39;s bitterly cold and
 &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of [randomize merchant type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in each of your many hearths, and plenty of money to buy the latest fashions. But your family can’t help but worry about how the war will impact their trade.&lt;&lt;else&gt;&gt;a [random merchant type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in each of your many hearths, and plenty of money to buy the latest fashions. But you can’t help but worry about how the war will impact your trade.&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 /* Noble Story */
-&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of &lt;&lt;/if&gt;&gt;a minor nobleman, you spend much of your time inside at the royal Court of King Charles II and are very glad to have access to the king as well as plenty of money to buy the latest fashions. But you can’t help but worry about how the war will impact your life.&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of &lt;&lt;/if&gt;&gt;a minor noble&lt;&lt;if $gender is &quot;female&quot;&gt;&gt;wo&lt;&lt;/if&gt;&gt;man, you spend much of your time inside at the royal Court of King Charles II in hopes of securing more titles, honor, and riches for yourself and your family&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, especially since Queen Catherine and the Queen Mother both share your Catholic faith&lt;&lt;/if&gt;&gt;. You fill your days traveling among the royal family&#39;s various London palaces--including attending the Queen Mother&#39;s weekly social circle as faithfully as if it were church--and spending money on the latest fashions and trends. But you can’t help but worry about how the war will impact your life.&lt;&lt;/if&gt;&gt;
 &lt;br&gt;&lt;br&gt;
 &lt;&lt;if $origin isnot &quot;the Dutch republic&quot;&gt;&gt;It&#39;s almost a relief when war officially breaks out on March 4th.&lt;&lt;else&gt;&gt;Things go from bad to worse for you when war officially breaks out on March 4th.&lt;&lt;/if&gt;&gt; &lt;&lt;linkappend &quot;Men pass back and forth through London, headed for the fleet—some voluntarily, some after having been impressed and forced into service.&quot;&gt;&gt;
 &lt;br&gt;
@@ -1801,7 +1801,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
     &lt;br&gt;&lt;br&gt;
     It takes almost a week, but news finally arrives of a great battle that killed many important men, especially on the ship of the Duke of York, James Stuart, the current heir to the throne—at least until the King and Queen manage to have children of their own. According to rumor, the battle came so close to killing the Duke that he was covered with blood and brains and the head of Mr. Boyle flew off and struck down the Duke. You happily repeat the rumors to anyone who will listen as bonfires break out in the street and people make merry, freely sharing their food and wine in celebration.
     &lt;br&gt;&lt;br&gt;
-    &lt;&lt;linkreplace &quot;That is the last good day of the month, though. The plague grows worse and the streets are soon filled with coaches and wagons full of people fleeing with their goods to the countryside.&quot;&gt;&gt;
+    That is the last good day of the month, though. The plague grows worse and the streets are soon filled with coaches and wagons full of people fleeing with their goods to the countryside. The Queen Mother Henrietta Maria moves back to France&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, much to your dismay, and that of our fellow Catholics who flock to her chapel each week&gt;&gt;&lt;&lt;else&gt;&gt;, much to your relief, and that of all your fellow God-fearing Protestants&lt;&lt;/if&gt;&gt;. &lt;&lt;linkreplace &quot;On June 29th, the King packs up his entire household in 148 carriages and moves 12 miles away, to his palace at Hampton Court.&quot;&gt;&gt;
     &lt;br&gt;
         &lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;There are still no plague cases in your parish. 
 /* Beggars */
@@ -1897,6 +1897,8 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 So many people are sick and shut up in their houses that the city has imposed a 9pm curfew for healthy people, so that the sick can go out for a bit of air. There is sickness in the fleet and everyone worries what that means for the war.
 &lt;br&gt;&lt;br&gt;
 The city has ordered public fasts and prayers to help combat the plague. &lt;&lt;if $religion is &quot;Presbyterian&quot;&gt;&gt;You attempt to join a private meeting of your fellow Presbyterians in Covent Garden but are too poor and turned away, which is lucky for you because everyone who attends the meeting is arrested. They are told they can be released if they pay £5 each to help care for the poor of the city, but they refuse and so are imprisoned.&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
+Afraid of the worsening plague outbreak, the King removes his household even further away to the west, finally settling into the city of Salisbury. Unfortunately, there is no royal palace there and anyone who follows him will have to find their own makeshift lodgings somewhere else in the city.&lt;&lt;/if&gt;&gt;
 
 [bit about prayer and seeking plague remedies here]
 
@@ -1949,6 +1951,9 @@ The weather is terrible but plague numbers are coming down and people start to t
 &lt;&lt;else&gt;&gt;
 Plague numbers are up, despite two great frosts, and the Christmas festivities are all cancelled. You hope it&#39;s the last gasp of the outbreak, even as you reflect at how much different things are now than the were last year. 
 
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
+The King decides to take the Court to Oxford to celebrate the Christmas festivities and settles into the Deanery at Christ Church College, the king&#39;s traditional lodgings when he is in residence. The rest of the Court is scattered in lodgings throughout the city.&lt;&lt;/if&gt;&gt;
+
 Maybe things will be better in [[1666-&gt;January 1666]].
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="January 1666" tags="" position="1100,875" size="100,100">&lt;&lt;nobr&gt;&gt;
@@ -1961,12 +1966,15 @@ Plague numbers continue to come down. Noble coaches fill the streets, porters ar
 A bad storm blows down tiles from houses and shuts down river traffic, but all in all, it&#39;s a good month and you look forward to even better things in [[February 1666]].
 
 &lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
+After six months of travel, the king finally returns the Court to Hampton Court Palace, so that he can be near to the City of London and the government officials working out of Westminster.&lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="February 1666" tags="beggar" position="1225,875" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 
 &lt;&lt;else&gt;&gt;
-The king has returned to London! People rejoice and return to their churches, knowing that if the king is willing to be in town then the plague be basically over. A great snow hides all the graves and it&#39;s as if the last year was all a terrible dream.
+The king has returned to London! People rejoice and return to their churches, knowing that if the king is willing to move back into his city palace of Whitehall, then the plague outbreak must be almost over. A great snow hides all the graves and it&#39;s as if the last year was all a terrible dream.
 
 Your parish priest hasn&#39;t returned yet, though, and his reputation plummets as the days tick over into [[March 1666]].
 
@@ -1976,7 +1984,7 @@ Your parish priest hasn&#39;t returned yet, though, and his reputation plummets 
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 
 &lt;&lt;else&gt;&gt;
-The Queen of Portugal, mother to England&#39;s beloved Queen Catherine, has died. The Court is plunged into mourning and the city quiets as well... because plague numbers are starting to go up again. 
+The Queen of Portugal, mother to England&#39;s beloved Queen Catherine, has died. The Court is plunged into mourning&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;. After a month in London, the King moves on to one of his father&#39;s old houses of Audley End, in Essex. Once an enormous and grand palace, it is in bad shape after the Civil War and Interregnum. But the plague has proved the wisdom of the King having more royal palaces outside of London and the Court is happy to follow him...&lt;&lt;else&gt;&gt; and the city quiets as well... &lt;&lt;/if&gt;&gt; because plague numbers are starting to go up again.
 
 So much for the city being safe again.
 
@@ -2311,6 +2319,8 @@ The graveyards are beginning to overflow and corpses are being flung into the op
 &lt;&lt;/if&gt;&gt;
 It feels like the church bells are ringing constantly, with each new death or funeral.
 &lt;br&gt;&lt;br&gt;
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
+The plague has followed the King&#39;s household to Hampton Court and one of his guards dies of plague at the end of the month.&lt;&lt;/if&gt;&gt;
 [[Continue to August 1665-&gt;August 1665]]
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
