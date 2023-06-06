@@ -98,15 +98,15 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Gaming the Great Plague 2" startnode="3" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="82d2fee6-bab5-4bdd-86ed-694046b2191b" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">:root {
-  --light-main: #e3dbdbff;
-  --light-contrast: #c9d5b5ff;
-  --contrast: #9f9f92ff;
-  --dark-contrast: #6d6466ff;
-  --main: #979772;
-  --dark-main: #4E495A;
-  --darker-main: #312E38;
-  --dark: #0C0C09;
+	<tw-storydata name="Gaming the Great Plague 2" startnode="3" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="82d2fee6-bab5-4bdd-86ed-694046b2191b" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">:root {
+  --light-main: #f8d8c9;
+  --light-contrast: #c3c0b4;
+  --contrast: #9ebca7;
+  --dark-contrast: #646e55;
+  --main: #b36c4a;
+  --dark-main: #96452e;
+  --darker-main: #7c2c3c;
+  --dark: #230c06;
 }
 
 * {
@@ -152,7 +152,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 body {
   margin: 0;
   color: #111;
-  background-color: #FAF4F0;
+  background-color: white;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -744,6 +744,11 @@ html.dark #ui-dialog-body button {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* Simple Inventory, for SugarCube 2, by Chapel
+v3.0.0-beta1, 2022-07-25, 19f255d958852e55a8a3afcde5c53331f0d938e8 */
+ul.simple-inventory-list{margin:0 auto;padding:0}.simple-inventory-listing{list-style:none;padding:.3rem .3rem .3rem 1rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr}.simple-inventory-listing:nth-child(2n){background-color:#000}.simple-inventory-listing>a,.simple-inventory-listing>span{display:inline-block}.all-listing.simple-inventory-listing{border-top:1px solid #fafafa;background-color:transparent}.drop-link{color:#e33}.drop-link:active,.drop-link:focus,.drop-link:hover{color:#f88}
+/* End Simple Inventory */
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/* weightedEither() Function - Start */
 window.weightedEither = function (types, ignore) {
 	/* Verify "types" parameter is a generic object. */
@@ -986,7 +991,7 @@ If that doesn&#39;t sound right, &lt;&lt;click &quot;click this link to try agai
 
 Not everything is perfect, though. Rumors swirl throughout the city about the possibility of a coming war with the Dutch Republic after several Dutch ships were captured and brought into Portsmouth as prizes. &lt;&lt;if $origin is &quot;the Dutch Republic&quot;&gt;&gt;You make merry with your neighbors even while you fear they will turn against you in the months ahead. &lt;&lt;/if&gt;&gt;Worse, it is common knowledge that plague has been spreading in the Dutch fleet for months, though it hasn&#39;t yet reached English shores.&lt;br&gt;&lt;br&gt;
 
-But those are worries for the future! For now, it is time to eat, drink, and play games with dice and cards to celebrate the Christmas season. &lt;&lt;if $religion is &quot;member of the Church of England&quot;&gt;&gt;You look forward to gathering with your neighbors in the parish church to celebrate the birth of Jesus Christ.&lt;&lt;elif $religion is &quot;Catholic&quot;&gt;&gt; You enjoy gathering with your fellow Catholics at the magnificent chapel attached to Somerset House, the Queen Mother Henrietta Maria&#39;s London home. &lt;&lt;else&gt;&gt;You might not be able to celebrate as openly as a conforming member of the Church of England, or the papists who flock to the chapels of the Catholic Queen Catherine and Queen Mother Henrietta Maria, but you will still enjoy the holidays in the comfort and privacy of your home.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+But those are worries for the future! For now, it is time to eat, drink, and play games with dice and cards to celebrate the Christmas season. &lt;&lt;if $religion is &quot;member of the Church of England&quot;&gt;&gt;You look forward to gathering with your neighbors in the parish church to celebrate the birth of Jesus Christ.&lt;&lt;elseif $religion is &quot;Catholic&quot;&gt;&gt; You enjoy gathering with your fellow Catholics at the magnificent chapel attached to Somerset House, the Queen Mother Henrietta Maria&#39;s London home. &lt;&lt;else&gt;&gt;You might not be able to celebrate as openly as a conforming member of the Church of England, or the papists who flock to the chapels of the Catholic Queen Catherine and Queen Mother Henrietta Maria, but you will still enjoy the holidays in the comfort and privacy of your home.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 
 On Christmas Eve, you see a comet in the sky and you wonder if it is [[a sign of good things to come-&gt;January 1665]].
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="start" tags="" position="100,100" size="100,100">The year is 1664 and you are a resident of the great city of London in England. After decades of civil war and experimental government, the merry monarch King Charles II was restored to the thrones of England, Scotland, and Ireland just four years ago and (most of) the kingdoms rejoiced.
@@ -1314,7 +1319,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 
 /* Noble options */
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;Court is abuzz with gossip about the war and there’s plenty to keep an ambitious courtier busy.
-&lt;br&gt;&lt;br&gt;Do you: 
+&lt;br&gt;&lt;br&gt;Do you: &lt;ul&gt;
 &lt;li&gt;[[throw in and help with the war effort-&gt;May 1665][$reputation +=5; $wealth -=5]]&lt;/li&gt;
 &lt;li&gt;[[keep yourself out of the fray and focus on your own needs-&gt;May 1665]]?&lt;/li&gt;
 &lt;/ul&gt;
@@ -1801,7 +1806,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
     &lt;br&gt;&lt;br&gt;
     It takes almost a week, but news finally arrives of a great battle that killed many important men, especially on the ship of the Duke of York, James Stuart, the current heir to the throne—at least until the King and Queen manage to have children of their own. According to rumor, the battle came so close to killing the Duke that he was covered with blood and brains and the head of Mr. Boyle flew off and struck down the Duke. You happily repeat the rumors to anyone who will listen as bonfires break out in the street and people make merry, freely sharing their food and wine in celebration.
     &lt;br&gt;&lt;br&gt;
-    That is the last good day of the month, though. The plague grows worse and the streets are soon filled with coaches and wagons full of people fleeing with their goods to the countryside. The Queen Mother Henrietta Maria moves back to France&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, much to your dismay, and that of our fellow Catholics who flock to her chapel each week&gt;&gt;&lt;&lt;else&gt;&gt;, much to your relief, and that of all your fellow God-fearing Protestants&lt;&lt;/if&gt;&gt;. &lt;&lt;linkreplace &quot;On June 29th, the King packs up his entire household in 148 carriages and moves 12 miles away, to his palace at Hampton Court.&quot;&gt;&gt;
+    That is the last good day of the month, though. The plague grows worse and the streets are soon filled with coaches and wagons full of people fleeing with their goods to the countryside. The Queen Mother Henrietta Maria moves back to France&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, much to your dismay, and that of our fellow Catholics who flock to her chapel each week&lt;&lt;else&gt;&gt;, much to your relief, and that of all your fellow God-fearing Protestants&lt;&lt;/if&gt;&gt;. &lt;&lt;linkreplace &quot;On June 29th, the King packs up his entire household in 148 carriages and moves 12 miles away, to his palace at Hampton Court.&quot;&gt;&gt;
     &lt;br&gt;
         &lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;There are still no plague cases in your parish. 
 /* Beggars */
@@ -2542,17 +2547,12 @@ Monthly spending: $expenses
 /* Remaining total: _remainder */
 &lt;&lt;set $wealth to _remainder&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;&lt;set _p to $wealth&gt;&gt;&lt;&lt;set _s to 0&gt;&gt;&lt;&lt;set _pounds to 0&gt;&gt;
-&lt;&lt;for _i = 0; _i = _p; _i++&gt;&gt;
-&lt;&lt;if _p gte 12&gt;&gt;&lt;&lt;set _s +=1&gt;&gt;&lt;&lt;set _p -=12&gt;&gt;
-	&lt;&lt;else&gt;&gt;&lt;&lt;break&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;&lt;for _x = 0; _x = _s; _x++&gt;&gt;
-&lt;&lt;if _s gte 20&gt;&gt;&lt;&lt;set _pounds +=1&gt;&gt;&lt;&lt;set _s -=20&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;&lt;break&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;
-Total wealth: $wealth (£_pounds, _s s., _p d.)&lt;&lt;/if&gt;&gt;
+&lt;&lt;set _shillings to Math.floor($wealth/12)&gt;&gt;&lt;&lt;set $pence to ($wealth - (_shillings*12))&gt;&gt;
+
+&lt;&lt;if _shillings gte 20&gt;&gt;
+&lt;&lt;set $pounds to Math.floor(_shillings/20)&gt;&gt;&lt;&lt;set $shillingsleft to (_shillings- Math.floor($pounds*20))&gt;&gt;&lt;&lt;/if&gt;&gt;
+
+Total wealth: $wealth (£$pounds, $shillingsleft s., $pence d.)&lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="61" name="ForgiveMe" tags="" position="2125,675" size="100,100">You&#39;re forgiven!
 
