@@ -98,15 +98,15 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Gaming the Great Plague 2" startnode="3" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="82d2fee6-bab5-4bdd-86ed-694046b2191b" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">:root {
-  --light-main: #f8d8c9;
-  --light-contrast: #c3c0b4;
-  --contrast: #9ebca7;
-  --dark-contrast: #646e55;
-  --main: #b36c4a;
-  --dark-main: #96452e;
-  --darker-main: #7c2c3c;
-  --dark: #230c06;
+	<tw-storydata name="Gaming the Great Plague 2" startnode="3" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="82d2fee6-bab5-4bdd-86ed-694046b2191b" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">:root {
+  --light-main: #ffffff;
+  --light-contrast: #42417f;
+  --contrast: #a0c9c1;
+  --dark-contrast: #e4e6d7;
+  --main: #007b7c;
+  --dark-main: #42417f;
+  --darker-main: #000000;
+  --dark: #000000;
 }
 
 * {
@@ -932,8 +932,7 @@ Setting.addList("theme", {
 	list			: themeList,
 	onInit		:	setTheme,
 	onChange	: setTheme
-});
-</script><tw-tag name="extreme-plague" color="red"></tw-tag><tw-tag name="some-plague" color="yellow"></tw-tag><tw-tag name="less-plague" color="green"></tw-tag><tw-tag name="level-1" color="green"></tw-tag><tw-tag name="play" color="purple"></tw-tag><tw-tag name="infection-rates" color="red"></tw-tag><tw-tag name="fire" color="red"></tw-tag><tw-passagedata pid="1" name="bio" tags="" position="475,150" size="100,100">&lt;&lt;set $plays to 4&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
+});</script><tw-tag name="extreme-plague" color="red"></tw-tag><tw-tag name="some-plague" color="yellow"></tw-tag><tw-tag name="less-plague" color="green"></tw-tag><tw-tag name="level-1" color="green"></tw-tag><tw-tag name="play" color="purple"></tw-tag><tw-tag name="infection-rates" color="red"></tw-tag><tw-tag name="fire" color="red"></tw-tag><tw-passagedata pid="1" name="bio" tags="" position="475,150" size="100,100">&lt;&lt;set $plays to 4&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
 &lt;&lt;playerName&gt;&gt;
 &lt;&lt;parish&gt;&gt;
 
@@ -2538,7 +2537,7 @@ Do you:
     &lt;&lt;/if&gt;&gt;.
     &lt;&lt;if $disability is 1&gt;&gt;Many of your neighbors begin to flee the city and those who remain curse at you to leave when you try begging at their doors.&lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="freeze" tags="" position="2475,300" size="100,100">You quietly freeze to death, but at least it was a [[painless way to go-&gt;stats]].</tw-passagedata><tw-passagedata pid="60" name="StoryCaption" tags="" position="1075,25" size="100,100">&lt;&lt;if $reputation gt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:green&quot;&gt;good&lt;/span&gt;.&lt;&lt;elseif $reputation lt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:red&quot;&gt;bad&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="freeze" tags="" position="2475,300" size="100,100">You quietly freeze to death, but at least it was a [[painless way to go-&gt;stats]].</tw-passagedata><tw-passagedata pid="60" name="StoryCaption" tags="" position="1075,25" size="100,100">&lt;&lt;if $reputation gt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:#ffffff;&quot;&gt;good&lt;/span&gt;.&lt;&lt;elseif $reputation lt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:red&quot;&gt;bad&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
 &lt;&lt;income&gt;&gt;
 /* Wealth at beginning of month: $wealth */
 Income: $income
@@ -2550,9 +2549,9 @@ Monthly spending: $expenses
 &lt;&lt;set _shillings to Math.floor($wealth/12)&gt;&gt;&lt;&lt;set $pence to ($wealth - (_shillings*12))&gt;&gt;
 
 &lt;&lt;if _shillings gte 20&gt;&gt;
-&lt;&lt;set $pounds to Math.floor(_shillings/20)&gt;&gt;&lt;&lt;set $shillingsleft to (_shillings- Math.floor($pounds*20))&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;set $pounds to Math.floor(_shillings/20)&gt;&gt;&lt;&lt;set $shillings to (_shillings- Math.floor($pounds*20))&gt;&gt;&lt;&lt;/if&gt;&gt;
 
-Total wealth: $wealth (£$pounds, $shillingsleft s., $pence d.)&lt;&lt;/if&gt;&gt;
+Total wealth: $wealth (£$pounds, $shillings s., $pence d.)&lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="61" name="ForgiveMe" tags="" position="2125,675" size="100,100">You&#39;re forgiven!
 
