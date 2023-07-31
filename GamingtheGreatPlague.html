@@ -1317,7 +1317,7 @@ The Christmas festivities end with a great snowfall.  It&#39;s bitterly cold and
 
 /*Day Labourer story */
 &lt;&lt;if $socio is &quot;day labourers&quot;&gt;&gt;
-	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;As the child of a day labourer, each member of your family has&lt;&lt;else&gt;&gt;As a day labourer, you have&lt;&lt;/if&gt;&gt; to search for a job every day and the weather is so miserable that some days you can’t find work. But at least you have a roof over your head and there is enough money to buy at least bread for your household every week. You are not freezing or starving to death, even if you are always cold and hungry.&lt;&lt;/if&gt;&gt;
+	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;As the child of a day labourer, each member of your family has&lt;&lt;else&gt;&gt;As a day labourer, you have&lt;&lt;/if&gt;&gt; to search for a job every day and the weather is so miserable that some days you can’t find work. But at least you have a roof over your head and there is enough money to buy at least bread for your household every week. You are not freezing or starving to death, even if you are always cold and hungry.
 
 /* Servant Story */
 &lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of a servant&lt;&lt;else&gt;&gt;a servant,&lt;&lt;/if&gt;&gt; you spend as much time running errands outside as inside, but at least you have a roof over your head, warm clothes, and plenty to eat. But you can’t help but worry about how the war will impact your life.&lt;&lt;/if&gt;&gt;
@@ -2025,7 +2025,11 @@ Household size: &lt;&lt;set _hhSize to $NPCs.length&gt;&gt; _hhSize&lt;br&gt;&lt
         &lt;&lt;/linkappend&gt;&gt;
 &lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="August 1665" tags="beggar storyline" position="975,725" size="100,100">People are dying so fast now that burials have to happen night and day to keep corpses from piling up throughout the city. 
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="August 1665" tags="beggar storyline" position="975,725" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $plagueinfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
+    &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;br&gt;People are dying so fast now that burials have to happen night and day to keep corpses from piling up throughout the city. 
 &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
     &lt;&lt;if $role is &quot;corpsebearer&quot;&gt;&gt;As you take the dead to the graveyards&lt;&lt;elseif $role is &quot;searcher&quot;&gt;&gt;Almost all the bodies you inspect are of plague victims and&lt;&lt;elseif $role is &quot;nurse&quot;&gt;&gt;Your patients die almost as fast as you are assigned to care for them and&lt;&lt;/if&gt;&gt; you marvel at how much money is being wasted through the clothing that is buried with them. It’s illegal to take goods off the dead, and you know it’s dangerous as well, &lt;&lt;set $plagueclothes to 0&gt;&gt;&lt;span id=&quot;plagueclothes&quot;&gt;&lt;&lt;link &quot;but you figure no one will notice and you need the money&quot;&gt;&gt;&lt;&lt;set $plagueclothes to 1&gt;&gt;&lt;&lt;set $plagueinfection to random(0,1)&gt;&gt;&lt;&lt;replace &quot;#plagueclothes&quot;&gt;&gt;but you figure no one will notice and you need the money&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt; | &lt;&lt;link &quot;so you leave things where they are&quot;&gt;&gt;&lt;&lt;replace &quot;#plagueclothes&quot;&gt;&gt;so you leave things where they are&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;.
 &lt;&lt;/if&gt;&gt;
@@ -2037,7 +2041,9 @@ Afraid of the worsening plague outbreak, the King removes his household even fur
 
 [bit about prayer and seeking plague remedies here]
 
-[[Continue to September 1665-&gt;September 1665]] </tw-passagedata><tw-passagedata pid="21" name="September 1665" tags="beggar storyline" position="1100,725" size="100,100">&lt;&lt;nobr&gt;&gt;
+[[Continue to September 1665-&gt;September 1665]] 
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="September 1665" tags="beggar storyline" position="1100,725" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -3266,14 +3272,13 @@ You can also choose to do nothing.
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;remedies&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
-There are several courses of treatment you can try once a family member falls ill. 
+&lt;&lt;if $fumigant gt 0&gt;&gt;You have some fumigant left from the apothecary.&lt;&lt;/if&gt;&gt;&lt;&lt;if $remedies gt 0&gt;&gt;You have some remedies on hand.&lt;&lt;else&gt;&gt;You do not have any remedies on hand. However, a neighbor is willing to visit the apothecary on your behalf to purchase curatives.&lt;&lt;/if&gt;&gt; 
+
 &lt;ul&gt;
-&lt;li&gt;&lt;&lt;linkappend=&quot;purgative drinks&quot;&gt;&gt;provoke vomiting&lt;&lt;/linkappend&gt;&gt;&lt;/li&gt;
-&lt;li&gt;sweating&lt;/li&gt;
-&lt;li&gt;drinkable medications&lt;/li&gt;
-&lt;li&gt;plasters&lt;/li&gt;
-&lt;li&gt;suppositories or anti-diarrheals&lt;/li&gt;
-&lt;li&gt;fumigation&lt;/li&gt;
+&lt;li&gt;&lt;&lt;linkreplace &quot;offer the sick a purgative drink&quot;&gt;&gt;You offer the sick a purgative drink, which induces vomiting. It&#39;s not clear how this helps.&lt;&lt;/linkreplace&gt;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;&lt;linkreplace &quot;apply a plaster to the plague buboes&quot;&gt;&gt;&lt;&lt;set $remedyEffect to 1&gt;&gt;You apply a blistering plaster to the plague buboes on the infected, especially those around the ears, armpits, and groin. If left on half the day, the plaster can break the buboes and draw out the malignity. Once broken open, you can apply another plaster to keep the buboe draining. If the buboes do not break, you may need to lance them.&lt;&lt;/linkreplace&gt;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;&lt;linkreplace &quot;prepare a posset drink for the first few days of illness&quot;&gt;&gt;You dissolve London Treacle in 5-6 spoonfuls of warm vinegar, and direct the sick to drink 1/4 pint for the first few days of illness.&lt;&lt;/linkreplace&gt;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;&lt;linkreplace &quot;induce sweating in the sick&quot;&gt;&gt;You cover the bodies of the ill with heavy blankets to induce sweating. After 1-2 hours of this, you dry their body with a warm cloth, and help them to wash their mouths and hands with warm water and vinegar.&lt;&lt;/linkreplace&gt;&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -3297,6 +3302,7 @@ There are several courses of treatment you can try once a family member falls il
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="First Plague Day" tags="" position="825,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;span id=&quot;plague-day-replace&quot;&gt;
 /* Beggars */
     &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;beggar-roles&gt;&gt;&lt;&lt;highway&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -3410,6 +3416,7 @@ There are several courses of treatment you can try once a family member falls il
             &lt;li&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation -= 3; $fled to 6]]&lt;/li&gt;
         &lt;/ul&gt;
     &lt;&lt;/if&gt;&gt;
+&lt;/span&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="92" name="test-passage" tags="" position="1025,400" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $socio to &quot;merchants&quot;&gt;&gt;
 &lt;&lt;set $gender to &quot;female&quot;&gt;&gt;
 &lt;&lt;set $age to &quot;child&quot;&gt;&gt;
