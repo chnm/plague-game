@@ -1065,9 +1065,7 @@ On Christmas Eve, you see a comet in the sky and you wonder if it is [[a sign of
 But enough about the king! [[What about you-&gt;identity]]?</tw-passagedata><tw-passagedata pid="4" name="identity" tags="" position="275,25" size="100,100">&lt;&lt;chunkText&gt;&gt;
 You are a &lt;&lt;set _gender = [&quot;female&quot;, &quot;male&quot;, &quot;non-binary&quot;]&gt;&gt;&lt;&lt;listbox &quot;$gender&quot;&gt;&gt;&lt;&lt;optionsfrom _gender&gt;&gt;&lt;&lt;/listbox&gt;&gt; &lt;&lt;set _age = [&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;]&gt;&gt;&lt;&lt;listbox &quot;$age&quot;&gt;&gt;&lt;&lt;optionsfrom _age&gt;&gt;&lt;&lt;/listbox&gt;&gt;.
 &lt;&lt;next&gt;&gt;
-Text about age/betrothal
-
-&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;You are &lt;&lt;set _relationship = [&quot;single&quot;, &quot;betrothed&quot;]&gt;&gt;&lt;&lt;listbox &quot;$relationship&quot;&gt;&gt;&lt;&lt;optionsfrom _relationship&gt;&gt;&lt;&lt;/listbox&gt;&gt;.&lt;&lt;else&gt;&gt;You are &lt;&lt;set _relationship = [&quot;single&quot;, &quot;married&quot;, &quot;widowed&quot;]&gt;&gt;&lt;&lt;listbox &quot;$relationship&quot;&gt;&gt;&lt;&lt;optionsfrom _relationship&gt;&gt;&lt;&lt;/listbox&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;While the rich and powerful might get betrothed as children and marry as teenagers, most people wait until their mid or late 20s when they have enough wealth to establish their own households. You are currently &lt;&lt;set _relationship = [&quot;single&quot;, &quot;betrothed&quot;]&gt;&gt;&lt;&lt;listbox &quot;$relationship&quot;&gt;&gt;&lt;&lt;optionsfrom _relationship&gt;&gt;&lt;&lt;/listbox&gt;&gt;.&lt;&lt;else&gt;&gt;Most people get married in their mid or late 20s to start a family, and those who are widowed often remarry as well. You are currently &lt;&lt;set _relationship = [&quot;single&quot;, &quot;married&quot;, &quot;widowed&quot;]&gt;&gt;&lt;&lt;listbox &quot;$relationship&quot;&gt;&gt;&lt;&lt;optionsfrom _relationship&gt;&gt;&lt;&lt;/listbox&gt;&gt;.&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;next&gt;&gt;
 
@@ -1387,7 +1385,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 
 /* Merchant options */
 &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;For now, at least, your &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;family&#39;s &lt;&lt;/if&gt;&gt;business is booming. 
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 When you go to church on Easter Sunday, you are reminded of how lucky you are as one of God’s chosen people.
 &lt;br&gt;&lt;br&gt;Do you: 
 &lt;ul&gt;
@@ -1947,7 +1945,7 @@ Household size: &lt;&lt;set _hhSize to $NPCs.length&gt;&gt; _hhSize&lt;br&gt;&lt
     It takes almost a week, but news finally arrives of a great battle that killed many important men, especially on the ship of the Duke of York, James Stuart, the current heir to the throne—at least until the King and Queen manage to have children of their own. According to rumor, the battle came so close to killing the Duke that he was covered with blood and the head of Mr. Boyle flew off and struck down the Duke. You happily repeat the rumors to anyone who will listen as bonfires break out in the street and people make merry, freely sharing their food and wine in celebration.
     &lt;br&gt;&lt;br&gt;
    &lt;&lt;linkappend &quot;That is the last good day of the month, though.&quot;&gt;&gt; The plague grows worse and the streets are soon filled with coaches and wagons full of people fleeing with their goods to the countryside. The Queen Mother Henrietta Maria moves back to France&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, much to your dismay, and that of your fellow Catholics who flock to her chapel each week&lt;&lt;else&gt;&gt;, much to your relief, and that of all your fellow God-fearing Protestants&lt;&lt;/if&gt;&gt;. On June 29th, the King packs up his entire household in 148 carriages and moves 12 miles away, to his palace at Hampton Court.
-    &lt;br&gt;
+    &lt;br&gt;&lt;br&gt;
         &lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;There are still no plague cases in your parish, but everyone knows that it&#39;s only a matter of time 
 /* Beggars */
             &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt; and your neighbors are no longer willing to give you food or money when you come begging to their doors.&lt;br&gt;
@@ -2454,8 +2452,8 @@ They have decided it will be your job to
 Despite the English fleet&#39;s victory, the war grinds on and rumors begin to circulate that the French are considering siding with the Dutch. &lt;&lt;if $origin is &quot;France&quot; or $origin is &quot;the Dutch republic&quot;&gt;&gt;You make sure to talk loudly of your loyalty to the King and the superiority of the English fleet, whenever your neighbors mention the war.&lt;&lt;/if&gt;&gt;There aren&#39;t as many rumors as there might have been, given how many people have fled the city and how afraid the people who remain are of coming near each other.
 &lt;br&gt;&lt;br&gt;
 The graveyards are beginning to overflow and corpses are being flung into the open marshes of Tuttle-fields. There is still room in the New Chapel churchyard, that was walled in during the last plague at great public expenses, but only the rich whose families can afford to pay are being buried there now.
-&lt;br&gt;
-&lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;&lt;&lt;linkappend &quot;Worse, the first case of plague has appeared in your parish.&quot;&gt;&gt;&lt;&lt;first-plague-day&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;&lt;&lt;linkappend &quot;Worse, the first case of plague has appeared in your parish.&quot;&gt;&gt;&lt;br&gt;&lt;&lt;first-plague-day&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;&lt;if $socio is &quot;beggars&quot; or $socio is &quot;day-labourers&quot;&gt;&gt;
 /* NTS: should these descriptions end with a choice to abandon your work? yes */
@@ -3039,7 +3037,7 @@ Your master flees London with you and the rest of your household. You have only 
 
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="no-plague-yet" tags="widget" position="825,800" size="100,100">&lt;&lt;widget &quot;no-plague-yet&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-Luckily, there are no plague cases in your parish...yet.
+Luckily, there are no plague cases in your parish... yet. 
         /* Beggar story */
             &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;But your neighbors are no longer willing to give you food or money when you come begging to their doors.&lt;br&gt;
                 &lt;&lt;highway&gt;&gt;
@@ -3048,16 +3046,16 @@ Luckily, there are no plague cases in your parish...yet.
             &lt;&lt;if $socio is &quot;day labourers&quot;&gt;&gt;Many people are beginning to remove their goods to the countryside, though, which makes extra opportunities for you to earn money. /* NTS: Navy passage options? Other options for accepting work? */
             &lt;&lt;/if&gt;&gt;
 /* Servants */ 
-            &lt;&lt;if $socio is &quot;servants&quot;&gt;&gt; (servant text)
+            &lt;&lt;if $socio is &quot;servants&quot;&gt;&gt; You anxiously await your master&#39;s decision about whether the household will flee or stay.
             &lt;&lt;/if&gt;&gt;
 /* Artisans */
-            &lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt; (artisan text)
+            &lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt; You will soon need to decide if you want to flee or at least send the rest of your household away before things get worse.
             &lt;&lt;/if&gt;&gt;
 /* Merchants */
-            &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt; (merchant text)
+            &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt; You will soon need to decide if you want to flee or at least send the rest of your household away before things get worse.
             &lt;&lt;/if&gt;&gt;
 /* Nobles */
-            &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt; (noble text)
+            &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt; You will soon need to decide if it&#39;s worth the risk of staying in London, near enough to visit the Court regularly, or if you or your household should flee before things get worse.
             &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="StoryInterface" tags="" position="525,25" size="100,100">&lt;!-- SIDEBAR --&gt;
