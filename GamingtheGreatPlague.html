@@ -1051,10 +1051,9 @@ You have no family.
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;Your household also includes $servants servants.&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $socio is &quot;beggars&quot; and $disabilities eq 1&gt;&gt;[add text about ability/disability]&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;
 
-If that sounds right, [[click this link to begin our story-&gt;day1][$plays +=1]].
+If that sounds right, [[click this link to begin our story-&gt;December 1664][$plays +=1]].
 
-If that doesn&#39;t sound right, &lt;&lt;click &quot;click this link to try again&quot;&gt;&gt;&lt;&lt;script&gt;&gt;state.restart()&lt;&lt;/script&gt;&gt;&lt;&lt;/click&gt;&gt;.</tw-passagedata><tw-passagedata pid="2" name="day1" tags="" position="650,325" size="100,100">&lt;&lt;if tags().includes(&#39;test-tag&#39;)&gt;&gt;Test tag!&lt;&lt;/if&gt;&gt;
-&lt;&lt;nobr&gt;&gt;It is December 1664 and you are looking forward to the Christmas holidays. You are&lt;&lt;if $age is &quot;child&quot;&gt;&gt;n&#39;t&lt;&lt;/if&gt;&gt; old enough to remember the days before King Charles II was restored to his rightful throne, when Christmas was banned as blasphemous, and it makes the weeks of celebration and feasting all the merrier.&lt;br&gt;&lt;br&gt;
+If that doesn&#39;t sound right, &lt;&lt;click &quot;click this link to try again&quot;&gt;&gt;&lt;&lt;script&gt;&gt;state.restart()&lt;&lt;/script&gt;&gt;&lt;&lt;/click&gt;&gt;.</tw-passagedata><tw-passagedata pid="2" name="December 1664" tags="storyline" position="700,425" size="100,100">&lt;&lt;nobr&gt;&gt;It is December 1664 and you are looking forward to the Christmas holidays. You are&lt;&lt;if $age is &quot;child&quot;&gt;&gt;n&#39;t&lt;&lt;/if&gt;&gt; old enough to remember the days before King Charles II was restored to his rightful throne, when Christmas was banned as blasphemous, and it makes the weeks of celebration and feasting all the merrier.&lt;br&gt;&lt;br&gt;
 
 Not everything is perfect, though. Rumors swirl throughout the city about the possibility of a coming war with the Dutch Republic after several Dutch ships were captured and brought into Portsmouth as prizes. &lt;&lt;if $origin is &quot;the Dutch Republic&quot;&gt;&gt;You make merry with your neighbors even while you fear they will turn against you in the months ahead. &lt;&lt;/if&gt;&gt;Worse, it is common knowledge that plague has been spreading in the Dutch fleet for months, though it hasn&#39;t yet reached English shores.&lt;br&gt;&lt;br&gt;
 
@@ -1144,7 +1143,8 @@ Too bad you and your household still have to be for the full 40 days, to make su
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 9&gt;&gt;
+&lt;&lt;elseif passage() is &quot;December 1664&quot; or passage() is &quot;January 1665&quot; or passage() is &quot;May 1665&quot; or passage() is &quot;June 1665&quot;&gt;&gt;
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1154,7 +1154,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,12) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1164,7 +1164,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,7) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1174,7 +1174,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,10) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1184,7 +1184,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 13&gt;&gt;
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,75) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1194,7 +1194,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-  &lt;&lt;elseif $plays gt 13&gt;&gt;
+  &lt;&lt;else&gt;&gt;
   	&lt;&lt;if random(1,1000) eq 1&gt;&gt;
   	&lt;&lt;set $plagueInfection to 1&gt;&gt;
   &lt;&lt;/if&gt;&gt;
@@ -1219,7 +1219,8 @@ Too bad you and your household still have to be for the full 40 days, to make su
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 8&gt;&gt;
+    &lt;&lt;elseif passage() is &quot;December 1664&quot; or passage() is &quot;January 1665&quot; or passage() is &quot;May 1665&quot;&gt;&gt;
+&lt;&lt;elseif passage() is &quot;June 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1229,7 +1230,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 9&gt;&gt;
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,20) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1239,7 +1240,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,4) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1249,7 +1250,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,3) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1259,7 +1260,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,5) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1269,7 +1270,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 13&gt;&gt;
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,20) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1279,7 +1280,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 14&gt;&gt;
+&lt;&lt;elseif passage() is &quot;December 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1289,7 +1290,7 @@ Too bad you and your household still have to be for the full 40 days, to make su
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays gt 14&gt;&gt;
+&lt;&lt;else&gt;&gt;
     &lt;&lt;if random(1,1000) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1530,22 +1531,26 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;pickup $shop &quot;preventative2&quot; 1 &quot;preventative3&quot; 1 &quot;preventative1&quot; 1&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="12" name="PassageHeader" tags="" position="800,25" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;
-	&lt;&lt;if $plays gte 5&gt;&gt;&lt;&lt;if $fumigant gte 1&gt;&gt;&lt;&lt;if random(1,2) eq 1&gt;&gt;&lt;&lt;infection-program&gt;&gt;&lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $fumigant eq 0&gt;&gt;&lt;&lt;infection-program&gt;&gt;&lt;&lt;/if&gt;&gt;
-    &lt;&lt;set _infectedFamily = []&gt;&gt;
-&lt;&lt;for _idx, _household range $NPCs&gt;&gt;
-	&lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
-    	&lt;&lt;set _infectedFamily.push(_idx)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
-&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;
-&lt;&lt;if passage() isnot &quot;Apothecary&quot;&gt;&gt;&lt;&lt;if $plays gte 4&gt;&gt;&lt;&lt;include [[Date-Location]]&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $plays +=1&gt;&gt;&lt;&lt;income&gt;&gt;&lt;&lt;disposable&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Western-infection" tags="infection-rates" position="425,900" size="100,100">&lt;silently&gt;/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 5 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events. */
+</tw-passagedata><tw-passagedata pid="12" name="PassageHeader" tags="" position="800,25" size="100,100">&lt;&lt;nobr&gt;&gt;
+	&lt;&lt;if tags().includes(&quot;storyline&quot;)&gt;&gt;
+    	&lt;&lt;silently&gt;&gt;&lt;&lt;if $fumigant gte 1&gt;&gt;&lt;&lt;if random(1,2) eq 1&gt;&gt;&lt;&lt;infection-program&gt;&gt;&lt;&lt;/if&gt;&gt;
+    	&lt;&lt;elseif $fumigant eq 0&gt;&gt;&lt;&lt;infection-program&gt;&gt;&lt;&lt;/if&gt;&gt;
+    	&lt;&lt;set _infectedFamily = []&gt;&gt;
+			&lt;&lt;for _idx, _household range $NPCs&gt;&gt;
+				&lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
+    				&lt;&lt;set _infectedFamily.push(_idx)&gt;&gt;
+    			&lt;&lt;/if&gt;&gt;
+			&lt;&lt;/for&gt;&gt;
+            &lt;&lt;if visited() lte 1&gt;&gt;&lt;&lt;income&gt;&gt;&lt;&lt;disposable&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if tags().includes(&quot;storyline&quot;)&gt;&gt;&lt;&lt;include [[Date-Location]]&gt;&gt; &lt;&lt;/if&gt;&gt;
+&lt;&lt;silently&gt;&gt;&lt;&lt;if $location is &quot;inside the City walls&quot; and passage() is &quot;July 1665&quot;&gt;&gt;&lt;&lt;set $apothecary to 1&gt;&gt;&lt;&lt;elseif $location isnot &quot;in the western suburbs, specifically Westminster&quot;&gt;&gt;&lt;&lt;if $location isnot &quot;inside the City walls&quot; and passage() is &quot;June 1665&quot;&gt;&gt;&lt;&lt;set $apothecary to 1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;elseif $location is &quot;in the western suburbs, specifically Westminster&quot; and passage() is &quot;May 1665&quot;&gt;&gt;&lt;&lt;set $apothecary to 1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Western-infection" tags="infection-rates" position="425,900" size="100,100">&lt;silently&gt;/* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 5 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events. */
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 8&gt;&gt;
+&lt;&lt;elseif passage() is &quot;December 1664&quot; or passage() is &quot;January 1665&quot; or passage() is &quot;May 1665&quot;&gt;&gt;
+&lt;&lt;elseif passage() is &quot;June 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1555,7 +1560,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 9&gt;&gt;
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,13) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1565,7 +1570,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,4) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1575,7 +1580,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,20) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1585,7 +1590,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,10) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1595,7 +1600,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 13&gt;&gt;
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,50) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1605,7 +1610,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 14&gt;&gt;
+&lt;&lt;elseif passage() is &quot;December 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,500) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1615,7 +1620,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays gt 14&gt;&gt;
+&lt;&lt;else&gt;&gt;
     &lt;&lt;if random(1,1000) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1640,7 +1645,8 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 8&gt;&gt;
+&lt;&lt;elseif passage() is &quot;December 1664&quot; or passage() is &quot;January 1665&quot; or passage() is &quot;May 1665&quot;&gt;&gt;
+&lt;&lt;elseif passage() is &quot;June 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,500) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1650,7 +1656,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 9&gt;&gt;
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,50) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1660,7 +1666,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,3) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1670,7 +1676,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1680,7 +1686,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,5) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1690,7 +1696,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 13&gt;&gt;
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,30) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1700,7 +1706,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 14&gt;&gt;
+&lt;&lt;elseif passage() is &quot;December 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1710,7 +1716,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
- &lt;&lt;elseif $plays gt 14&gt;&gt;
+ &lt;&lt;else&gt;&gt;
     &lt;&lt;if random(1,1000) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1730,28 +1736,29 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;/for&gt;&gt;
 
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Date-Location" tags="" position="950,25" size="100,100">&lt;h2&gt;&lt;&lt;if $plays eq 5&gt;&gt;December 1664, $location
-&lt;&lt;elseif $plays eq 6&gt;&gt;Late Winter and Spring 1665, $location
-&lt;&lt;elseif $plays eq 7&gt;&gt;May 1665, $location
-&lt;&lt;elseif $plays eq 8&gt;&gt;June 1665, $location
-&lt;&lt;elseif $plays eq 9&gt;&gt;July 1665, $location
-&lt;&lt;elseif $plays eq 10&gt;&gt;August 1665, $location
-&lt;&lt;elseif $plays eq 11&gt;&gt;September 1665, $location
-&lt;&lt;elseif $plays eq 12&gt;&gt;October 1665, $location
-&lt;&lt;elseif $plays eq 13&gt;&gt;November 1665, $location
-&lt;&lt;elseif $plays eq 14&gt;&gt;December 1665, $location
-&lt;&lt;elseif $plays eq 15&gt;&gt;January 1666, $location
-&lt;&lt;elseif $plays eq 16&gt;&gt;February 1666, $location
-&lt;&lt;elseif $plays eq 17&gt;&gt;March 1666, $location
-&lt;&lt;elseif $plays eq 18&gt;&gt;April 1666, $location
-&lt;&lt;elseif $plays eq 19&gt;&gt;May 1666, $location
-&lt;&lt;elseif $plays eq 20&gt;&gt;June 1666, $location
-&lt;&lt;elseif $plays eq 21&gt;&gt;July 1666, $location
-&lt;&lt;elseif $plays eq 22&gt;&gt;August 1666, $location
-&lt;&lt;elseif $plays eq 23&gt;&gt;September 1666, $location
-&lt;&lt;elseif $plays eq 24&gt;&gt;October 1666, $location
-&lt;&lt;elseif $plays eq 25&gt;&gt;November 1666, $location
-&lt;&lt;elseif $plays eq 26&gt;&gt;December 1666, $location&lt;&lt;/if&gt;&gt;&lt;/h2&gt;</tw-passagedata><tw-passagedata pid="16" name="char-gen-widgets" tags="widget" position="125,250" size="100,100">/* add family members based on age */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Date-Location" tags="" position="950,25" size="100,100">&lt;h2&gt;&lt;&lt;if passage() is &quot;December 1664&quot;&gt;&gt;December 1664, $location
+&lt;&lt;elseif passage() is &quot;January 1665&quot;&gt;&gt;Late Winter and Spring 1665, $location
+&lt;&lt;elseif passage() is &quot;May 1665&quot;&gt;&gt;May 1665, $location
+&lt;&lt;elseif passage() is &quot;June 1665&quot;&gt;&gt;June 1665, $location
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;July 1665, $location
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;August 1665, $location
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;September 1665, $location
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;October 1665, $location
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;November 1665, $location
+&lt;&lt;elseif passage() is &quot;December 1665&quot;&gt;&gt;December 1665, $location
+&lt;&lt;elseif passage() is &quot;January 1666&quot;&gt;January 1666, $location
+&lt;&lt;elseif passage() is &quot;February 1666&quot;&gt;&gt;February 1666, $location
+&lt;&lt;elseif passage() is &quot;March 1666&quot;&gt;&gt;March 1666, $location
+&lt;&lt;elseif passage() is &quot;April 1666&quot;&gt;&gt;April 1666, $location
+&lt;&lt;elseif passage() is &quot;May 1666&quot;&gt;&gt;May 1666, $location
+&lt;&lt;elseif passage() is &quot;June 1666&quot;&gt;&gt;June 1666, $location
+&lt;&lt;elseif passage() is &quot;July 1666&quot;&gt;&gt;July 1666, $location
+&lt;&lt;elseif passage() is &quot;August 1666&quot;&gt;&gt;August 1666, $location
+&lt;&lt;elseif passage() is &quot;September 1666&quot;&gt;&gt;September 1666, $location
+&lt;&lt;elseif passage() is &quot;October 1666&quot;&gt;&gt;October 1666, $location
+&lt;&lt;elseif passage() is &quot;November 1666&quot;&gt;&gt;November 1666, $location
+&lt;&lt;elseif passage() is &quot;December 1666&quot;&gt;&gt;December 1666, $location
+&lt;&lt;else&gt;&gt;&lt;&lt;print passage()&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;/h2&gt;</tw-passagedata><tw-passagedata pid="16" name="char-gen-widgets" tags="widget" position="125,250" size="100,100">/* add family members based on age */
 &lt;&lt;widget &quot;addParentNPC&quot;&gt;&gt;
   &lt;&lt;if $age is &quot;child&quot;&gt;&gt;
     &lt;&lt;if random(1,4) lte 3&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;mother&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -1927,11 +1934,10 @@ Household size: &lt;&lt;set _hhSize to $NPCs.length&gt;&gt; _hhSize&lt;br&gt;&lt
         	&lt;&lt;if $socio isnot &quot;beggars&quot;&gt;&gt;
         [[You know that plague only grows worse as the weather warms and you dread the coming of June and the first real heat of summer.-&gt;June 1665]]
         	&lt;&lt;/if&gt;&gt;
-        &lt;&lt;else&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
+        &lt;&lt;else&gt;&gt;&lt;&lt;linkappend &quot;Worse, the first case of plague has appeared in your parish.&quot;&gt;&gt; &lt;&lt;first-plague-day&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
         &lt;&lt;/if&gt;&gt;
         &lt;/span&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="June 1665" tags="beggar storyline" position="1225,575" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueinfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
     &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -1960,7 +1966,7 @@ Household size: &lt;&lt;set _hhSize to $NPCs.length&gt;&gt; _hhSize&lt;br&gt;&lt
 &lt;&lt;/if&gt;&gt;
 
 /* If not in city walls or Westminster */
-        &lt;&lt;elseif $location isnot &quot;in the western suburbs, specifically Westminster&quot;&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
+        &lt;&lt;elseif $location isnot &quot;in the western suburbs, specifically Westminster&quot;&gt;&gt;&lt;&lt;linkappend &quot;Worse, the first case of plague has appeared in your parish.&quot;&gt;&gt;&lt;&lt;first-plague-day&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 
 /* If location is Westminster */
         &lt;&lt;else&gt;&gt;
@@ -2254,7 +2260,8 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 8&gt;&gt;
+    &lt;&lt;elseif passage() is &quot;December 1664&quot; or passage() is &quot;January 1665&quot; or passage() is &quot;May 1665&quot;&gt;&gt;
+&lt;&lt;elseif passage() is &quot;June 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,500) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2264,7 +2271,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 9&gt;&gt;
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,18) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2274,7 +2281,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,3) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2284,7 +2291,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,5) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2294,7 +2301,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,15) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2304,7 +2311,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 13&gt;&gt;
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2314,7 +2321,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays gt 13&gt;&gt;
+&lt;&lt;else&gt;&gt;
     &lt;&lt;if random(1,1000) lte 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2339,7 +2346,8 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;if visited(&quot;Sickness&quot;)&gt;&gt;
     &lt;&lt;set $plagueinfection to 2&gt;&gt;
-&lt;&lt;elseif $plays eq 8&gt;&gt;
+    &lt;&lt;elseif passage() is &quot;December 1664&quot; or passage() is &quot;January 1665&quot; or passage() is &quot;May 1665&quot;&gt;&gt;
+&lt;&lt;elseif passage() is &quot;June 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,1000) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2349,7 +2357,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 9&gt;&gt;
+&lt;&lt;elseif passage() is &quot;July 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2359,7 +2367,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 10&gt;&gt;
+&lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,8) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2369,7 +2377,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 11&gt;&gt;
+&lt;&lt;elseif passage() is &quot;September 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,4) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2379,7 +2387,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 12&gt;&gt;
+&lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,6) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2389,7 +2397,7 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 13&gt;&gt;
+&lt;&lt;elseif passage() is &quot;November 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,25) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2399,11 +2407,11 @@ Congratulations. You have [[survived the Great Plague of London-&gt;stats]]
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;elseif $plays eq 14&gt;&gt;
+&lt;&lt;elseif passage() is &#39;December 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,100) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $plays gt 14&gt;&gt;
+    &lt;&lt;else&gt;&gt;
     &lt;&lt;if random(1,1000) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2447,7 +2455,7 @@ Despite the English fleet&#39;s victory, the war grinds on and rumors begin to c
 &lt;br&gt;&lt;br&gt;
 The graveyards are beginning to overflow and corpses are being flung into the open marshes of Tuttle-fields. There is still room in the New Chapel churchyard, that was walled in during the last plague at great public expenses, but only the rich whose families can afford to pay are being buried there now.
 &lt;br&gt;
-&lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
+&lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;&lt;&lt;linkappend &quot;Worse, the first case of plague has appeared in your parish.&quot;&gt;&gt;&lt;&lt;first-plague-day&gt;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;&lt;if $socio is &quot;beggars&quot; or $socio is &quot;day-labourers&quot;&gt;&gt;
 /* NTS: should these descriptions end with a choice to abandon your work? yes */
@@ -2693,7 +2701,7 @@ NTS: reputation goes up?
 
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="survival-mode" tags="" position="2200,900" size="100,100">You are running low on resources and may need to take desparate measures.
 
-&lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Untitled Passage" tags="" position="900,400" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Untitled Passage" tags="" position="900,250" size="100,100">&lt;&lt;nobr&gt;&gt;
     As a member of your master&#39;s household, your only choices are to &#39;&#39;follow his lead&lt;&lt;if $masterflee is 0&gt;&gt; and remain in the city&lt;&lt;/if&gt;&gt;&#39;&#39; or to &#39;&#39;run away&lt;&lt;if $masterflee is 1&gt;&gt; to stay in London&lt;&lt;/if&gt;&gt;&#39;&#39; and hope you aren’t caught for having broken your contract.&lt;br&gt;&lt;br&gt;
     
     &lt;span id=&quot;fleeChoice&quot;&gt;You decide to:&lt;br&gt;
@@ -3137,10 +3145,11 @@ Luckily, there are no plague cases in your parish...yet.
 &lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt; (work text here)
 
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="Untitled Passage 2" tags="" position="600,1025" size="100,100">As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of a&lt;&lt;/if&gt; $socio, </tw-passagedata><tw-passagedata pid="77" name="storyLogo" tags="" position="725,1550" size="100,100">&lt;a href=&quot;https://rrchnm.org/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://avatars.githubusercontent.com/u/296531?s=280&amp;v=4&quot; height=&quot;50px&quot;&gt;&lt;/a&gt;</tw-passagedata><tw-passagedata pid="78" name="gameTitle" tags="" position="600,1550" size="100,100">Gaming the Great Plague</tw-passagedata><tw-passagedata pid="79" name="storyAuthor" tags="" position="725,1675" size="100,100">&lt;a href=&quot;https://rrchnm.org/&quot;&gt;RRCHNM&lt;/a&gt;</tw-passagedata><tw-passagedata pid="80" name="storyMenu" tags="" position="400,25" size="100,100">&lt;&lt;if hasVisited(&quot;bio&quot;)&gt;&gt;&lt;&lt;if $reputation gt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:#fff;&quot;&gt;good&lt;/span&gt;.&lt;&lt;elseif $reputation lt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:red&quot;&gt;bad&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="storyLogo" tags="" position="725,1550" size="100,100">&lt;a href=&quot;https://rrchnm.org/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://avatars.githubusercontent.com/u/296531?s=280&amp;v=4&quot; height=&quot;50px&quot;&gt;&lt;/a&gt;</tw-passagedata><tw-passagedata pid="77" name="gameTitle" tags="" position="600,1550" size="100,100">Gaming the Great Plague</tw-passagedata><tw-passagedata pid="78" name="storyAuthor" tags="" position="725,1675" size="100,100">&lt;a href=&quot;https://rrchnm.org/&quot;&gt;RRCHNM&lt;/a&gt;</tw-passagedata><tw-passagedata pid="79" name="storyMenu" tags="" position="400,25" size="100,100">&lt;&lt;if hasVisited(&quot;bio&quot;)&gt;&gt;&lt;&lt;if $reputation gt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:#fff;&quot;&gt;good&lt;/span&gt;.&lt;&lt;elseif $reputation lt 3&gt;&gt;Your reputation is &lt;span style=&quot;color:red&quot;&gt;bad&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;
 &lt;li&gt;&lt;&lt;link &quot;Disposable Income&quot;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;Disposable Income&quot;); Dialog.wiki(&quot;The amount of money you have after your expenses each month, converted to pounds, shillings, and pence. 12 pence = 1 shilling; 20 shillings = 1 pound.&quot;); Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;:&lt;br&gt; /* @@#money; &lt;&lt;= $money&gt;&gt; @@ */ @@#conversion; &lt;&lt;conversion&gt;&gt;@@&lt;/li&gt;
 &lt;!-- PLACE LINKS TO YOUR MENU BELOW, BUT REMEMBER TO WRAP IN &lt;LI&gt; TAGS --&gt;
-&lt;&lt;if hasVisited(&quot;First Plague Day&quot;)&gt;&gt;&lt;li&gt;[[Apothecary]]&lt;/li&gt;
+
+&lt;&lt;if $apothecary == 1&gt;&gt;&lt;li&gt;[[Apothecary]]&lt;/li&gt;
 &lt;li&gt;&lt;&lt;link &quot;Inventory&quot;&gt;&gt;
     &lt;&lt;run Dialog.setup(&quot;Inventory&quot;, &quot;inventory&quot;); Dialog.wiki(Story.get(&quot;Inventory&quot;).text); Dialog.open()&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;/li&gt;
@@ -3148,13 +3157,13 @@ Luckily, there are no plague cases in your parish...yet.
     &lt;&lt;run Dialog.setup(&quot;Household&quot;, &quot;household&quot;); Dialog.wiki(Story.get(&quot;Household Status&quot;).text); Dialog.open()&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;/li&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="81" name="socialMedia" tags="" position="475,1750" size="100,100"></tw-passagedata><tw-passagedata pid="82" name="Household Status" tags="" position="600,1875" size="100,100">&lt;&lt;ListNPCs&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="socialMedia" tags="" position="475,1750" size="100,100"></tw-passagedata><tw-passagedata pid="81" name="Household Status" tags="" position="600,1875" size="100,100">&lt;&lt;ListNPCs&gt;&gt;
 
-&lt;!-- IMPORTANT! INCLUDE THE CODE BELOW ON ALL STAT PAGES TO MAKE SURE THE LINK RETURNS THE USER TO THE LAST PASSAGE. IF YOU USE A NORMAL RETURN LINK IT WILL SIMPLY LOOP --&gt;</tw-passagedata><tw-passagedata pid="83" name="Stat page 2" tags="" position="725,1875" size="100,100">Your stats go here..
+&lt;!-- IMPORTANT! INCLUDE THE CODE BELOW ON ALL STAT PAGES TO MAKE SURE THE LINK RETURNS THE USER TO THE LAST PASSAGE. IF YOU USE A NORMAL RETURN LINK IT WILL SIMPLY LOOP --&gt;</tw-passagedata><tw-passagedata pid="82" name="Stat page 2" tags="" position="725,1875" size="100,100">Your stats go here..
 
 &lt;!-- IMPORTAN! INCLUDE THE CODE BELOW ON ALL STAT PAGES TO MAKE SURE THE LINK RETURNS THE USER TO THE LAST PASSAGE. IF YOU USE A NORMAL RETURN LINK IT WILL SIMPLY LOOP --&gt;
 
-&lt;center&gt;&lt;&lt;link &quot;Return to game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/center&gt;</tw-passagedata><tw-passagedata pid="84" name="plague-widgets" tags="widget" position="250,750" size="100,100">/*Infection Program: determines rate of plague infection based on your location*/ 
+&lt;center&gt;&lt;&lt;link &quot;Return to game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/center&gt;</tw-passagedata><tw-passagedata pid="83" name="infection-widgets" tags="widget" position="250,750" size="100,100">/*Infection Program: determines rate of plague infection based on your location*/ 
 &lt;&lt;widget &quot;infection-program&quot;&gt;&gt;
 &lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;&lt;&lt;include [[inside-city]]&gt;&gt;
 &lt;&lt;elseif $location is &quot;in another part of the western suburbs&quot;&gt;&gt;&lt;&lt;include [[Western-infection]]&gt;&gt;
@@ -3181,14 +3190,7 @@ Luckily, there are no plague cases in your parish...yet.
 &lt;&lt;/for&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;first-plague-day-continue&quot;&gt;&gt;
-&lt;&lt;if $location is &quot;in the western suburbs, specifically Westminster&quot;&gt;&gt;[[Continue to June 1665-&gt;June 1665]]
-&lt;&lt;elseif $location is &quot;inside the City walls&quot;&gt;&gt;[[Continue to August 1665-&gt;August 1665]]
-&lt;&lt;else&gt;&gt;[[Continue to July 1665-&gt;July 1665]]
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-</tw-passagedata><tw-passagedata pid="85" name="countryside-infection" tags="" position="450,1075" size="100,100"></tw-passagedata><tw-passagedata pid="86" name="money-widgets" tags="widget" position="0,250" size="100,100">&lt;&lt;widget &quot;income&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="84" name="countryside-infection" tags="" position="450,1075" size="100,100"></tw-passagedata><tw-passagedata pid="85" name="money-widgets" tags="widget" position="0,250" size="100,100">&lt;&lt;widget &quot;income&quot;&gt;&gt;
 &lt;&lt;set _hhSize to $NPCs.length + 1&gt;&gt;
 &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $income to 120&gt;&gt;&lt;&lt;set $expenses to 120&gt;&gt;
 &lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $income to 300&gt;&gt;&lt;&lt;set $expenses to 240&gt;&gt;
@@ -3242,8 +3244,8 @@ Luckily, there are no plague cases in your parish...yet.
             &lt;&lt;/link&gt;&gt;
         &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
     &lt;/p&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="Inventory" tags="" position="350,1550" size="100,100">&lt;&lt;inv $remedies inspect&gt;&gt;
-</tw-passagedata><tw-passagedata pid="88" name="Apothecary" tags="menu" position="650,150" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="86" name="Inventory" tags="" position="350,1550" size="100,100">&lt;&lt;inv $remedies inspect&gt;&gt;
+</tw-passagedata><tw-passagedata pid="87" name="Apothecary" tags="menu" position="650,150" size="100,100">&lt;&lt;nobr&gt;&gt;
     &lt;&lt;silently&gt;&gt;&lt;&lt;set _hhSize to $NPCs.length + 1&gt;&gt;&lt;&lt;set _treaclePrice to _hhSize*10&gt;&gt;&lt;&lt;set _waterPrice to _hhSize*5&gt;&gt;&lt;&lt;set _incensePrice to _hhSize*5&gt;&gt;&lt;&lt;set _fancyfumesPrice to _hhSize*20&gt;&gt;&lt;&lt;set _smellyfumesPrice to _hhSize*15&gt;&gt;&lt;&lt;/silently&gt;&gt;
 
     The apothecary sells items that may help your family avoid illness. For the remedies to be effective, however, you must purchase enough for all members of your household. The effects are also limited and must be reused each month.&lt;br&gt;
@@ -3261,7 +3263,7 @@ Luckily, there are no plague cases in your parish...yet.
 &lt;/table&gt;&lt;br&gt;
 Remaining money: $money&lt;br&gt;
 &lt;&lt;return&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="preventative" tags="widget" position="775,150" size="100,100">&lt;&lt;widget &quot;preventative&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="88" name="preventative" tags="widget" position="775,175" size="100,100">&lt;&lt;widget &quot;preventative&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
 You can take measures to help prevent yourself &lt;&lt;if $NPCs.length gt 1&gt;&gt;and your household &lt;&lt;/if&gt;&gt;from catching the plague.&lt;br&gt;
 You decide to:
 &lt;ul&gt;&lt;li&gt;&lt;span id=&quot;church&quot;&gt;&lt;&lt;link &quot;Go to church and pray often&quot;&gt;&gt;&lt;&lt;set $reputation +=3&gt;&gt;&lt;&lt;replace #church&gt;&gt;You go to church and pray regularly through the month. Others admire your piety in the face of such a grave situation!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;
@@ -3282,7 +3284,7 @@ You can also choose to do nothing.
 &lt;/ul&gt;
 &lt;&lt;/widget&gt;&gt;
 
-&lt;&lt;widget &quot;fumigant&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if $fumigant gte 1&gt;&gt;&lt;&lt;$fumigant -=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="90" name="old widgets" tags="" position="475,1550" size="100,100">&lt;&lt;widget &quot;ListNPCs&quot;&gt;&gt;
+&lt;&lt;widget &quot;fumigant&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if $fumigant gte 1&gt;&gt;&lt;&lt;$fumigant -=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="old widgets" tags="" position="475,1550" size="100,100">&lt;&lt;widget &quot;ListNPCs&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
         &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
             &lt;&lt;capture _i&gt;&gt;
@@ -3301,7 +3303,8 @@ You can also choose to do nothing.
     &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs[_i].hishers to &quot;their&quot;&gt;&gt;&lt;&lt;set $NPCs[_i].heshe to &quot;they&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="First Plague Day" tags="" position="825,925" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="90" name="first-plague-day" tags="widget" position="825,925" size="100,100">&lt;&lt;widget &quot;first-plague-day&quot;&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;span id=&quot;plague-day-replace&quot;&gt;
 /* Beggars */
     &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;beggar-roles&gt;&gt;&lt;&lt;highway&gt;&gt;
@@ -3417,7 +3420,15 @@ You can also choose to do nothing.
         &lt;/ul&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;/span&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="92" name="test-passage" tags="" position="1025,400" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $socio to &quot;merchants&quot;&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;first-plague-day-continue&quot;&gt;&gt;
+&lt;&lt;if $location is &quot;in the western suburbs, specifically Westminster&quot;&gt;&gt;[[Continue to June 1665-&gt;June 1665]]
+&lt;&lt;elseif $location is &quot;inside the City walls&quot;&gt;&gt;[[Continue to August 1665-&gt;August 1665]]
+&lt;&lt;else&gt;&gt;[[Continue to July 1665-&gt;July 1665]]
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="test-passage" tags="" position="1025,250" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $socio to &quot;merchants&quot;&gt;&gt;
 &lt;&lt;set $gender to &quot;female&quot;&gt;&gt;
 &lt;&lt;set $age to &quot;child&quot;&gt;&gt;
 &lt;&lt;set $reputation to 7&gt;&gt;
