@@ -1067,9 +1067,11 @@ Your name is $name and you are $agenum years old. You are proud to have been bor
 
 You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;silently&gt;&gt;&lt;&lt;set _x to random(0,5)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addFamilyNPC&gt;&gt;&lt;&lt;/for&gt;&gt;
-&lt;&lt;addParentNPC&gt;&gt;
+&lt;&lt;silently&gt;&gt;
+&lt;&lt;if $relationship is &quot;married&quot;&gt;&gt;&lt;&lt;addPartner&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;addChildNPC&gt;&gt;
+&lt;&lt;addParentNPC&gt;&gt;
+&lt;&lt;set _x to random(0,5)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addFamilyNPC&gt;&gt;&lt;&lt;/for&gt;&gt;
 &lt;&lt;NPCarticle&gt;&gt;
 &lt;&lt;NPCpronouns&gt;&gt;
 &lt;&lt;/silently&gt;&gt; 
@@ -1770,6 +1772,20 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="char-gen-widgets" tags="widget" position="150,275" size="100,100">/* add family members based on age */
+
+&lt;&lt;widget &quot;addPartner&quot;&gt;&gt;
+&lt;&lt;if $age is &quot;young adult&quot;&gt;&gt;&lt;&lt;if $gender is &quot;female&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;husband&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $gender is &quot;male&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;wife&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $gender is &quot;non-binary&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;husband&quot;, &quot;wife&quot;), health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif $age is &quot;middle-aged adult&quot;&gt;&gt;&lt;&lt;if $gender is &quot;female&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;husband&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $gender is &quot;male&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;wife&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $gender is &quot;non-binary&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: either(&quot;husband&quot;, &quot;wife&quot;), health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif $age is &quot;elderly adult&quot;&gt;&gt;&lt;&lt;if $gender is &quot;female&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;husband&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $gender is &quot;male&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;wife&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $gender is &quot;non-binary&quot;&gt;&gt;&lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: either(&quot;husband&quot;, &quot;wife&quot;), health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
 &lt;&lt;widget &quot;addParentNPC&quot;&gt;&gt;
   &lt;&lt;if $age is &quot;child&quot;&gt;&gt;
     &lt;&lt;if random(1,4) lte 3&gt;&gt;&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;mother&quot;, health: &quot;uninfected&quot;})&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -3357,12 +3373,9 @@ You can take measures to help prevent yourself &lt;&lt;if $NPCs.length gt 1&gt;&
 You decide to:
 &lt;ul&gt;&lt;li&gt;&lt;span id=&quot;church&quot;&gt;&lt;&lt;link &quot;Go to church and pray often&quot;&gt;&gt;&lt;&lt;set $reputation +=3&gt;&gt;&lt;&lt;replace #church&gt;&gt;You go to church and pray regularly through the month. Others admire your piety in the face of such a grave situation!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;eat&quot;&gt;&lt;&lt;link &quot;Avoid eating berries, cabbage, cucumbers, melon, and spinach.&quot;&gt;&gt;&lt;&lt;replace #eat&gt;&gt;You avoid eating berries, cabbage, cucumbers, melons, and spinach. Your neighbors swear by it!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;
-You can also &lt;&lt;link &quot;visit the apothecary&quot;&gt;&gt;&lt;&lt;run Dialog.setup(&quot;Apothecary&quot;, &quot;apothecary&quot;); Dialog.wiki(Story.get(&quot;Apothecary&quot;).text); Dialog.open()&gt;&gt;&lt;&lt;/link&gt;&gt;, who sells preventative medicines and materials for your home. You can find the apothecary in the menu bar and return monthly to continue stocking up on supplies.
+You can also &#39;&#39;visit the Apothecary&#39;&#39;, who sells preventative medicines and materials for your home. You can find the apothecary in the menu bar and return monthly to continue stocking up on supplies.&lt;br&gt;&lt;br&gt;
 You can also choose to do nothing.
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-
-&lt;&lt;widget &quot;remedies&quot;&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;fumigant&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;if $fumigant gte 1&gt;&gt;&lt;&lt;$fumigant -=1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;/widget&gt;&gt;
