@@ -1133,54 +1133,133 @@ NTS: Insert conditionals in here to deal with religious variation, esp. the Cath
 
 NTS: This is also what happened to your family.
 
-[[How typical was your experience of the Great Plague of London? Let&#39;s find out!-&gt;stats]]</tw-passagedata><tw-passagedata pid="6" name="Sickness" tags="infection-rates" position="650,625" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;span id=&quot;plague-replace&quot;&gt;
-    &lt;&lt;set $plagueInfection to 2&gt;&gt;
-        &lt;&lt;if $quarantine gt 0&gt;&gt;
-        &#39;&#39;Lord have mercy! A strange lump has appeared on your 
-        &lt;&lt;set _x to random(1,3)&gt;&gt;
-            &lt;&lt;if _x == 1&gt;&gt;leg
-            &lt;&lt;elseif _x == 2&gt;&gt;armpit
-            &lt;&lt;elseif _x == 3&gt;&gt;neck
-            &lt;&lt;/if&gt;&gt;, and there&#39;s no hiding that you have caught the dreaded plague.&#39;&#39; &lt;br&gt;&lt;br&gt;
-            /*NTS: add in code here to show family status */
-            &lt;&lt;else&gt;&gt;
-Your neighbors shut up the entrances to your house and paint a red cross with the words //Lord Have Mercy// on the front door.
-    &lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;linkreplace &quot;You pray that God does have mercy on you as take to your sickbed.&quot;&gt;&gt;
-&lt;&lt;player-treatments&gt;&gt;
-&lt;&lt;link &quot;You pray the treatments work.&quot;&gt;&gt;&lt;&lt;replace &quot;#plague-replace&quot;&gt;&gt;
-&lt;&lt;linkreplace &quot;Unfortunately, your fever spikes, you grow weak, and you fear for your life.&quot;&gt;&gt;
-    &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;It occurs to you that perhaps you ought to write your will
-        &lt;&lt;if $reputation lte 2&gt;&gt;, but your reputation is so poor that no one can be convinced to bring you the writing materials you need&lt;&lt;/if&gt;&gt;.
-    &lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;It occurs to you that perhaps you ought to write your will
-            &lt;&lt;if $reputation lte 2&gt;&gt;, but your reputation is so poor that you can&#39;t convince a scrivener to come help you.&lt;&lt;/if&gt;&gt;.
-    &lt;&lt;/if&gt;&gt;
-/* If there&#39;s a child in the house and your reputation is high enough, we should give them the choice to smuggle the kid out a la Pepys. */
+[[How typical was your experience of the Great Plague of London? Let&#39;s find out!-&gt;stats]]</tw-passagedata><tw-passagedata pid="6" name="Sickness" tags="infection-rates" position="650,625" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;check-NPCs&gt;&gt;&lt;&lt;set _remedyEffect to 0&gt;&gt;
+  &lt;&lt;set $plagueInfection to 2&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;if ndef $textGroup&gt;&gt;&lt;&lt;set $textGroup = 1&gt;&gt;&lt;&lt;/if&gt;&gt;
+  &lt;&lt;switch $textGroup&gt;&gt;
+    &lt;&lt;case 1&gt;&gt;
+          &lt;&lt;if $quarantine gt 0&gt;&gt;
+          &#39;&#39;Lord have mercy! A strange lump has appeared on your 
+          &lt;&lt;set _x to random(1,3)&gt;&gt;
+              &lt;&lt;if _x == 1&gt;&gt;leg
+              &lt;&lt;elseif _x == 2&gt;&gt;armpit
+              &lt;&lt;elseif _x == 3&gt;&gt;neck
+              &lt;&lt;/if&gt;&gt;, and there&#39;s no hiding that you have caught the dreaded plague.&#39;&#39; &lt;br&gt;&lt;br&gt;
+              &lt;&lt;if _infectedFamily.length gt 0&gt;&gt;Worse yet, you learn that your
+              &lt;&lt;for _z, _y range _infectedFamily&gt;&gt;
+                &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].relationship, $NPCs[_y].name has also fallen ill.&lt;br&gt;
+                &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].relationship $NPCs[_y].name have also fallen ill.
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+              &lt;&lt;else&gt;&gt;
+  Your neighbors shut up the entrances to your house and paint a red cross with the words //Lord Have Mercy// on the front door.
+  &lt;&lt;/if&gt;&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;&lt;link &quot;You pray that God does have mercy on you as take to your sickbed.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
+  &lt;&lt;case 2&gt;&gt;
+    &lt;&lt;player-treatments&gt;&gt;
+  
+    &lt;&lt;link &quot;You pray the treatments work.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
+  
+  &lt;&lt;case 3&gt;&gt;
+    &lt;&lt;link &quot;Unfortunately, your fever spikes, you grow weak, and you fear for your life.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
 
-&lt;&lt;linkreplace &quot;The days pass with agonizing slowness.&quot;&gt;&gt;
-&lt;&lt;linkreplace &quot;As your condition declines, you pray constantly.&quot;&gt;&gt;
-    &lt;&lt;if $reputation lte 0&gt;&gt;Unfortunately, your reputation is so poor that you cannot convince any of your neighbors to bring food or medical supplies to your household.
-        &lt;&lt;elseif $reputation gte 1&gt;&gt;Your friends and neighbors bring you food and plague remedies, which they pass in through the windows taking care to keep their distance from you.
-        &lt;br&gt;&lt;br&gt;
+  &lt;&lt;case 4&gt;&gt;
+    /* NTS: should we have text in this part about the health of the rest of your family, or wait til the end? */
+    &lt;&lt;if $hoh is 1&gt;&gt;&lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;It occurs to you that perhaps you ought to write your will&lt;&lt;if $reputation lte 2&gt;&gt;, but your reputation is so poor that no one can be convinced to bring you the writing materials you need&lt;&lt;/if&gt;&gt;.
+    &lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;It occurs to you that perhaps you ought to write your will&lt;&lt;if $reputation lte 2&gt;&gt;, but your reputation is so poor that you can&#39;t convince a scrivener to come help you.&lt;&lt;/if&gt;&gt;.
     &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+  
+    /* smuggle out any healthy children if your rep is good enough */
+    &lt;&lt;if $reputation gte 6&gt;&gt;
+      &lt;&lt;set $getaway = []&gt;&gt;
+        &lt;&lt;for _e, _household range $NPCs&gt;&gt;
+          &lt;&lt;if _household.health is &quot;uninfected&quot; and (_household.age is &quot;child&quot; or _household.age is &quot;infant&quot;)&gt;&gt;
+            &lt;&lt;set $getaway.push(_e)&gt;&gt;
+          &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/for&gt;&gt;
+    /* NTS: need to update text! */
+      &lt;&lt;if $getaway.length gt 0&gt;&gt;&lt;br&gt;&lt;br&gt;
+      In the meantime, your family has resorted to desperate measures to protect the health of the youngest. One evening, someone manages to smuggle 
+        &lt;&lt;for _f, _g range $getaway&gt;&gt;
+          &lt;&lt;if $getaway.length eq 1&gt;&gt;your $NPCs[_g].relationship $NPCs[_g].name,
+          &lt;&lt;elseif _f &lt; $getaway.length - 1&gt;&gt;your $NPCs[_g].relationship $NPCs[_g].name, &lt;&lt;else&gt;&gt;and your $NPCs[_g].relationship $NPCs[_y].name
+          &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/for&gt;&gt;out of the house and to a safer location.
+      &lt;&lt;/if&gt;&gt;
+      &lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+  
+    &lt;&lt;link &quot;The days continue to pass with agonizing slowness.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
+  &lt;&lt;case 5&gt;&gt;
+    You spend most of your waking hours in a terrible, fevered state. &lt;&lt;if $NPCs.length gt 0&gt;&gt;In your brief moments of lucidity, you ask after your family&lt;&lt;if _infectedFamily.length eq 0&gt;&gt; and are grateful to hear no more have fallen ill... yet&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;.
+  
+    &lt;&lt;silently&gt;&gt;
+        /* determine if sick family die or recover */
+          &lt;&lt;for _s range _infectedFamily&gt;&gt;
+            &lt;&lt;if _remedyEffect is 1 and random(1,3) is 1&gt;&gt;&lt;&lt;set $NPCs[_s].health to &quot;deceased-pq&quot;&gt;&gt;
+            &lt;&lt;elseif _remedyEffect is 0 and random(1,2) is 1&gt;&gt;&lt;&lt;set $NPCs[_s].health to &quot;deceased-pq&quot;&gt;&gt;
+            &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs[_s].health to &quot;recovered-pq&quot;&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/for&gt;&gt;
+        /* Check for family members who died or recovered */
+        &lt;&lt;set _deceased = []&gt;&gt;
+        &lt;&lt;set _recovered = []&gt;&gt;
+            &lt;&lt;for _d, _household range $NPCs&gt;&gt;
+                &lt;&lt;if _household.health is &quot;deceased-pq&quot;&gt;&gt;&lt;&lt;set _deceased.push(_d)&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+                &lt;&lt;if _household.health is &quot;recovered-pq&quot;&gt;&gt;&lt;&lt;set _recovered.push(_d)&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+      &lt;&lt;/silently&gt;&gt;
     
-    &lt;&lt;if random(1,2) is 1&gt;&gt; But nothing works. At least you will grow too delirious to notice how miserable you are in the hours before your [[death]].
-        &lt;&lt;else&gt;&gt; Miraculously, after a few days you feel your fever break and your buboes begin to go down. Thanks be to God, you have survived the plague.
+    /* reveal if sick family members have died or survived*/
+        &lt;&lt;if _recovered.length gt 0&gt;&gt;&lt;br&gt;&lt;br&gt;You are grateful to hear that your
+            &lt;&lt;for _r, _d range _recovered&gt;&gt;
+                &lt;&lt;if _recovered.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has&lt;&lt;elseif _r &lt; _recovered.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name, &lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;started to recover from their illness.
         &lt;br&gt;&lt;br&gt;
-        Too bad you and your household still have to be for the full 40 days, to make sure you don&#39;t spread the plague to anyone else.
-        /* NTS: Set choice in here about breaking quarantine if running out of money, tie to money and reputation of course. */
-        &lt;br&gt;&lt;br&gt;
-        &lt;&lt;storyline-return&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-&lt;/span&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="inside-city" tags="infection-rates" position="25,825" size="100,100">/* infection code - London
+        &lt;&lt;/if&gt;&gt;
+        &lt;&lt;if _deceased.length gt 0&gt;&gt;&lt;&lt;if _recovered.length gt 0&gt;&gt;Unfortunately, not all have fared the same. &lt;&lt;/if&gt;&gt;Your
+            &lt;&lt;for _x, _d range _deceased&gt;&gt;
+                &lt;&lt;if _deceased.length eq 1&gt;&gt; $NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; _deceased.length - 1&gt;&gt; $NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
+                &lt;&lt;/if&gt;&gt;       
+            &lt;&lt;/for&gt;&gt;
+            &lt;br&gt;&lt;br&gt; 
+        &lt;&lt;/if&gt;&gt;
+    
+    &lt;&lt;silently&gt;&gt;
+      /* check if plague spreads */
+        &lt;&lt;fumigant-check&gt;&gt;
+        &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
+            &lt;&lt;if $NPCs[_i].health is &quot;uninfected&quot;&gt;&gt;
+                &lt;&lt;if _fumes eq 1 and random(1,4) is 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+                &lt;&lt;elseif _fumes eq 0 and random(1,2) is 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/if&gt;&gt;
+        &lt;&lt;/for&gt;&gt;
+        &lt;&lt;/silently&gt;&gt;
+  &lt;br&gt;&lt;br&gt;
+    &lt;&lt;link &quot;As your condition declines, you pray constantly.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
+  &lt;&lt;default&gt;&gt;
+      &lt;&lt;if $reputation lte 2&gt;&gt;Unfortunately, your reputation is so poor that you cannot convince any of your neighbors to bring food or medical supplies to your household any longer.
+      &lt;&lt;elseif $reputation gt 2&gt;&gt;Your friends and neighbors continue to bring you food and plague remedies, which they pass in through the windows taking care to keep their distance from you.
+      &lt;br&gt;&lt;br&gt;
+      &lt;&lt;/if&gt;&gt;
+      
+      /* check if player used a helpful remedy earlier */
+      &lt;&lt;unset $textGroup&gt;&gt;
+      &lt;&lt;if _remedyEffect is 0 and random(1,2) is 1&gt;&gt; But nothing works. At least you will grow too delirious to notice how miserable you are in the hours before your [[death]].
+      &lt;&lt;elseif _remedyEffect is 1 and random(1,3) is 1&gt;&gt; But nothing works. At least you will grow too delirious to notice how miserable you are in the hours before your [[death]].
+      &lt;&lt;else&gt;&gt; Miraculously, after a few days you feel your fever break and your buboes begin to go down. Thanks be to God, you have survived the plague.
+      &lt;br&gt;&lt;br&gt;
+      [[Too bad you and your household still have to be for the full 40 days, to make sure you don&#39;t spread the plague to anyone else.-&gt;Reconnecting]]
+      /* NTS: Set choice in here about breaking quarantine if running out of money, tie to money and reputation of course. */
+      &lt;&lt;/if&gt;&gt;
+      &lt;&lt;/switch&gt;&gt;&lt;&lt;if def $textGroup&gt;&gt;&lt;&lt;set $textGroup += 1&gt;&gt;&lt;&lt;/if&gt;&gt;
+      &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="inside-city" tags="infection-rates" position="25,825" size="100,100">/* infection code - London
 /* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
@@ -1354,27 +1433,45 @@ Your neighbors shut up the entrances to your house and paint a red cross with th
 
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="January 1665" tags="storyline 1665" position="1075,475" size="100,100">&lt;&lt;nobr&gt;&gt;
-The Christmas festivities end with a great snowfall.  It&#39;s bitterly cold and the frost doesn&#39;t break for over two weeks. Freezing rain alternates with snow all winter and rumors swirl about the Dutch fleet.&lt;br&gt;&lt;br&gt;
+The Christmas festivities end with a great snowfall. It&#39;s bitterly cold and the frost doesn&#39;t break for over two weeks. Freezing rain alternates with snow all winter and rumors swirl about the Dutch fleet.&lt;br&gt;&lt;br&gt;
 
 /*Beggar story*/
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;Even though you are one of the deserving poor and have a license to beg in your parish, few people are in a charitable mood. At least you have a roof over your head and receive bread each week, thanks to your parish&#39;s Overseers of the Poor&lt;&lt;if $age isnot &quot;child&quot; or $age isnot &quot;elderly adult&quot; or $disability eq 0&gt;&gt;, even if they put you to work to earn it&lt;&lt;/if&gt;&gt;. You are not freezing or starving to death, even if you are always cold and hungry.&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;Even though you are one of the deserving poor and have a license to beg in your parish, few people are in a charitable mood. At least you have a roof over your head and receive bread each week, thanks to your parish&#39;s Overseers of the Poor
+	&lt;&lt;if $age isnot &quot;child&quot; or $age isnot &quot;elderly adult&quot;&gt;&gt;, even if they put you to work to earn it
+	&lt;&lt;/if&gt;&gt;. 
+You are not freezing or starving to death, even if you are always cold and hungry.
+&lt;&lt;/if&gt;&gt;
 
 /*Day Labourer story */
 &lt;&lt;if $socio is &quot;day labourers&quot;&gt;&gt;
-	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;As the child of a day labourer, each member of your family has&lt;&lt;else&gt;&gt;As a day labourer, you have&lt;&lt;/if&gt;&gt; to search for a job every day and the weather is so miserable that some days you can’t find work. But at least you have a roof over your head and there is enough money to buy at least bread for your household every week. You are not freezing or starving to death, even if you are always cold and hungry.
+	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;As the child of a day labourer, each member of your family has
+	&lt;&lt;else&gt;&gt;As a day labourer, you have
+	&lt;&lt;/if&gt;&gt; to search for a job every day and the weather is so miserable that some days you can’t find work. But at least you have a roof over your head and there is enough money to buy at least bread for your household every week. You are not freezing or starving to death, even if you are always cold and hungry.
+&lt;&lt;/if&gt;&gt;
 
 /* Servant Story */
-&lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of a servant&lt;&lt;else&gt;&gt;a servant,&lt;&lt;/if&gt;&gt; you spend as much time running errands outside as inside, but at least you have a roof over your head, warm clothes, and plenty to eat. But you can’t help but worry about how the war will impact your life.&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;As 
+	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of a servant
+	&lt;&lt;else&gt;&gt;a servant,
+	&lt;&lt;/if&gt;&gt; you spend as much time running errands outside as inside, but at least you have a roof over your head, warm clothes, and plenty to eat. But you can’t help but worry about how the war will impact your life.
+&lt;&lt;/if&gt;&gt;
 
 /*Artisan Story */
-&lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt;As&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt; the child of&lt;&lt;/if&gt;&gt; a [random artisan type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in your hearth, and enough money for you and your household to eat well. But you can’t help but worry about how the war will impact your &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;family&#39;s &lt;&lt;/if&gt;&gt;trade.&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt;As
+	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt; the child of
+	&lt;&lt;/if&gt;&gt; a [random artisan type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in your hearth, and enough money for you and your household to eat well. But you can’t help but worry about how the war will impact your 
+	&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;family&#39;s 
+	&lt;&lt;/if&gt;&gt;trade.
+&lt;&lt;/if&gt;&gt;
 
 /* Merchant Story */
-&lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of [randomize merchant type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in each of your many hearths, and plenty of money to buy the latest fashions. But your family can’t help but worry about how the war will impact their trade.&lt;&lt;else&gt;&gt;a [random merchant type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in each of your many hearths, and plenty of money to buy the latest fashions. But you can’t help but worry about how the war will impact your trade.&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of [randomize merchant type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in each of your many hearths, and plenty of money to buy the latest fashions. But your family can’t help but worry about how the war will impact their trade.&lt;&lt;else&gt;&gt;a [random merchant type], you spend much of your time working inside and are very glad to have a roof over your head, a fire in each of your many hearths, and plenty of money to buy the latest fashions. But you can’t help but worry about how the war will impact your trade.&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
 /* Noble Story */
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of &lt;&lt;/if&gt;&gt;a minor noble, you spend much of your time inside at the royal Court of King Charles II in hopes of securing more titles, honor, and riches for yourself and your family&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, especially since Queen Catherine and the Queen Mother both share your Catholic faith&lt;&lt;/if&gt;&gt;. You fill your days traveling among the royal family&#39;s various London palaces--including attending the Queen Mother&#39;s weekly social circle as faithfully as if it were church--and spending money on the latest fashions and trends. But you can’t help but worry about how the war will impact your life.&lt;&lt;/if&gt;&gt;
 &lt;br&gt;&lt;br&gt;
+
 &lt;&lt;if $origin isnot &quot;the Dutch republic&quot;&gt;&gt;It&#39;s almost a relief when war officially breaks out on March 4th.&lt;&lt;else&gt;&gt;Things go from bad to worse for you when war officially breaks out on March 4th.&lt;&lt;/if&gt;&gt; Men pass back and forth through London, headed for the fleet—some voluntarily, some after having been impressed and forced into service.
 &lt;br&gt;&lt;br&gt;
 /* Beggar options */
@@ -1416,7 +1513,7 @@ Do you:&lt;ul&gt;
 
 /* Artisan options */
 &lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt;For now, at least, your &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;family&#39;s &lt;&lt;/if&gt;&gt;business is booming. 
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
 When you go to church on Easter Sunday, you are reminded of how lucky you are as one of God’s chosen people. 
 &lt;br&gt;&lt;br&gt;Do you: &lt;ul&gt;
 &lt;li&gt;[[celebrate your good fortune by increasing your donations to the poor-&gt;May 1665][$reputation to Math.clamp($reputation + 1, 0, 10); $money to Math.clamp($money - 560, 0, 1000000)]]&lt;/li&gt;
@@ -2039,6 +2136,7 @@ So many people are sick and shut up in their houses that the city has imposed a 
         [[Continue to September 1665-&gt;September 1665]] 
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="September 1665" tags="storyline 1665" position="1200,625" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2054,6 +2152,7 @@ You can continue to try and avoid the plague by visiting the Apothecary, or you 
 
 [[Continue to October 1665-&gt;October 1665]] 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="October 1665" tags="storyline 1665" position="1325,625" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2077,12 +2176,14 @@ You hope the cold will deepen--and plague numbers continue to fall--as you head 
 /* Noble text */
 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="November 1665" tags="storyline 1665" position="1450,625" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
 The weather is terrible but plague numbers are coming down and people start to trickle back into town. You don&#39;t expect great things this Christmas, but you are still looking forward to [[December 1665]].&lt;br&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="December 1665" tags="storyline 1665" position="1075,775" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2094,6 +2195,7 @@ The King decides to take the Court to Oxford to celebrate the Christmas festivit
 &lt;br&gt;&lt;br&gt;
 Maybe things will be better in [[1666-&gt;January 1666]].
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="January 1666" tags="storyline 1666" position="1200,775" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2107,6 +2209,7 @@ After six months of travel, the king finally returns the Court to Hampton Court 
 
 You look forward to even better things in [[February 1666]].
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="February 1666" tags="storyline 1666" position="1325,775" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2116,6 +2219,7 @@ The king has returned to London! People rejoice and return to their churches, kn
 Your parish priest hasn&#39;t returned yet, though, and his reputation plummets as the days tick over into [[March 1666]].&lt;br&gt;&lt;br&gt;
 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="March 1666" tags="storyline 1666" position="1450,775" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2126,12 +2230,14 @@ So much for the city being safe again.&lt;br&gt;&lt;br&gt;
 
 It&#39;s not a great lead up for [[April 1666]].
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="April 1666" tags="storyline 1666" position="1075,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
 &lt;&lt;else&gt;&gt;
 There&#39;s no denying it now. Plague cases are definitely on the rise. Luckily, Sweden has declared itself on England&#39;s side in the war against the Dutch, so at least there&#39;s some good news to balance out the bad as you head into [[May 1666]].
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="May 1666" tags="storyline 1666" position="1200,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2142,6 +2248,7 @@ Plague is increasing throughout the city, but that doesn&#39;t stop all of Londo
 You are still recovering from the festivities when the days tip over into [[June 1666]].
 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="June 1666" tags="storyline 1666" position="1325,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2152,6 +2259,7 @@ You hear rumors that the fleet has engaged the Dutch in battle again and the str
 One thing is for certain, though. The weather is so hot that plague cases are on the rise again and you know it will only get worse in [[July 1666]]. 
 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="July 1666" tags="storyline 1666" position="1450,925" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2161,6 +2269,7 @@ The heat of the city is oppressive but the worst is not the heat but the wails o
 
 Those who remain in the city hear the sounds of another battle in the distance--but any battle that is close enough for you can hear the cannon fire is too close. You wonder if you will make it to [[August 1666]].
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="August 1666" tags="storyline 1666" position="1075,1075" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2169,6 +2278,7 @@ Those who remain in the city hear the sounds of another battle in the distance--
 As the summer heat engulfs the city, plague numbers continue to rise. But at least there&#39;s good news on the war front, as you hear that the fleet has burnt more Dutch ships. You hope it will be enough to tide you through the last hot month of the year, as [[September 1666]] dawns.
 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="September 1666" tags="fire storyline 1666" position="1200,1075" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2205,6 +2315,7 @@ You ask around and discover the fire began in the King&#39;s Baker&#39;s house o
 Everyone is still reeling from the shock of the Great Fire at the beginning of [[October 1666]]. 
 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="October 1666" tags="storyline 1666" position="1325,1075" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2223,6 +2334,7 @@ There&#39;s so many people homeless that there&#39;s money to be made for someon
 The weather may be miserable, but every disaster has a silver lining. Between the fires that still smolder in the city&#39;s cellars and the rainy weather, plague cases are plummeting and you&#39;ve heard that the theatres are finally going to reopen! You greatly look forward to [[November 1666]] 
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="November 1666" tags="storyline 1666" position="1450,1075" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2234,6 +2346,7 @@ Even better, the king declares the official thanksgiving day for the end of the 
 
 As Lent begins, you look forward to actually being able to properly [[celebrate Christmas this year.-&gt;December 1666]] 
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="December 1666" tags="storyline 1666" position="1600,1075" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2492,11 +2605,23 @@ As morning dawns, a terrible realization settles over your household. Your
         &lt;&lt;/for&gt;&gt;
     &lt;br&gt;
     As a good Christian, it is your duty to look after the poor, sick, and needy. But as a good Christian, you also know it is a sin to needlessly risk your life. Do you:&lt;ul&gt;
-&lt;li&gt;[[Quarantine with your household-&gt;Quarantine, Week 1][$reputation += 5]]&lt;/li&gt;
+&lt;li&gt;[[Quarantine with your household-&gt;Quarantine, Week 1][$reputation to Math.clamp($reputation + 3, 0, 10)]]&lt;/li&gt;
     &lt;li&gt;[[Send the sick to the pesthouse-&gt;FamPesthouse][$reputation to Math.clamp($reputation - 5, 0, 10)]]&lt;/li&gt;
     &lt;/ul&gt;    
     &lt;&lt;/nobr&gt;&gt;
-    &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="return to the story" tags="widget" position="900,450" size="100,100">&lt;&lt;widget &quot;storyline-return&quot;&gt;&gt;
+    &lt;&lt;/widget&gt;&gt;
+    
+    &lt;&lt;widget &quot;check-NPCs&quot;&gt;&gt;
+    /* check to see which family members were infected and put into temp array */
+    &lt;&lt;silently&gt;&gt;
+        &lt;&lt;set _infectedFamily = []&gt;&gt;
+            &lt;&lt;for _y, _household range $NPCs&gt;&gt;
+                &lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
+                       &lt;&lt;set _infectedFamily.push(_y)&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+    &lt;&lt;/silently&gt;&gt; 
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="return to the story" tags="widget" position="900,450" size="100,100">&lt;&lt;widget &quot;storyline-return&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 /* if you were imprisoned or impressed, show a bit of text here that says what happened while you were away. Add code that moves you forward a play equivalent to your imprisonment time. */
 &lt;&lt;if hasVisited(&quot;November 1666&quot;)&gt;&gt;[[Continue.-&gt;December 1666]]
@@ -2663,7 +2788,7 @@ NTS: reputation goes up?
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="survival-mode" tags="" position="1725,50" size="100,100">You are running low on resources and may need to take desparate measures.
 
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="Quarantine, Week 1" tags="quarantine" position="200,375" size="100,100">/* Quarantine Week 1*/
-&lt;&lt;nobr&gt;&gt;
+&lt;&lt;nobr&gt;&gt;&lt;&lt;set $quarantine to 1&gt;&gt;
 /* check which family members are currently infected */
     &lt;&lt;silently&gt;&gt;
         &lt;&lt;set _infectedFamily = []&gt;&gt;
@@ -2742,6 +2867,7 @@ You have heard and read about different courses of treatment for the sick. &lt;&
         &lt;&lt;else&gt;&gt;and $NPCs[_d].relationship, $NPCs[_d].name have started to recover from their illness.&lt;br&gt;&lt;br&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/for&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
 
 You must remain in quarantine for at least three more weeks, however, and only time will tell if the disease has spread.
 &lt;br&gt;&lt;br&gt;
@@ -2849,36 +2975,35 @@ The first week was agony. The second is no better.&lt;br&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;/span&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Quarantine, Week 3" tags="quarantine" position="200,500" size="100,100">&lt;&lt;nobr&gt;&gt;
-    /* check if any family members were infected the previous week */
-        &lt;&lt;silently&gt;&gt;
-            &lt;&lt;set _infectedFamily = []&gt;&gt;
-                &lt;&lt;for _y, _household range $NPCs&gt;&gt;
-                    &lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
-                           &lt;&lt;set _infectedFamily.push(_y)&gt;&gt;
-                    &lt;&lt;/if&gt;&gt;
-                &lt;&lt;/for&gt;&gt;
-        &lt;&lt;/silently&gt;&gt;
-    
-/* NTS: fix text here */
-As you enter the third week of quarantine, even the smallest glimmer of hope is a welcome relief. 
+/* check if any family members were infected the previous week */
+    &lt;&lt;silently&gt;&gt;
+        &lt;&lt;set _infectedFamily = []&gt;&gt;
+            &lt;&lt;for _y, _household range $NPCs&gt;&gt;
+                &lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
+                        &lt;&lt;set _infectedFamily.push(_y)&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+    &lt;&lt;/silently&gt;&gt;
+&lt;span id=&quot;plague-replace&quot;&gt;
+As you enter the third week of quarantine, even the smallest glimmer of hope is a welcome relief.&lt;br&gt;&lt;br&gt; 
 
-/* reveal which family members are infected */
-    &lt;&lt;if _infectedFamily.length gt 0&gt;&gt;Unfortunately, the illness has continued to spread through your household.
+&lt;&lt;if _infectedFamily.length eq 0&gt;&gt;While the recovery process is slow for those who were ill, the infection does not seem to have spread any further.
+
+You must also remain in quarantine for at least two more weeks, and [[only time will tell if the plague will claim more.-&gt;Quarantine, Week 3]]
+
+&lt;&lt;else&gt;&gt; Unfortunately, the illness has continued to spread through your household, and your
         &lt;&lt;for _z, _y range _infectedFamily&gt;&gt;
-            &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].name is now infected.&lt;br&gt;
-            &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].name are now infected.
+            &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name is now infected.&lt;br&gt;
+            &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].relationship $NPCs[_y].name are now infected.
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/for&gt;&gt;
-    &lt;&lt;else&gt;&gt;While the infection does not seem to have spread any further, the recovery process is long and slow.
-    &lt;&lt;/if&gt;&gt;
-
-/* if more family members were infected, offer treatment options &amp; run death recovery &amp; spread code */
-&lt;&lt;if _infectedFamily.length gt 0&gt;&gt;
-    /* call in widget showing treatment options if family members are infected*/
+        
+    /* call in widget showing treatment options if family members are infected */
     &lt;&lt;hh-treatments&gt;&gt;
     
-    &lt;&lt;linkappend &quot;You tend to the sick and suffering.&quot;&gt;&gt;&lt;br&gt;&lt;br&gt;
-        &lt;&lt;silently&gt;&gt;
+    &lt;&lt;link &quot;You tend to the sick and suffering.&quot;&gt;&gt;&lt;&lt;replace &quot;#plague-replace&quot;&gt;&gt;
+    
+	&lt;&lt;silently&gt;&gt;
         /* Check if player has used a helpful remedy to decrease chance of death */
             &lt;&lt;for _s range _infectedFamily&gt;&gt;
                 &lt;&lt;if _remedyEffect is 1 and random(1,3) is 1&gt;&gt;&lt;&lt;set $NPCs[_s].health to &quot;deceased3&quot;&gt;&gt;
@@ -2897,31 +3022,32 @@ As you enter the third week of quarantine, even the smallest glimmer of hope is 
                     &lt;&lt;/if&gt;&gt;
                 &lt;&lt;/for&gt;&gt;
             
-        //* Check for fumigants to prevent spread to household */ 
-        &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
-            &lt;&lt;if $NPCs[_i].health is &quot;uninfected&quot;&gt;&gt;
-                &lt;&lt;if _fumes gt 0 and random(1,4) eq 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
-                &lt;&lt;elseif _fumes lt 1 and random(1,2) eq 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
-                &lt;&lt;/if&gt;&gt;
-            &lt;&lt;/if&gt;&gt;
-        &lt;&lt;/for&gt;&gt;
+       /* Check for fumigants to prevent spread to household */ 
+	   &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
+	   &lt;&lt;if $NPCs[_i].health is &quot;uninfected&quot;&gt;&gt;
+		   &lt;&lt;if _fumes gt 0 and random(1,4) eq 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+		   &lt;&lt;elseif _fumes lt 1 and random(1,2) eq 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+		   &lt;&lt;/if&gt;&gt;
+	   &lt;&lt;/if&gt;&gt;
+   		&lt;&lt;/for&gt;&gt;
 
-        /* check for fumigants to prevent spread to player */
-        &lt;&lt;if _fumes gt 0 and random(1,4) is 1&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
-        &lt;&lt;elseif _fumes lt 1 and random(1,2) is 1&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
+		/* check for fumigants to prevent spread to player */
+		&lt;&lt;if _fumes gt 0 and random(1,4) is 1&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
+		&lt;&lt;elseif _fumes lt 1 and random(1,2) is 1&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+
+	&lt;&lt;/silently&gt;&gt;
+
+    /* reveal which family members have died or survived*/
+        &lt;&lt;if _deceased.length gt 0&gt;&gt;Despite your care, your
+            &lt;&lt;for _x, _d range _deceased&gt;&gt;
+                &lt;&lt;if _deceased.length eq 1&gt;&gt; $NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; _deceased.length - 1&gt;&gt; $NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
+                &lt;&lt;/if&gt;&gt;       
+            &lt;&lt;/for&gt;&gt;
+            &lt;br&gt;&lt;br&gt; 
         &lt;&lt;/if&gt;&gt;
-        
-    &lt;&lt;/silently&gt;&gt;
-        /* reveal which family members have died or survived*/
-            &lt;&lt;if _deceased.length gt 0&gt;&gt;Despite your care, your 
-                &lt;&lt;for _x, _d range _deceased&gt;&gt;
-                    &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; _deceased.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
-                    &lt;&lt;/if&gt;&gt;       
-                &lt;&lt;/for&gt;&gt;
-                &lt;br&gt;&lt;br&gt; 
-            &lt;&lt;/if&gt;&gt;
 
-        /* show which family members recovered */
+    /* show which family members recovered */
         &lt;&lt;if _recovered.length gt 0&gt;&gt;
             &lt;&lt;if _deceased.length gt 0&gt;&gt;There is some good news, though. &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your 
             &lt;&lt;for _r, _d range _recovered&gt;&gt;
@@ -2930,28 +3056,18 @@ As you enter the third week of quarantine, even the smallest glimmer of hope is 
             &lt;&lt;/for&gt;&gt; 
         &lt;br&gt;&lt;br&gt;
         &lt;&lt;/if&gt;&gt;
+	/*NTS: fix text here!*/
+    You wonder what has been taking place in the outside world and hope for even a small bit of news as you enter the final weeks of quarantine.
 
-        /*NTS: fix text here!*/
-        You wonder what has been taking place in the outside world and hope for even a small bit of news as you enter the final weeks of quarantine. 
-            
-        /* NTS: ask if they want to purchase any more items from the apothecary? */    
-        /* Check if player was infected, send to next passage depending */
-            
-        &lt;&lt;if $plagueInfection is 1&gt;&gt;[[The days continue to pass with agonizing slowness.-&gt;Sickness]]
-            &lt;&lt;else&gt;&gt;[[The days continue to pass with agonizing slowness.-&gt;Quarantine, Week 4]]
-        &lt;&lt;/if&gt;&gt;
-        &lt;&lt;fumigant&gt;&gt;
-    &lt;&lt;/linkappend&gt;&gt;
-&lt;&lt;else&gt;&gt;
-/*NTS: fix text here!*/
-You wonder what has been taking place in the outside world and hope for even a small bit of news as you enter the final weeks of quarantine. 
-    
-/* Check if player was infected, send to next passage depending */
+    /* Check if player was infected, send to next passage depending */ 
     &lt;&lt;if $plagueInfection is 1&gt;&gt;[[The days continue to pass with agonizing slowness.-&gt;Sickness]]
-        &lt;&lt;else&gt;&gt;[[The days continue to pass with agonizing slowness.-&gt;Quarantine, Week 4]]
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;fumigant&gt;&gt;
+		&lt;&lt;else&gt;&gt;[[The days continue to pass with agonizing slowness.-&gt;Quarantine, Week 4]]
+	&lt;&lt;/if&gt;&gt;
+     &lt;&lt;fumigant&gt;&gt;
+  &lt;&lt;/replace&gt;&gt;
+  &lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;/span&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Quarantine, Week 4" tags="quarantine" position="325,500" size="100,100">&lt;&lt;nobr&gt;&gt;
     /* check if any family members were infected the previous week */
     &lt;&lt;silently&gt;&gt;
@@ -3053,11 +3169,11 @@ After nearly a month in quarantine, you begin to believe you might survive this.
     &lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Fled" tags="fled" position="1275,1275" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;You have decided to flee to your country estate.&lt;br&gt;
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;You have decided to &#39;&#39;flee to your country estate&#39;&#39;.&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $socio is &quot;servants&quot; and $fled is 1&gt;&gt;
 Your master flees London with you and the rest of your household. You have only a little time to prepare and say goodbye to your friends before you leave.&lt;br&gt;
-    &lt;&lt;elseif $socio is &quot;servants&quot; and $fled is 2&gt;&gt;You decide to flee the city to save yourself. Unfortunately, with no money and no reputation to speak of anymore, you only have the option of begging to survive. &lt;&lt;set $socio to &quot;beggars&quot;&gt;&gt;
+    &lt;&lt;elseif $socio is &quot;beggars&quot; and $fled is 2&gt;&gt;You decide to flee the city to save yourself. Unfortunately, with no money and no reputation to speak of anymore, you only have the option of begging to survive.
     /*NTS: add text for what happens to servants who flee the city w/o master */
     &lt;&lt;else&gt;&gt;You decide to flee the city&lt;&lt;if $origin isnot &quot;London&quot; and $origin isnot &quot;somewhere else&quot;&gt;&gt; and return to $origin&lt;&lt;elseif $origin is &quot;somewhere else&quot;&gt;&gt;and return to your homeland&lt;&lt;/if&gt;&gt;.&lt;br&gt;&lt;br&gt;
 /*NTS: add text for what options others see - artisans, merchants, laborers, beggars */
@@ -3395,16 +3511,16 @@ The apothecary sells items that may help your family avoid illness. For the reme
 &lt;/table&gt;&lt;br&gt;
 Remaining money: $money&lt;br&gt;
 &lt;&lt;return&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="preventatives-treatments" tags="widget" position="825,225" size="100,100">&lt;&lt;widget &quot;preventative&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="preventatives-treatments" tags="widget" position="825,175" size="100,100">&lt;&lt;widget &quot;preventative&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
 &lt;ul&gt;&lt;li&gt;&lt;span id=&quot;church&quot;&gt;&lt;&lt;link &quot;Go to church and pray often&quot;&gt;&gt;&lt;&lt;set $reputation +=1&gt;&gt;&lt;&lt;replace #church&gt;&gt;You go to church and pray regularly through the month. Others admire your piety in the face of such a grave situation!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;eat&quot;&gt;&lt;&lt;link &quot;Avoid eating berries, cabbage, cucumbers, melon, and spinach.&quot;&gt;&gt;&lt;&lt;replace #eat&gt;&gt;You avoid eating berries, cabbage, cucumbers, melons, and spinach. Your neighbors swear by it!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;li&gt;&lt;span id=&quot;eat&quot;&gt;&lt;&lt;link &quot;Avoid eating berries, cabbage, cucumbers, melon, and spinach.&quot;&gt;&gt;&lt;&lt;replace #eat&gt;&gt;You avoid eating berries, cabbage, cucumbers, melons, and spinach. Your neighbors swear by it!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;&lt;br&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;player-treatments&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 /* NTS: change nurse details based on family/class/rep */
-A member of your family/nurse/household offer you some remedies to help ease your suffering and, hopefully, prevent your death.
+A member of your family/nurse/household offer you some remedies to help ease your suffering and, hopefully, prevent your death. You:
 &lt;&lt;set _remedyEffect to 0&gt;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;&lt;linkreplace &quot;accept a purgative drink&quot;&gt;&gt;You are offered a purgative drink, which induces vomiting. It&#39;s incredibly unpleasant.&lt;&lt;/linkreplace&gt;&gt;&lt;/li&gt;
@@ -3461,8 +3577,7 @@ You have some remedies on hand in your household, and may be able to purchase ot
     The first case of plague has appeared in your parish, &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;beggar-roles&gt;&gt;&lt;&lt;highway&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 /* Day Labourers */
-&lt;&lt;if $socio is &quot;day labourers&quot;&gt;&gt;
-and many of your neighbors have begun to flee the city.&lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt; You still have family back home in $origin and have to consider whether or not to abandon your home and whatever possessions you cannot carry to take refuge with your family.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
+&lt;&lt;if $socio is &quot;day labourers&quot;&gt;&gt;and many of your neighbors have begun to flee the city.&lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt; You still have family back home in $origin and have to consider whether or not to abandon your home and whatever possessions you cannot carry to take refuge with your family.&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
     You hear that the local parish officials want to hire you to &lt;&lt;if $gender is &quot;male&quot; or $gender is &quot;non-binary&quot;&gt;&gt;remove the plague corpses if anyone dies&lt;&lt;elseif $gender is &quot;female&quot; and $reputation gte 5&gt;&gt;look at plague corpses and determine if they died of plague or some other cause of death&lt;&lt;else&gt;&gt;nurse the sick and dying, despite the risk to your own life&lt;&lt;/if&gt;&gt;.&lt;br&gt;&lt;br&gt;
     You decide to:
     &lt;ul&gt;
@@ -3478,37 +3593,35 @@ and many of your neighbors have begun to flee the city.&lt;&lt;if $origin isnot 
 &lt;&lt;/if&gt;&gt;
     
 /* Servants */
-&lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;
-, and many of your neighbors have begun to flee the city. Your master decides to &lt;&lt;if random(1,2) is 1&gt;&gt;&lt;&lt;set _masterflee to 1&gt;&gt;flee&lt;&lt;else&gt;&gt;&lt;&lt;set _masterflee to 0&gt;&gt;stay&lt;&lt;/if&gt;&gt;.&lt;br&gt;&lt;br&gt;
+&lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;and many of your neighbors have begun to flee the city. Your master decides to &lt;&lt;if random(1,2) is 1&gt;&gt;&lt;&lt;set _masterflee to 1&gt;&gt;flee&lt;&lt;else&gt;&gt;&lt;&lt;set _masterflee to 0&gt;&gt;stay&lt;&lt;/if&gt;&gt;.&lt;br&gt;&lt;br&gt;
 As a member of your master&#39;s household, your only choices are to follow his lead &lt;&lt;if _masterflee is 0&gt;&gt;and remain in the city, or to run away&lt;&lt;else&gt;&gt;and flee the city, or to stay in the city&lt;&lt;/if&gt;&gt; and hope you are not caught for having broken your contract.&lt;br&gt;&lt;br&gt;
 
 You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your family&lt;&lt;else&gt;&gt;decide&lt;&lt;/if&gt;&gt; to:
     &lt;&lt;if _masterflee is 1&gt;&gt;
         &lt;ul&gt;
             &lt;li&gt;[[Follow your master&#39;s lead and leave the city-&gt;Fled][$fled to 1]]&lt;/li&gt;
-            &lt;li&gt;&lt;&lt;link &quot;Break your contract and remain in the city&quot; &quot;Stay&quot;&gt;&gt;&lt;&lt;set $fled to 3&gt;&gt;&lt;&lt;set $socio to &quot;beggars&quot;&gt;&gt;&lt;&lt;set $reputation to 0&gt;&gt;&lt;/li&gt;
+            &lt;li&gt;[[Break your contract and remain in the city-&gt;Stay][$fled to 3; $socio to &quot;beggars&quot;; $reputation to 0; $role to &quot;unemployed&quot;]]&lt;/li&gt;
         &lt;/ul&gt;
     &lt;&lt;else&gt;&gt;
         &lt;ul&gt;
             &lt;li&gt;[[Remain in the city with your master-&gt;Stay][$fled to 0]]&lt;/li&gt;
-            &lt;li&gt;[[Break your contract and flee the city-&gt;Fled][$fled to 2; $socio to &quot;beggars&quot;; $reputation to 0]]&lt;/li&gt;
+            &lt;li&gt;[[Break your contract and flee the city-&gt;Fled][$fled to 2; $socio to &quot;beggars&quot;; $reputation to 0; $role to &quot;unemployed&quot;]]&lt;/li&gt;
         &lt;/ul&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 /* Artisans */
-&lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt;
-, and many of your neighbors have begun to flee the city. 
+&lt;&lt;if $socio is &quot;artisans&quot;&gt;&gt;and many of your neighbors have begun to flee the city. 
     &lt;&lt;if $origin is &quot;London&quot; and $reputation lte 5&gt;&gt;Your reputation is so bad that you&#39;re not sure if anyone will take you in if you decide to leave London.
     &lt;&lt;else&gt;&gt;
         &lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt;You still have family back home in $origin
         &lt;&lt;else&gt;&gt;You have friends in the countryside
         &lt;&lt;/if&gt;&gt; who would take in you and your household if you decide to leave, too.
     &lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-    You decide to:
+    &lt;&lt;if $hoh is 0&gt;&gt;You convince your family to&lt;&lt;else&gt;&gt;You decide to:&lt;&lt;/if&gt;&gt;
         &lt;ul&gt;
-            &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&quot;&gt;&gt;&lt;/li&gt;
-            &lt;li&gt;[[Remain in the city, but send the rest of your household away-&gt;Stay][$fled to 5; $money -= 560]]&lt;/li&gt;
+            &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&lt;/li&gt;
+            &lt;&lt;if $hoh is 1 and $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[Remain in the city, but send the rest of your household away.-&gt;Stay][$fled to 5; $money -= 560]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
             &lt;li&gt;&lt;&lt;if $reputation gt 5&gt;&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 6; $money -= 1120]]
                 &lt;&lt;else&gt;&gt;
                     &lt;&lt;if random(1,2) eq 1&gt;&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 6; $money -= 1120]]&lt;&lt;else&gt;&gt;[[Flee the city with your entire household.-&gt;Stay][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 7; $money -= 1120]]
@@ -3519,7 +3632,7 @@ You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your famil
 &lt;&lt;/if&gt;&gt;
 
 /* Merchants */
-&lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;, and your neighbors have begun to flee the city. Many are renting houses in the countryside and small towns surrounding London, either for themselves or for their households.&lt;br&gt;&lt;br&gt;
+&lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;and your neighbors have begun to flee the city. Many are renting houses in the countryside and small towns surrounding London, either for themselves or for their households.&lt;br&gt;&lt;br&gt;
 You decide to:
     &lt;ul&gt;
         &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]&quot;&gt;&gt;&lt;/li&gt;
@@ -3530,7 +3643,7 @@ You decide to:
 
 /* Nobles */
 /*NTS: need more text about how the nobles decide to flee? */
-&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;, and many members of the Court have begun to flee the city.&lt;br&gt;&lt;br&gt;
+&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;and many members of the Court have begun to flee the city.&lt;br&gt;&lt;br&gt;
 
 You decide to: 
     &lt;ul&gt;
@@ -3539,11 +3652,22 @@ You decide to:
         &lt;li&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 1, 0, 10); $fled to 6; $money -= 10000]]&lt;/li&gt;
     &lt;/ul&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="83" name="Reconnecting" tags="quarantine" position="625,450" size="100,100">Lord be praised, your household has survived the plague. You still need to finish quarantine, but begin reconnecting with the outside world.
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="83" name="Reconnecting" tags="quarantine" position="625,450" size="100,100">&lt;&lt;nobr&gt;&gt;
+/*&lt;&lt;check-NPCs&gt;&gt;
+&lt;&lt;if _infectedFamily.length gt 0&gt;&gt;Unfortunately, you&#39;re going to be here a while longer. Your
+              &lt;&lt;for _z, _y range _infectedFamily&gt;&gt;
+                &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].relationship, $NPCs[_y].name has also fallen ill.&lt;br&gt;
+                &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].relationship $NPCs[_y].name have also fallen ill.
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+&lt;&lt;else&gt;&gt; */
+Lord be praised, your household has survived the plague. You still need to finish quarantine, but begin reconnecting with the outside world.
 
 In the time you were away.... (nts: add updates based on what big events have happened)
 
 &lt;&lt;storyline-return&gt;&gt;
+/* &lt;&lt;/if&gt;&gt; */
+&lt;&lt;/nobr&gt;&gt;
 </tw-passagedata><tw-passagedata pid="84" name="Summer 1665" tags="fled" position="1100,1300" size="100,100">/* NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early */
 
 When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call. By the beginning of October, death tolls have fallen to half that and you decide to [[return to the city-&gt;October 1665]] </tw-passagedata><tw-passagedata pid="85" name="Winter 1665" tags="fled" position="1150,1425" size="100,100">/*NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early */
@@ -3624,7 +3748,7 @@ Life may go on for the reckless, but it will not be until 1667 that you finally 
 
     /* Servants Stay*/
     &lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;
-&lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;successfully convince your family&lt;&lt;else&gt;&gt;decide&lt;&lt;/if&gt;&gt; to remain in the city with your master and his household, despite the danger.
+&lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;You successfully convince your family&lt;&lt;else&gt;&gt;decide&lt;&lt;/if&gt;&gt; to remain in the city with your master and his household, despite the danger.
     &lt;&lt;/if&gt;&gt;
 
 /* Artisans */
@@ -3856,6 +3980,22 @@ You enter your sixth week of quarantine. The days are interminable.
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="test-pq" tags="" position="750,450" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
+&lt;&lt;set $quarantine to 1&gt;&gt;
+&lt;&lt;set $money to 10000&gt;&gt;
+&lt;&lt;set $age to &quot;young adult&quot;&gt;&gt;
+&lt;&lt;set $socio to &quot;merchants&quot;&gt;&gt;
+&lt;&lt;set $reputation to 8&gt;&gt;
+&lt;&lt;set $gender to &quot;female&quot;&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;child&quot;, relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;), relationship: weightedEither($fRelationships), health: &quot;infected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;infected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;), relationship: weightedEither($fRelationships), health: &quot;infected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
+&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;uninfected&quot;})&gt;&gt;
+&lt;&lt;/silently&gt;&gt;[[You have fallen ill.-&gt;Sickness]]
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
