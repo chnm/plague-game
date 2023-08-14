@@ -1179,7 +1179,7 @@ NTS: This is also what happened to your family.
 &lt;&lt;if ndef $textGroup&gt;&gt;&lt;&lt;set $textGroup = 1&gt;&gt;&lt;&lt;/if&gt;&gt;
   &lt;&lt;switch $textGroup&gt;&gt;
     &lt;&lt;case 1&gt;&gt;
-          &lt;&lt;if $quarantine gt 0&gt;&gt;
+          &lt;&lt;if $quarantine gt 1&gt;&gt;
           &#39;&#39;Lord have mercy! A strange lump has appeared on your 
           &lt;&lt;set _x to random(1,3)&gt;&gt;
               &lt;&lt;if _x == 1&gt;&gt;leg
@@ -1193,7 +1193,7 @@ NTS: This is also what happened to your family.
                 &lt;&lt;/if&gt;&gt;
             &lt;&lt;/for&gt;&gt;
             &lt;&lt;/if&gt;&gt;
-              &lt;&lt;else&gt;&gt;
+              &lt;&lt;else&gt;&gt;&lt;&lt;set $quarantine += 1&gt;&gt;
   Your neighbors shut up the entrances to your house and paint a red cross with the words //Lord Have Mercy// on the front door.
   &lt;&lt;/if&gt;&gt;
   &lt;br&gt;&lt;br&gt;
@@ -1230,14 +1230,12 @@ NTS: This is also what happened to your family.
           &lt;&lt;if $getaway.length eq 1&gt;&gt;your $NPCs[_g].relationship $NPCs[_g].name,
           &lt;&lt;elseif _f &lt; $getaway.length - 1&gt;&gt;your $NPCs[_g].relationship $NPCs[_g].name, &lt;&lt;else&gt;&gt;and your $NPCs[_g].relationship $NPCs[_y].name
           &lt;&lt;/if&gt;&gt;
-        &lt;&lt;/for&gt;&gt;out of the house and to a safer location.
+        &lt;&lt;/for&gt;&gt;out of the house and to a safer location.&lt;br&gt;&lt;br&gt;
       &lt;&lt;/if&gt;&gt;
-      &lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
-  
+      &lt;&lt;/if&gt;&gt;
     &lt;&lt;link &quot;The days continue to pass with agonizing slowness.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
   &lt;&lt;case 5&gt;&gt;
     You spend most of your waking hours in a terrible, fevered state. &lt;&lt;if $NPCs.length gt 0&gt;&gt;In your brief moments of lucidity, you ask after your family&lt;&lt;if _infectedFamily.length eq 0&gt;&gt; and are grateful to hear no more have fallen ill... yet&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;.
-  
     &lt;&lt;silently&gt;&gt;
         /* determine if sick family die or recover */
           &lt;&lt;for _s range _infectedFamily&gt;&gt;
@@ -1256,7 +1254,6 @@ NTS: This is also what happened to your family.
                 &lt;&lt;/if&gt;&gt;
             &lt;&lt;/for&gt;&gt;
       &lt;&lt;/silently&gt;&gt;
-    
     /* reveal if sick family members have died or survived*/
         &lt;&lt;if _recovered.length gt 0&gt;&gt;&lt;br&gt;&lt;br&gt;You are grateful to hear that your
             &lt;&lt;for _r, _d range _recovered&gt;&gt;
@@ -1272,7 +1269,6 @@ NTS: This is also what happened to your family.
             &lt;&lt;/for&gt;&gt;
             &lt;br&gt;&lt;br&gt; 
         &lt;&lt;/if&gt;&gt;
-    
     &lt;&lt;silently&gt;&gt;
       /* check if plague spreads */
         &lt;&lt;fumigant-check&gt;&gt;
@@ -1283,25 +1279,24 @@ NTS: This is also what happened to your family.
                 &lt;&lt;/if&gt;&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/for&gt;&gt;
-        &lt;&lt;/silently&gt;&gt;
    &lt;&lt;health-update&gt;&gt;
-  &lt;br&gt;&lt;br&gt;
+   &lt;&lt;/silently&gt;&gt;
     &lt;&lt;link &quot;As your condition declines, you pray constantly.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
   &lt;&lt;default&gt;&gt;
       &lt;&lt;if $reputation lte 2&gt;&gt;Unfortunately, your reputation is so poor that you cannot convince any of your neighbors to bring food or medical supplies to your household any longer.
       &lt;&lt;elseif $reputation gt 2&gt;&gt;Your friends and neighbors continue to bring you food and plague remedies, which they pass in through the windows taking care to keep their distance from you.
       &lt;br&gt;&lt;br&gt;
       &lt;&lt;/if&gt;&gt;
-      
       /* check if player used a helpful remedy earlier */
       &lt;&lt;unset $textGroup&gt;&gt;
       &lt;&lt;if _remedyEffect is 0 and random(1,2) is 1&gt;&gt; But nothing works. At least you will grow too delirious to notice how miserable you are in the hours before your [[death]].
-      &lt;&lt;elseif _remedyEffect is 1 and random(1,3) is 1&gt;&gt; But nothing works. At least you will grow too delirious to notice how miserable you are in the hours before your [[death]].
-      &lt;&lt;else&gt;&gt; Miraculously, after a few days you feel your fever break and your buboes begin to go down. Thanks be to God, you have survived the plague.
-      &lt;br&gt;&lt;br&gt;
-      [[Too bad you and your household still have to be for the full 40 days, to make sure you don&#39;t spread the plague to anyone else.-&gt;Reconnecting]]
-      /* NTS: Set choice in here about breaking quarantine if running out of money, tie to money and reputation of course. */
-      &lt;&lt;/if&gt;&gt;
+&lt;&lt;elseif _remedyEffect is 1 and random(1,3) is 1&gt;&gt; But nothing works. At least you will grow too delirious to notice how miserable you are in the hours before your [[death]].
+&lt;&lt;else&gt;&gt; Miraculously, after a few days you feel your fever break and your buboes begin to go down. Thanks be to God, you have survived the plague.&lt;br&gt;&lt;br&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;check-NPCs&gt;&gt;&lt;&lt;/silently&gt;&gt;
+    &lt;&lt;if not hasVisited(&quot;Quarantine, Week 6&quot;) and _infectedFamily.length gt 0&gt;&gt; [[Unfortunately, you&#39;re going to be here a little while longer-&gt;Quarantine, Week 6]].
+    &lt;&lt;else&gt;&gt;[[Too bad you and your household still have to be for the full 40 days, to make sure you don&#39;t spread the plague to anyone else.-&gt;Reconnecting]]
+    /* NTS: Set choice in here about breaking quarantine if running out of money, tie to money and reputation of course. */
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;
       &lt;&lt;/switch&gt;&gt;&lt;&lt;if def $textGroup&gt;&gt;&lt;&lt;set $textGroup += 1&gt;&gt;&lt;&lt;/if&gt;&gt;
       &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="inside-city" tags="infection-rates" position="25,825" size="100,100">/* infection code - London
 /* This adjusts the rate of infection for a specific location depending on how much time has passed in the game, starting at 6 plays (the first passage after the game starts proper). The play number roughly corresponds to our broad time events.
@@ -1661,7 +1656,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;if tags().includes(&quot;storyline&quot;)&gt;&gt;&lt;h2&gt;&lt;&lt;print passage()&gt;&gt;, $location&lt;/h2&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;if tags().includes(&quot;quarantine&quot;)&gt;&gt;&lt;h2&gt;&lt;&lt;print passage()&gt;&gt;&lt;/h2&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if tags().includes(&quot;quarantine&quot;)&gt;&gt;&lt;&lt;set $quarantine += 1&gt;&gt;&lt;h2&gt;&lt;&lt;print &quot;Quarantine, Week $quarantine&quot;&gt;&gt;&lt;/h2&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 	&lt;&lt;if $location is &quot;inside the City walls&quot; and hasVisited(&quot;June 1665&quot;) is &quot;July 1665&quot;&gt;&gt;&lt;&lt;set $apothecary to 1&gt;&gt;
 	&lt;&lt;elseif $location isnot &quot;in another part of the western suburbs&quot;&gt;&gt;
@@ -2758,12 +2753,25 @@ As morning dawns, a terrible realization settles over your household. Your
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;health-update&quot;&gt;&gt;
-&lt;&lt;silently&gt;&gt;&lt;&lt;for _d range _deceased&gt;&gt;
+&lt;&lt;silently&gt;&gt;
+&lt;&lt;set _deceased = []&gt;&gt;
+&lt;&lt;set _recovered = []&gt;&gt;
+    &lt;&lt;for _d, _household range $NPCs&gt;&gt;
+        &lt;&lt;if _household.health is (&quot;deceased1&quot; or &quot;deceased2&quot; or &quot;deceased3&quot; or &quot;deceased4&quot; or &quot;deceased5&quot; or &quot;deceased6&quot; or &quot;deceased-pq&quot;)&gt;&gt;
+            &lt;&lt;set _deceased.push(_d)&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+        &lt;&lt;if _household.health is (&quot;recovered1&quot; or &quot;recovered2&quot; or &quot;recovered3&quot; or &quot;recovered4&quot; or &quot;recovered5&quot; or &quot;recovered6&quot; or &quot;recovered-pq&quot;)&gt;&gt;
+            &lt;&lt;set _recovered.push(_d)&gt;&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/for&gt;&gt;
+    &lt;&lt;for _d range _deceased&gt;&gt;
         &lt;&lt;set $NPCs[_d].health to &quot;deceased&quot;&gt;&gt;
-        &lt;&lt;/for&gt;&gt;
- &lt;&lt;for _r range _recovered&gt;&gt;
- 	&lt;&lt;set $NPCs[_r].health to &quot;recovered&quot;&gt;&gt;
-    &lt;&lt;/for&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="return to the story" tags="widget" position="900,450" size="100,100">&lt;&lt;widget &quot;storyline-return&quot;&gt;&gt;
+    &lt;&lt;/for&gt;&gt;
+    &lt;&lt;for _r range _recovered&gt;&gt;
+ 	    &lt;&lt;set $NPCs[_r].health to &quot;recovered&quot;&gt;&gt;
+    &lt;&lt;/for&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="return to the story" tags="widget" position="900,450" size="100,100">&lt;&lt;widget &quot;storyline-return&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 /* if you were imprisoned or impressed, show a bit of text here that says what happened while you were away. Add code that moves you forward a play equivalent to your imprisonment time. */
 &lt;&lt;if hasVisited(&quot;November 1666&quot;)&gt;&gt;[[Continue.-&gt;December 1666]]
@@ -2930,7 +2938,7 @@ NTS: reputation goes up?
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="survival-mode" tags="" position="1725,50" size="100,100">You are running low on resources and may need to take desparate measures.
 
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="Quarantine, Week 1" tags="quarantine" position="200,375" size="100,100">/* Quarantine Week 1*/
-&lt;&lt;nobr&gt;&gt;&lt;&lt;set $quarantine to 1&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 /* check which family members are currently infected */
     &lt;&lt;silently&gt;&gt;
         &lt;&lt;set _infectedFamily = []&gt;&gt;
@@ -2945,7 +2953,6 @@ Your neighbors shut up the entrances to your house and paint a red cross with th
 You have heard and read about different courses of treatment for the sick. &lt;&lt;hh-treatments&gt;&gt; 
 &lt;&lt;link &quot;You tend to the sick and suffering.&quot;&gt;&gt;&lt;&lt;replace &quot;#plague-replace&quot;&gt;&gt;
 &lt;&lt;silently&gt;&gt;
-
 /* Check if player has used a helpful remedy to decrease chance of death */
      &lt;&lt;for _s range _infectedFamily&gt;&gt;
         &lt;&lt;if _remedyEffect is 1 and random(1,3) is 1&gt;&gt;
@@ -3010,10 +3017,9 @@ You have heard and read about different courses of treatment for the sick. &lt;&
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/for&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-
 You must remain in quarantine for at least three more weeks, however, and only time will tell if the disease has spread.
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;health-update&gt;&gt;
+&lt;&lt;silently&gt;&gt;&lt;&lt;health-update&gt;&gt;&lt;&lt;/silently&gt;&gt;
 /* Check if player was infected, send to next passage depending */
 &lt;&lt;if $plagueInfection is 1&gt;&gt;[[You pray that God does have mercy on your household as you continue to nurse the sick.-&gt;Sickness]]
     &lt;&lt;else&gt;&gt;[[You pray that God does have mercy on your household as you continue to nurse the sick.-&gt;Quarantine, Week 2]]
@@ -3109,13 +3115,12 @@ You must remain in quarantine for at least three more weeks, however, and only t
       &lt;&lt;if $plagueInfection is 1&gt;&gt;[[You fear more of your family will die. You are even more afraid you will fall ill next.-&gt;Sickness]]
           &lt;&lt;else&gt;&gt;[[You fear more of your family will die. You are even more afraid you will fall ill next.-&gt;Quarantine, Week 3]]
       &lt;&lt;/if&gt;&gt;
+      &lt;&lt;health-update&gt;&gt;
        &lt;&lt;fumigant&gt;&gt;
-       &lt;&lt;health-update&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
     &lt;&lt;/link&gt;&gt;
   &lt;&lt;else&gt;&gt;
      &lt;&lt;if _recovered.length gt 0&gt;&gt;Although the sick have started to recover, you&lt;&lt;else&gt;&gt;You must also remain in quarantine for at least two more weeks, and [[only time will tell if the disease has spread.-&gt;Quarantine, Week 3]]&lt;&lt;/if&gt;&gt;
-     &lt;&lt;health-update&gt;&gt;
        &lt;&lt;fumigant&gt;&gt;
   &lt;&lt;/if&gt;&gt;
   &lt;/span&gt;
@@ -3135,7 +3140,6 @@ As you enter the third week of quarantine, even the smallest glimmer of hope is 
 &lt;&lt;if _infectedFamily.length eq 0&gt;&gt;While the recovery process is slow for those who were ill, the infection does not seem to have spread any further.
 
 You must also remain in quarantine for at least two more weeks, and [[only time will tell if the plague will claim more.-&gt;Quarantine, Week 3]]
-&lt;&lt;health-update&gt;&gt;
 &lt;&lt;else&gt;&gt; Unfortunately, the illness has continued to spread through your household, and your
         &lt;&lt;for _z, _y range _infectedFamily&gt;&gt;
             &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name is now infected.&lt;br&gt;
@@ -3145,9 +3149,7 @@ You must also remain in quarantine for at least two more weeks, and [[only time 
         
     /* call in widget showing treatment options if family members are infected */
     &lt;&lt;hh-treatments&gt;&gt;
-    
     &lt;&lt;link &quot;You tend to the sick and suffering.&quot;&gt;&gt;&lt;&lt;replace &quot;#plague-replace&quot;&gt;&gt;
-    
 	&lt;&lt;silently&gt;&gt;
         /* Check if player has used a helpful remedy to decrease chance of death */
             &lt;&lt;for _s range _infectedFamily&gt;&gt;
@@ -3210,7 +3212,7 @@ You must also remain in quarantine for at least two more weeks, and [[only time 
 	&lt;&lt;/if&gt;&gt;
      &lt;&lt;fumigant&gt;&gt;
      &lt;&lt;health-update&gt;&gt;
-  &lt;&lt;/replace&gt;&gt;
+     &lt;&lt;/replace&gt;&gt;
   &lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;/span&gt;
@@ -3314,9 +3316,8 @@ After nearly a month in quarantine, you begin to believe you might survive this.
 &lt;&lt;else&gt;&gt; The infection seems to have burned itself out, and you can now focus on the recovery of those who survived.&lt;br&gt;&lt;br&gt;
     [[You wonder what has been happening while you were away from the world.-&gt;Reconnecting]]
     &lt;&lt;fumigant&gt;&gt;
-    &lt;&lt;health-update&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Fled" tags="fled" position="1250,1300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Fled" tags="fled" position="1275,1275" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;You have decided to &#39;&#39;flee to your country estate&#39;&#39;.&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;if $socio is &quot;servants&quot; and $fled is 1&gt;&gt;
@@ -3335,7 +3336,7 @@ In fact, you are determined to stay away until:
 &lt;li&gt;[[the official Day of Thanksgiving for the end of the plague outbreak-&gt;official-end]]&lt;/li&gt;
 &lt;li&gt;[[there are no more plague deaths in London-&gt;no-plague]]&lt;/li&gt;
 &lt;/ul&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="flight-choice" tags="widget fled" position="925,950" size="100,100">/* call in this widget to give some players a chance to leave after the first appearance of plague */
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="flight-choice" tags="widget fled" position="900,1000" size="100,100">/* call in this widget to give some players a chance to leave after the first appearance of plague */
 
 &lt;&lt;widget &quot;late-departure&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
@@ -3598,7 +3599,7 @@ Luckily, there are no plague cases in your parish... yet.
         &lt;td class=&quot;buy-link&quot;&gt;
             &lt;&lt;link &quot;Buy&quot;&gt;&gt;
                 &lt;&lt;if $money &lt; _price&gt;&gt;
-                    &lt;&lt;run UI.alert(&quot;You don&#39;t have enough money!&quot;)&gt;&gt;
+                    &lt;&lt;run UI.alert(&quot;You don&#39;t have enough gold!&quot;)&gt;&gt;
                 &lt;&lt;else&gt;&gt;
                     &lt;&lt;money `-1 * _price`&gt;&gt;
                     &lt;&lt;transfer $shop $player _item 1&gt;&gt;
@@ -3727,7 +3728,7 @@ You have some remedies on hand in your household, and may be able to purchase ot
     &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCs[_i].hishers to &quot;their&quot;&gt;&gt;&lt;&lt;set $NPCs[_i].heshe to &quot;they&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="82" name="First Plague Day" tags="" position="900,750" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="82" name="First Plague Day" tags="" position="900,725" size="100,100">&lt;&lt;nobr&gt;&gt;
 /* Beggars */
     The first case of plague has appeared in your parish, &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;beggar-roles&gt;&gt;&lt;&lt;highway&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -3790,7 +3791,7 @@ You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your famil
 &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;and your neighbors have begun to flee the city. Many are renting houses in the countryside and small towns surrounding London, either for themselves or for their households.&lt;br&gt;&lt;br&gt;
 You decide to:
     &lt;ul&gt;
-        &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&gt;&gt;&lt;/li&gt;
+        &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]&quot;&gt;&gt;&lt;/li&gt;
         &lt;li&gt;[[Remain in the city, but send the rest of your household away-&gt;Stay][$fled to 5; $money -= 800]]&lt;/li&gt;
         &lt;li&gt;[[Flee the city with your entire household.-&gt;Fled][$fled to 6; $money -= 1600; $reputation to Math.clamp($reputation - 2, 0, 10)]]&lt;/li&gt;
     &lt;/ul&gt;
@@ -3808,187 +3809,75 @@ You decide to:
     &lt;/ul&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="83" name="Reconnecting" tags="quarantine" position="625,450" size="100,100">&lt;&lt;nobr&gt;&gt;
-/*&lt;&lt;check-NPCs&gt;&gt;
-&lt;&lt;if _infectedFamily.length gt 0&gt;&gt;Unfortunately, you&#39;re going to be here a while longer. Your
-              &lt;&lt;for _z, _y range _infectedFamily&gt;&gt;
-                &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].relationship, $NPCs[_y].name has also fallen ill.&lt;br&gt;
-                &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].relationship $NPCs[_y].name have also fallen ill.
-                &lt;&lt;/if&gt;&gt;
-            &lt;&lt;/for&gt;&gt;
-&lt;&lt;else&gt;&gt; */
-Lord be praised, your household has survived the plague. You still need to finish quarantine, but begin reconnecting with the outside world.
+Lord be praised, your household has survived the plague. You were in quarantine for $quarantine weeks, &lt;&lt;if $quarantine lt 5&gt;&gt;and still need to spend at least &lt;&lt;set _x to (40 - $quarantine*7)&gt;&gt;_x days, but can soon begin&lt;&lt;else&gt;&gt; and can now begin&lt;&lt;/if&gt;&gt; reconnecting with the outside world.
 
 In the time you were away.... (nts: add updates based on what big events have happened)
 
 &lt;&lt;storyline-return&gt;&gt;
 &lt;&lt;health-update&gt;&gt;
-/* &lt;&lt;/if&gt;&gt; */
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="84" name="Summer 1665" tags="fled" position="1075,1275" size="100,100">&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;You lose money every day that you&#39;re away from the city, as no one wants to give charity to a beggar from the city&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;You lose money every day that you&#39;re away from the city and the people who normally would be willing to employ you for a day&#39;s labor&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;You dislike being so far from the city&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;You lose money every day that you&#39;re away from the city and unable to practice your trade&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;It&#39;s deeply irritating to have to pay rent on a country house as well as your home back in the city&lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;It&#39;s to your great disadvantage to be so far from Court and the centers of power&lt;&lt;/if&gt;&gt;, but luckily it&#39;s a price that you&#39;re able to pay for at least a little while to ensure your safety.
+</tw-passagedata><tw-passagedata pid="84" name="Summer 1665" tags="fled" position="1100,1300" size="100,100">/* NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early */
 
-When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call. By the beginning of October, death tolls have fallen to half that and you decide to [[return to the city-&gt;October 1665]].</tw-passagedata><tw-passagedata pid="85" name="Winter 1665" tags="fled" position="1125,1425" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;You lose money every day that you&#39;re away from the city, as no one wants to give charity to a beggar from the city&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;You lose money every day that you&#39;re away from the city and the people who normally would be willing to employ you for a day&#39;s labor&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;You dislike being so far from the city&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;You lose money every day that you&#39;re away from the city and unable to practice your trade&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;It&#39;s deeply irritating to have to pay rent on a country house as well as your home back in the city&lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;It&#39;s to your great disadvantage to be so far from Court and the centers of power&lt;&lt;/if&gt;&gt;, but luckily it&#39;s a price that you&#39;re able to pay for at least a little while to ensure your safety.
+When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call. By the beginning of October, death tolls have fallen to half that and you decide to [[return to the city-&gt;October 1665]] </tw-passagedata><tw-passagedata pid="85" name="Winter 1665" tags="fled" position="1150,1425" size="100,100">/*NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early */
 
-When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call. 
+When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call. By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week. You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November. By the start of Advent, there are barely 200 or 300 odd people dying each week and you decide it&#39;s finally safe to [[return to the city-&gt;December 1665]] </tw-passagedata><tw-passagedata pid="86" name="court-return" tags="fled" position="1275,1450" size="100,100">&lt;&lt;nobr&gt;&gt; /*NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early*/
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call.&lt;br&gt;&lt;br&gt;
 
-By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week.&lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;October 1665]] to avoid starving.&lt;&lt;else&gt;&gt;
+By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November.&lt;br&gt;&lt;br&gt;
 
-You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November. &lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;November 1665]] to avoid starving.&lt;&lt;else&gt;&gt;
+At the start of Advent, there are still 200 or 300 odd people dying each week and you reconcile yourself with a Christmas spent away from the City.&lt;br&gt;&lt;br&gt;
 
-By the start of Advent, there are barely 200 or 300 odd people dying each week and you decide it&#39;s finally safe to [[return to the city-&gt;December 1665]] just in time for the Christmas feasting and merrymaking.&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="86" name="court-return" tags="fled" position="1275,1450" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;You lose money every day that you&#39;re away from the city, as no one wants to give charity to a beggar from the city&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;You lose money every day that you&#39;re away from the city and the people who normally would be willing to employ you for a day&#39;s labor&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;You dislike being so far from the city&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;You lose money every day that you&#39;re away from the city and unable to practice your trade&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;It&#39;s deeply irritating to have to pay rent on a country house as well as your home back in the city&lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;It&#39;s to your great disadvantage to be so far from Court and the centers of power&lt;&lt;/if&gt;&gt;, but luckily it&#39;s a price that you&#39;re able to pay for at least a little while to ensure your safety.
-
-When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call. 
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week.&lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;October 1665]] to avoid starving.&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November. &lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;November 1665]] to avoid starving.&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-At the start of Advent, there are still 200 or 300 odd people dying each week &lt;&lt;if $money lte 0&gt;&gt;but unfortunately, you have run out of money and are forced to [[return to the city-&gt;December 1665]] to avoid starving.&lt;&lt;else&gt;&gt;and you reconcile yourself with a Christmas spent away from the City.&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-When the New Year dawns, you are desperately homesick and renew your resolve to return to London as soon as the court does. You hear the King and court have returned to Hampton Court Palace, near to the city, and eagerly await news of his return. &lt;&lt;if $money lte 0&gt;&gt;While you are waiting, you realize you&#39;ve run out of money and are forced to [[return early to avoid starving-&gt;January 1666]].&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-As soon as the first rumors fly of the king&#39;s entrance into London, you hastily make your way [[back to the city-&gt;February 1666]].&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="official-end" tags="fled" position="1425,1425" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;You lose money every day that you&#39;re away from the city, as no one wants to give charity to a beggar from the city&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;You lose money every day that you&#39;re away from the city and the people who normally would be willing to employ you for a day&#39;s labor&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;You dislike being so far from the city&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;You lose money every day that you&#39;re away from the city and unable to practice your trade&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;It&#39;s deeply irritating to have to pay rent on a country house as well as your home back in the city&lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;It&#39;s to your great disadvantage to be so far from Court and the centers of power&lt;&lt;/if&gt;&gt;, but luckily it&#39;s a price that you&#39;re able to pay for at least a little while to ensure your safety.
-
+When the New Year dawns, you are desperately homesick and renew your resolve to return to London as soon as the court does. You hear the King and court have returned to Hampton Court Palace, near to the city, and eagerly await news of his return. As soon as the first rumors fly of the king&#39;s entrance into London, you hastily make your way [[back to the city-&gt;February 1666]] 
+&lt;&lt;.nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="official-end" tags="fled" position="1425,1425" size="100,100">/*NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early*/
+&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;&lt;&lt;set $reputation to 0&gt;&gt;&lt;&lt;/if&gt;&gt;
 When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week.&lt;br&gt;&lt;br&gt; 
 
-By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week.&lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;October 1665]] to avoid starving.&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt; 
+You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+At the start of Advent, there are still 200 or 300 odd people dying each week and you reconcile yourself with a Christmas spent away from the City. &lt;br&gt;&lt;br&gt;
 
-You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November. &lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;November 1665]] to avoid starving.&lt;&lt;else&gt;&gt;
+When the New Year dawns, you are desperately homesick but renew your resolve not to return to London until the plague is officiall over. You hear the King and court have returned to Hampton Court Palace, near to the city, and eagerly anticipate the end of the plague.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+In February, you hear that the King has reentered the city and people begin asking you why you have not returned when the danger has clearly passed. Your reputation plummets NTS: set reputation to 0* and people begin accusing you of cowardice. But by March, the bills of mortality show plague deaths creeping back up again and you hold your course.&lt;br&gt;&lt;br&gt;
 
-At the start of Advent, there are still 200 or 300 odd people dying each week &lt;&lt;if $money lte 0&gt;&gt;but unfortunately, you have run out of money and are forced to [[return to the city-&gt;December 1665]] to avoid starving.&lt;&lt;else&gt;&gt;and you reconcile yourself with a Christmas spent away from the City.&lt;br&gt;&lt;br&gt;
+As summer dawns over the city, plague deaths reach a height of *NTS: check numbers* a week. It&#39;s nothing compared to 1665, but the risk of death is still high and you are frustrated with all the people who demand your return.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-When the New Year dawns, you are desperately homesick but renew your resolve not to return to London until the plague is officiall over. You hear the King and court have returned to Hampton Court Palace, near to the city, and eagerly anticipate the end of the plague.&lt;&lt;if $money lte 0&gt;&gt;While you are waiting, you realize you&#39;ve run out of money and are forced to return early to avoid starving.&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-In February, you hear that the King has reentered the city and people begin asking you why you have not returned when the danger has clearly passed. Your reputation plummets NTS: set reputation to 0* and people begin accusing you of cowardice. &lt;&lt;if $money lte 0&gt;&gt;It is therefore a mixed blessing that you realize you&#39;ve run out of money and are forced to [[return early to avoid starving-&gt;January 1666]].&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-But by March, the bills of mortality show plague deaths creeping back up again and you &lt;&lt;if $money lte 0&gt;&gt;are terrified to realize you&#39;ve run out of money and must [[return early to the city-&gt;April 1666]]&lt;&lt;else&gt;&gt;hold your course.&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in April and are forced to [[return to the city-&gt;April 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in May and are forced to [[return to the city-&gt;May 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-As summer dawns over the city, plague deaths reach a height of *NTS: check numbers* a week. It&#39;s nothing compared to 1665, but the risk of death is still high and you are frustrated with all the people who demand your return.&lt;&lt;if $money lte 0&gt;&gt;It is therefore a mixed blessing that you realize you&#39;ve run out of money and are forced to [[return early to avoid starving-&gt;June 1666]].&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in July and are forced to [[return to the city-&gt;July 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in August and are forced to [[return to the city-&gt;August 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-Then, in September, disaster strikes. Your first hint is a dark cloud rising into the air, just barely visible in the distance, but news soon arrives that the city is burning. You pray to God for the salvation of the city - and your home and everything you left behind in it - as the fire burns for days.&lt;&lt;if $money lte 0&gt;&gt; Disaster heaps upon disaster as you realize you&#39;ve run out of money and are forced to [[return to the ruined city to avoid starving-&gt;October 1666]].&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+Then, in September, disaster strikes. Your first hint is a dark cloud rising into the air, just barely visible in the distance, but news soon arrives that the city is burning. You pray to God for the salvation of the city - and your home and everything you left behind in it - as the fire burns for days.&lt;br&gt;&lt;br&gt;
 
 Finally, you receive word that *NTS: put in results here based on where you live, if your house burned you&#39;re in the countryside for the rest of the game, go straight to the end.*&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-While you consider making a profit from renting out your residence to those who have been made homeless, you feel like your house being spared is God&#39;s way of encouraging you to return to the city. Luckily, the official Thanksgiving Day for the end of the plague is proclaimed, and so you make your way [[back to the city-&gt;November 1666]].&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="88" name="no-plague" tags="fled" position="1500,1300" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;You lose money every day that you&#39;re away from the city, as no one wants to give charity to a beggar from the city&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;You lose money every day that you&#39;re away from the city and the people who normally would be willing to employ you for a day&#39;s labor&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;You dislike being so far from the city&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;You lose money every day that you&#39;re away from the city and unable to practice your trade&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;It&#39;s deeply irritating to have to pay rent on a country house as well as your home back in the city&lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;It&#39;s to your great disadvantage to be so far from Court and the centers of power&lt;&lt;/if&gt;&gt;, but luckily it&#39;s a price that you&#39;re able to pay for at least a little while to ensure your safety.
+While you consider making a profit from renting out your residence to those who have been made homeless, you feel like your house being spared is God&#39;s way of encouraging you to return to the city. Luckily, the official Thanksgiving Day for the end of the plague is proclaimed, and so you make your way [[back to the city-&gt;November 1666]]</tw-passagedata><tw-passagedata pid="88" name="no-plague" tags="fled" position="1450,1300" size="100,100">&lt;&lt;nobr&gt;&gt;/*NTS: put in code checking to be sure you have enough money to stay away and don&#39;t have to return early. Also put in code to check plague in your parish and break out of this sequence when appropriate to return them */
 
 When the death tolls top 7,000 a week in August and September, you&#39;re sure you made the right call.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week. &lt;br&gt;&lt;br&gt;
 
-By the beginning of October, death tolls have fallen to half that but there are still a horrifying number of people dying every week.&lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;October 1665]] to avoid starving.&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt; 
+You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November.&lt;br&gt;&lt;br&gt; 
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+At the start of Advent, there are still 200 or 300 odd people dying each week and you reconcile yourself with a Christmas spent away from the City.&lt;br&gt;&lt;br&gt;
 
-You anxiously watch the fall in the number of deaths each week, thanking God when only a thousand people a week are dying at the beginning of November. &lt;&lt;if $money lte 0&gt;&gt; Unfortunately, you have run out of money and are forced to [[return to the city-&gt;November 1665]] to avoid starving.&lt;&lt;else&gt;&gt;
+When the New Year dawns, you are desperately homesick but renew your resolve not to return to London until the plague is officiall over. You hear the King and court have returned to Hampton Court Palace, near to the city, and eagerly anticipate the end of the plague.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+In February, you hear that the King has reentered the city and people begin asking you why you have not returned when the danger has clearly passed. Your reputation plummets *NTS: set reputation to 0* and people begin accusing you of cowardice. But by March, the bills of mortality show plague deaths creeping back up again and you hold your course.&lt;br&gt;&lt;br&gt;
 
-At the start of Advent, there are still 200 or 300 odd people dying each week &lt;&lt;if $money lte 0&gt;&gt;but unfortunately, you have run out of money and are forced to [[return to the city-&gt;December 1665]] to avoid starving.&lt;&lt;else&gt;&gt;and you reconcile yourself with a Christmas spent away from the City.&lt;br&gt;&lt;br&gt;
+As summer dawns over the city, plague deaths reach a height of *NTS: check numbers* a week. It&#39;s nothing compared to 1665, but the risk of death is still high and you are frustrated with all the people who demand your return.&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-When the New Year dawns, you are desperately homesick but renew your resolve not to return to London until the plague is officiall over. You hear the King and court have returned to Hampton Court Palace, near to the city, and eagerly anticipate the end of the plague.&lt;&lt;if $money lte 0&gt;&gt;While you are waiting, you realize you&#39;ve run out of money and are forced to return early to avoid starving.&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-In February, you hear that the King has reentered the city and people begin asking you why you have not returned when the danger has clearly passed. Your reputation plummets NTS: set reputation to 0* and people begin accusing you of cowardice. &lt;&lt;if $money lte 0&gt;&gt;It is therefore a mixed blessing that you realize you&#39;ve run out of money and are forced to [[return early to avoid starving-&gt;January 1666]].&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-But by March, the bills of mortality show plague deaths creeping back up again and you &lt;&lt;if $money lte 0&gt;&gt;are terrified to realize you&#39;ve run out of money and must [[return early to the city-&gt;April 1666]]&lt;&lt;else&gt;&gt;hold your course.&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in April and are forced to [[return to the city-&gt;April 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in May and are forced to [[return to the city-&gt;May 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-As summer dawns over the city, plague deaths reach a height of *NTS: check numbers* a week. It&#39;s nothing compared to 1665, but the risk of death is still high and you are frustrated with all the people who demand your return.&lt;&lt;if $money lte 0&gt;&gt;It is therefore a mixed blessing that you realize you&#39;ve run out of money and are forced to [[return early to avoid starving-&gt;June 1666]].&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in July and are forced to [[return to the city-&gt;July 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $money lte 0&gt;&gt;Unfortunately, you run out of money in August and are forced to [[return to the city-&gt;August 1666]] to avoid starving&lt;&lt;else&gt;&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-Then, in September, disaster strikes. Your first hint is a dark cloud rising into the air, just barely visible in the distance, but news soon arrives that the city is burning. You pray to God for the salvation of the city - and your home and everything you left behind in it - as the fire burns for days.&lt;&lt;if $money lte 0&gt;&gt; Disaster heaps upon disaster as you realize you&#39;ve run out of money and are forced to [[return to the ruined city to avoid starving-&gt;October 1666]].&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+Then, in September, disaster strikes. Your first hint is a dark cloud rising into the air, just barely visible in the distance, but news soon arrives that the city is burning. You pray to God for the salvation of the city - and your home and everything you left behind in it - as the fire burns for days.&lt;br&gt;&lt;br&gt;
 
 Finally, you receive word that *NTS: put in results here based on where you live, if your house burned you&#39;re in the countryside for the rest of the game, go straight to the end.*&lt;br&gt;&lt;br&gt;
 
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+While you consider making a profit from renting out your residence to those who have been made homeless, you are uncomfortable doing so when you aren&#39;t around to make sure to make sure the tenant is taking proper care of your belongings. There is still plague about and who knows what other pestilence they could bring into your home?&lt;br&gt;&lt;br&gt;
 
-While you consider making a profit from renting out your residence to those who have been made homeless, you are uncomfortable doing so when you aren&#39;t around to make sure to make sure the tenant is taking proper care of your belongings. There is still plague about and who knows what other pestilence they could bring into your home?&lt;&lt;if $money lte 0&gt;&gt; Besides, you are running out of money and realize you&#39;re going to have to return to the city soon to avoid starving-&gt;November 1666]]&lt;&lt;else&gt;&gt;&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-The official Thanksgiving Day for the end of the plague is proclaimed in November, but there are still people dying each week&lt;&lt;if $money lte 0&gt;&gt;. Unfortunately, you are out of money and so are forced to [[return to the city-&gt;December 1666]]&lt;&lt;else&gt;&gt; so you hold off returning and resign yourself to another winter in exile.&lt;br&gt;&lt;br&gt;
-
-&lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 120, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 300, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 800, 0, 1000000)&gt;&gt;&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set $money to Math.clamp($money - 2800, 0, 1000000)&gt;&gt;&lt;&lt;/if&gt;&gt;
+The official Thanksgiving Day for the end of the plague is proclaimed in November, but there are still people dying each week so you hold off returning and resign yourself to another winter in exile.&lt;br&gt;&lt;br&gt;
 
 Life may go on for the reckless, but it will not be until 1667 that you finally make your way [[back to the city-&gt;December 1666]].
-&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="Stay" tags="" position="775,1150" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="Stay" tags="" position="775,1150" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $fled is 5&gt;&gt;&lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt;&lt;&lt;set $hhlocation to $origin&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $hhlocation to &quot;the countryside&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
     /* Beggars */
     &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
@@ -4141,8 +4030,11 @@ You have now been in quarantine for over a month, and there is no sign that the 
                     &lt;&lt;set _infectedFamily.push(_y)&gt;&gt;
                 &lt;&lt;/if&gt;&gt;
             &lt;&lt;/for&gt;&gt;&lt;&lt;/silently&gt;&gt;
+            
         &lt;&lt;if $plagueInfection is 1&gt;&gt;[[You wonder what has happened while you were away from the world.-&gt;Sickness]]
             &lt;&lt;elseif _infectedFamily.length gt 0&gt;&gt;[[You wonder what has been happening while you are away from the world.-&gt;Quarantine, Week 6]]
+            &lt;&lt;health-update&gt;&gt;
+            &lt;&lt;fumigant&gt;&gt;
             &lt;&lt;else&gt;&gt;[[You wonder what has happened while you were away from the world.-&gt;Reconnecting]]
         &lt;&lt;/if&gt;&gt;
         &lt;&lt;fumigant&gt;&gt;
@@ -4151,7 +4043,6 @@ You have now been in quarantine for over a month, and there is no sign that the 
 &lt;&lt;else&gt;&gt; The infection seems to have burned itself out, and you can now focus on the recovery of those who survived.&lt;br&gt;&lt;br&gt;
     [[You wonder what has been happening while you were away from the world.-&gt;Reconnecting]]
     &lt;&lt;fumigant&gt;&gt;
-    &lt;&lt;health-update&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="92" name="Quarantine, Week 6" tags="quarantine" position="450,500" size="100,100">&lt;&lt;nobr&gt;&gt;
     /* check if any family members were infected the previous week */
@@ -4164,13 +4055,13 @@ You have now been in quarantine for over a month, and there is no sign that the 
             &lt;&lt;/for&gt;&gt;
     &lt;&lt;/silently&gt;&gt;
 /*NTS: fix text here. Something about going out after plague curfew? */
-You enter your sixth week of quarantine. The days are interminable.
+&lt;&lt;if previous() isnot &quot;Sickness&quot;&gt;&gt;You have been in quarantine for $quarantine weeks. The days are interminable.&lt;&lt;/if&gt;&gt;
 
 /* reveal which family members are infected */
-    &lt;&lt;if _infectedFamily.length gt 0&gt;&gt;Unfortunately, even more members of your household have fallen ill. Your 
+    &lt;&lt;if _infectedFamily.length gt 0&gt;&gt;&lt;&lt;if previous() is &quot;Sickness&quot;&gt;&gt;More members of your household have fallen ill.&lt;&lt;else&gt;&gt;Worse, even more members of your household have fallen ill.&lt;&lt;/if&gt;&gt;
         &lt;&lt;for _z, _y range _infectedFamily&gt;&gt;
-            &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name is now infected.&lt;br&gt;
-            &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].relationship $NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].relationship $NPCs[_y].name are now infected.
+            &lt;&lt;if _infectedFamily.length eq 1&gt;&gt;$NPCs[_y].name is now infected.&lt;br&gt;
+            &lt;&lt;elseif _z &lt; _infectedFamily.length - 1&gt;&gt;$NPCs[_y].name, &lt;&lt;else&gt;&gt;and $NPCs[_y].name are now infected.
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/for&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -4200,17 +4091,18 @@ You enter your sixth week of quarantine. The days are interminable.
             &lt;&lt;/for&gt;&gt;
 
             /* Check for fumigants to prevent spread to household */ 
-            &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
+           /* turn off for now - need to find another way to loop back into quarantine period
+           &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
                 &lt;&lt;if $NPCs[_i].health is &quot;healthy&quot;&gt;&gt;
                     &lt;&lt;if _fumes gt 0 and random(1,4) eq 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
                     &lt;&lt;elseif _fumes lt 1 and random(1,2) eq 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
                     &lt;&lt;/if&gt;&gt;
                 &lt;&lt;/if&gt;&gt;
-            &lt;&lt;/for&gt;&gt;
+            &lt;&lt;/for&gt;&gt; */ 
     
             /* check for fumigants to prevent spread to player */
-            &lt;&lt;if _fumes gt 0 and random(1,4) is 1&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
-            &lt;&lt;elseif _fumes lt 1 and random(1,2) is 1&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
+            &lt;&lt;if _fumes gt 0 and random(1,4) is 1&gt;&gt;&lt;&lt;set $plagueInfection += 1&gt;&gt;
+            &lt;&lt;elseif _fumes lt 1 and random(1,2) is 1&gt;&gt;&lt;&lt;set $plagueInfection += 1&gt;&gt;
             &lt;&lt;/if&gt;&gt;
 
         &lt;&lt;/silently&gt;&gt;
@@ -4218,15 +4110,15 @@ You enter your sixth week of quarantine. The days are interminable.
         /* NTS: update text here for variety from past weeks */
         &lt;&lt;if _deceased.length gt 0&gt;&gt;Despite your care, your 
             &lt;&lt;for _x, _d range _deceased&gt;&gt;
-                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; deceased6.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
+                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; deceased.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
                 &lt;&lt;/if&gt;&gt;       
             &lt;&lt;/for&gt;&gt;
         &lt;br&gt;&lt;br&gt; 
         &lt;&lt;/if&gt;&gt;
         
         /* show which family members recovered */
-        &lt;&lt;if _recovered6.length gt 0&gt;&gt;
-            &lt;&lt;if _deceased6.length gt 0&gt;&gt;There is some good news, though.
+        &lt;&lt;if _recovered.length gt 0&gt;&gt;
+            &lt;&lt;if _deceased.length gt 0&gt;&gt;There is some good news, though.
             &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your
             &lt;&lt;for _r, _d range _recovered&gt;&gt;
                 &lt;&lt;if _recovered.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has started to recover from their illness.
@@ -4243,6 +4135,7 @@ You enter your sixth week of quarantine. The days are interminable.
             &lt;&lt;else&gt;&gt;[[You wonder what has happened while you were away from the world.-&gt;Reconnecting]]
         &lt;&lt;/if&gt;&gt;
         &lt;&lt;fumigant&gt;&gt;
+        &lt;&lt;health-update&gt;&gt;
     &lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;else&gt;&gt; The infection seems to have burned itself out, and you can now focus on the recovery of those who survived.
     /* Check if player was infected, send to next passage depending */   
