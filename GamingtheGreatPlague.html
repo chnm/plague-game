@@ -1050,7 +1050,7 @@ $(document).on(':passagestart', function (ev) {
 You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br&gt;
 
 &lt;&lt;silently&gt;&gt;
-/* add family for young children */
+/* add family for young children &amp; YA */
 &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot; or $age is &quot;young adult&quot;&gt;&gt;
   &lt;&lt;if $relationship is &quot;single&quot; or $relationship is &quot;betrothed&quot;&gt;&gt;
     &lt;&lt;addParentNPC&gt;&gt;
@@ -1084,9 +1084,9 @@ You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br
     &lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;
       &lt;&lt;set _x to random(2,6)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addChildNPC&gt;&gt;&lt;&lt;/for&gt;&gt;
     &lt;&lt;/if&gt;&gt;
-   &lt;&lt;/if&gt;&gt;
-  &lt;&lt;addParentNPC&gt;&gt;
-  &lt;&lt;set _x to random(0,3)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addSiblingsNPC&gt;&gt;&lt;&lt;/for&gt;&gt;
+    &lt;&lt;addParentNPC&gt;&gt;
+    &lt;&lt;set _x to random(0,2)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addSiblingsNPC&gt;&gt;&lt;&lt;/for&gt;&gt;
+  &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 /* add unmarried or widowed adult family */
@@ -1094,15 +1094,15 @@ You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br
     &lt;&lt;if $relationship is &quot;single&quot; or $relationship is &quot;widowed&quot;&gt;&gt;
       &lt;&lt;if $socio is &quot;beggars&quot; or $socio is &quot;day labourers&quot;&gt;&gt;
         &lt;&lt;if random(1,2) is 1&gt;&gt;
-          &lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;sister&quot;, &quot;niece&quot;), health: &quot;healthy&quot;})&gt;&gt;
+          &lt;&lt;set $NPCs.push({name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;sister&quot;, &quot;niece&quot;), health: &quot;healthy&quot;})&gt;&gt;
         &lt;&lt;else&gt;&gt;
-          &lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either (&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;brother&quot;, &quot;nephew&quot;), health: &quot;healthy&quot;})&gt;&gt;
+          &lt;&lt;set $NPCs.push({name: $mNames.pluck(), age: either (&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;brother&quot;, &quot;nephew&quot;), health: &quot;healthy&quot;})&gt;&gt;
         &lt;&lt;/if&gt;&gt;
       &lt;&lt;else&gt;&gt;
         &lt;&lt;if random(1,2) is 1&gt;&gt;
-          &lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;sister&quot;, &quot;niece&quot;), health: &quot;healthy&quot;})&gt;&gt;
+          &lt;&lt;set $NPCs.push({name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;sister&quot;, &quot;niece&quot;), health: &quot;healthy&quot;})&gt;&gt;
         &lt;&lt;else&gt;&gt;
-          &lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either (&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;brother&quot;, &quot;nephew&quot;), health: &quot;healthy&quot;})&gt;&gt;
+          &lt;&lt;set $NPCs.push({name: $mNames.pluck(), age: either (&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: either(&quot;brother&quot;, &quot;nephew&quot;), health: &quot;healthy&quot;})&gt;&gt;
         &lt;&lt;/if&gt;&gt;
       &lt;&lt;/if&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -1119,8 +1119,7 @@ You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;/for&gt;&gt;
 &lt;&lt;elseif $NPCs.length eq 0&gt;&gt;You have no family.&lt;&lt;set $hoh to 1&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;br&gt;&lt;br&gt;
+&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;br&gt;
 &lt;&lt;if $NPCsExtended.length gt 0&gt;&gt;Your 
   &lt;&lt;for _e, _idx range $NPCsExtended&gt;&gt;
     &lt;&lt;if $NPCsExtended.length eq 1&gt;&gt;$NPCsExtended[_e].relationship, $NPCsExtended[_e].name
@@ -1129,8 +1128,11 @@ You currently live in the parish of $parish, which is $location.&lt;br&gt;&lt;br
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;/for&gt;&gt;also live&lt;&lt;if $NPCsExtended.length eq 1&gt;&gt;s&lt;&lt;/if&gt;&gt; in London.&lt;br&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;silently&gt;&gt;&lt;&lt;addServantNPC&gt;&gt;&lt;&lt;/silently&gt;&gt;
-&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;Your household also includes $servants servants.&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;silently&gt;&gt;&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;&lt;&lt;set _x to random(8,15)&gt;&gt;&lt;&lt;for _i to 0; _i lt _x; _i++&gt;&gt;&lt;&lt;addServantNPC&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;&lt;&lt;set _x to random(1,3)&gt;&gt;&lt;&lt;for _i to 0, _i lt _x, _i++&gt;&gt;&lt;&lt;addServantNPC&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $socio is &quot;servants&quot;&gt;&gt;&lt;&lt;set _x to random(1,3)&gt;&gt;&lt;&lt;for _i to 0, _i lt _x, _i++&gt;&gt;&lt;&lt;addServantNPC&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;addMasterNPC&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/silently&gt;&gt;
+&lt;&lt;if $socio is &quot;nobles&quot; or $socio is &quot;merchants&quot;&gt;&gt;Your household also includes &lt;&lt;print $NPCsHH.length&gt;&gt; servants.&lt;br&gt;&lt;br&gt;
+&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;You live and work in a household with $NPCsHH.length other servant&lt;&lt;if $NPCsHH.length gt 1&gt;&gt;s&lt;&lt;/if&gt;&gt; and your master, a merchant and his family.&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
 If that sounds right, [[click this link to begin our story-&gt;December 1664]].
 &lt;br&gt;&lt;br&gt;
 If that doesn&#39;t sound right, &lt;&lt;click &quot;click this link to try again&quot;&gt;&gt;&lt;&lt;script&gt;&gt;state.restart()&lt;&lt;/script&gt;&gt;&lt;&lt;/click&gt;&gt;.
@@ -1309,11 +1311,23 @@ NTS: This is also what happened to your family.
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
-	&lt;&lt;if $NPCs[_i].health is &quot;healthy&quot;&gt;&gt;
-		&lt;&lt;if random(1,100) lte 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;if $NPCs[_i].health is &quot;healthy&quot;&gt;&gt;
+			&lt;&lt;if random(1,100) lte 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+			&lt;&lt;/if&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/for&gt;&gt;
+	&lt;&lt;/for&gt;&gt;
+	&lt;&lt;for _i = 0; _i &lt; $NPCsHH.length; _i++&gt;&gt;
+		&lt;&lt;if $NPCsHH[_i].health is &quot;healthy&quot;&gt;&gt;
+			&lt;&lt;if random(1,100) lte 1&gt;&gt;&lt;&lt;set $NPCsHH[_i].health to &quot;infected&quot;&gt;&gt;
+			&lt;&lt;/if&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/for&gt;&gt;
+	&lt;&lt;for _i = 0; _i &lt; $NPCsExtended.length; _i++&gt;&gt;
+		&lt;&lt;if $NPCsExtended[_i].health is &quot;healthy&quot;&gt;&gt;
+			&lt;&lt;if random(1,100) lte 1&gt;&gt;&lt;&lt;set $NPCsExtended[_i].health to &quot;infected&quot;&gt;&gt;
+			&lt;&lt;/if&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/for&gt;&gt;
 &lt;&lt;elseif passage() is &quot;August 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,12) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
@@ -1321,6 +1335,18 @@ NTS: This is also what happened to your family.
       &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
 	&lt;&lt;if $NPCs[_i].health is &quot;healthy&quot;&gt;&gt;
 		&lt;&lt;if random(1,12) lte 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsHH.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsHH[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,12) lte 1&gt;&gt;&lt;&lt;set $NPCsHH[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsExtended.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsExtended[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,12) lte 1&gt;&gt;&lt;&lt;set $NPCsExtended[_i].health to &quot;infected&quot;&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
@@ -1334,6 +1360,18 @@ NTS: This is also what happened to your family.
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsHH.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsHH[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,7) lte 1&gt;&gt;&lt;&lt;set $NPCsHH[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsExtended.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsExtended[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,7) lte 1&gt;&gt;&lt;&lt;set $NPCsExtended[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
 &lt;&lt;elseif passage() is &quot;October 1665&quot;&gt;&gt;
     &lt;&lt;if random(1,10) eq 1&gt;&gt;
     &lt;&lt;set $plagueInfection to 1&gt;&gt;
@@ -1341,6 +1379,18 @@ NTS: This is also what happened to your family.
       &lt;&lt;for _i = 0; _i &lt; $NPCs.length; _i++&gt;&gt;
 	&lt;&lt;if $NPCs[_i].health is &quot;healthy&quot;&gt;&gt;
 		&lt;&lt;if random(1,10) lte 1&gt;&gt;&lt;&lt;set $NPCs[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsHH.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsHH[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,10) lte 1&gt;&gt;&lt;&lt;set $NPCsHH[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsExtended.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsExtended[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,10) lte 1&gt;&gt;&lt;&lt;set $NPCsExtended[_i].health to &quot;infected&quot;&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
@@ -1354,6 +1404,18 @@ NTS: This is also what happened to your family.
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsHH.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsHH[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,75) lte 1&gt;&gt;&lt;&lt;set $NPCsHH[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsExtended.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsExtended[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,75) lte 1&gt;&gt;&lt;&lt;set $NPCsExtended[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
   &lt;&lt;else&gt;&gt;
   	&lt;&lt;if random(1,1000) eq 1&gt;&gt;
   	&lt;&lt;set $plagueInfection to 1&gt;&gt;
@@ -1364,12 +1426,36 @@ NTS: This is also what happened to your family.
 		&lt;&lt;/if&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsHH.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsHH[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,1000) lte 1&gt;&gt;&lt;&lt;set $NPCsHH[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;for _i = 0; _i &lt; $NPCsExtended.length; _i++&gt;&gt;
+	&lt;&lt;if $NPCsExtended[_i].health is &quot;healthy&quot;&gt;&gt;
+		&lt;&lt;if random(1,1000) lte 1&gt;&gt;&lt;&lt;set $NPCsExtended[_i].health to &quot;infected&quot;&gt;&gt;
+		&lt;&lt;/if&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set _infectedFamily = []&gt;&gt;
 &lt;&lt;for _idx, _household range $NPCs&gt;&gt;
 	&lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
     	&lt;&lt;set _infectedFamily.push(_idx)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;set _infectedHH = []&gt;&gt;
+&lt;&lt;for _idx, _nonfam range $NPCsHH&gt;&gt;
+	&lt;&lt;if _nonfam.health is &quot;infected&quot;&gt;&gt;
+    	&lt;&lt;set _infectedHH.push(_idx)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;set _infectedExtended = []&gt;&gt;
+&lt;&lt;for _idx, _extended range $NPCsExtended&gt;&gt;
+	&lt;&lt;if _extended.health is &quot;infected&quot;&gt;&gt;
+    	&lt;&lt;set _infectedExtended.push(_idx)&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/for&gt;&gt;
 
@@ -1591,40 +1677,10 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;set $impressed to 0&gt;&gt;
 &lt;&lt;set $NPCs = []&gt;&gt;
 &lt;&lt;set $NPCsExtended = []&gt;&gt;
+&lt;&lt;set $NPCsHH = []&gt;&gt;
 &lt;&lt;set $FledFamily = []&gt;&gt;
-&lt;&lt;set $fNames = {
-  Elizabeth:  400,
-  Anne:       370,
-  Mary:       300,
-  Margaret:   230,
-  Jane:       150,
-  Catherine:  190,
-  Agnes:      50,
-  Eleanor:    50,
-  Bridget:    30,
-  Sarah:      30,
-  Isabel:     30,
-  Margery:    28,
-  Lucy:       20,
-  Ursula:     20,
-}&gt;&gt;
-&lt;&lt;set $mNames = {
-  John:       1500,
-  Thomas:     1300,
-  William:    1300,
-  Richard:    620,
-  Robert:     600,
-  Henry:      500,
-  James:      430,
-  George:     420,
-  Edward:     400,
-  Charles:    210,
-  Francis:    200,
-  Samuel:     200,
-  Alexander:  150,
-  Nicholas:   148,
-  Abraham:    30, 
-}&gt;&gt;
+&lt;&lt;set $fNames to [&quot;Elizabeth&quot;, &quot;Anne&quot;, &quot;Mary&quot;, &quot;Margaret&quot;, &quot;Jane&quot;, &quot;Catherine&quot;, &quot;Agnes&quot;, &quot;Eleanor&quot;, &quot;Bridget&quot;, &quot;Sarah&quot;, &quot;Isabel&quot;, &quot;Margery&quot;, &quot;Lucy&quot;, &quot;Ursula&quot;, &quot;Frances&quot;, &quot;Cecily&quot;, &quot;Martha&quot;, &quot;Barbara&quot;, &quot;Susan&quot;, &quot;Grace&quot;, &quot;Susanna&quot;, &quot;Anna&quot;, &quot;Hester&quot;, &quot;Joyce&quot;, &quot;Winifred&quot;, &quot;Helen&quot;, &quot;Lettice&quot;, &quot;Rose&quot;, &quot;Christian&quot;, &quot;Edith&quot;, &quot;Isabella&quot;, &quot;Judith&quot;, &quot;Maud&quot;, &quot;Rebecca&quot;, &quot;Constance&quot;, &quot;Henrietta&quot;, &quot;Magdalen&quot;, &quot;Maria&quot;, &quot;Thomasine&quot;, &quot;Abigail&quot;, &quot;Blanche&quot;, &quot;Elinor&quot;, &quot;Ellen&quot;, &quot;Gertrude&quot;, &quot;Hannah&quot;, &quot;Honra&quot;, &quot;Marie&quot;, &quot;Joanna&quot;, &quot;Marion&quot;, &quot;Charlotte&quot;, &quot;Janet&quot;, &quot;Penelope&quot;, &quot;Rachel&quot;, &quot;Sybil&quot;, &quot;Arabella&quot;, &quot;Amy&quot;, &quot;Deborah&quot;, &quot;Diana&quot;, &quot;Johanna&quot;, &quot;Mabel&quot;, &quot;Theophila&quot;, &quot;Cecilia&quot;, &quot;Elisabeth&quot;, &quot;Emma&quot;, &quot;Esther&quot;, &quot;Jennet&quot;, &quot;Juliana&quot;, &quot;Lydia&quot;, &quot;Muriel&quot;, &quot;Theodosia&quot;, &quot;Audrey&quot;, &quot;Aurelia&quot;, &quot;Avice&quot;, &quot;Avis&quot;, &quot;Brilliana&quot;, &quot;Cassandra&quot;, &quot;Christina&quot;, &quot;Cordell&quot;, &quot;Damaris&quot;, &quot;Denise&quot;, &quot;Dorcas&quot;, &quot;Ellyn&quot;, &quot;Faith&quot;, &quot;Florence&quot;, &quot;Francisca&quot;, &quot;Grisel&quot;, &quot;Griselda&quot;, &quot;Helena&quot;, &quot;Inex&quot;, &quot;Jeanne&quot;, &quot;Jocosa&quot;, &quot;Madeleine&quot;, &quot;Sabine&quot;, &quot;Sophia&quot;, &quot;Sylvestra&quot;, &quot;Teresa&quot;, &quot;Matilda&quot;]&gt;&gt;
+&lt;&lt;set $mNames to [&quot;John&quot;, &quot;Thomas&quot;, &quot;William&quot;, &quot;Richard&quot;, &quot;Robert&quot;, &quot;Henry&quot;, &quot;James&quot;, &quot;George&quot;, &quot;Edward&quot;, &quot;Charles&quot;, &quot;Francis&quot;, &quot;Samuel&quot;, &quot;Alexander&quot;, &quot;Nicholas&quot;, &quot;Abraham&quot;, &quot;Peter&quot;, &quot;Edmund&quot;, &quot;Christopher&quot;, &quot;David&quot;, &quot;Anthony&quot;, &quot;Hugh&quot;, &quot;Joseph&quot;, &quot;Andrew&quot;, &quot;Roger&quot;, &quot;Walter&quot;, &quot;Ralph&quot;, &quot;Arthur&quot;, &quot;Philip&quot;, &quot;Patrick&quot;, &quot;Nathaniel&quot;, &quot;Matthew&quot;, &quot;Daniel&quot;, &quot;Humphrey&quot;, &quot;Stephen&quot;, &quot;Benjamin&quot;, &quot;Michael&quot;, &quot;Archibald&quot;, &quot;Gilbert&quot;, &quot;Abraham&quot;, &quot;Isaac&quot;, &quot;Simon&quot;, &quot;Laurence&quot;, &quot;Paul&quot;, &quot;Adam&quot;, &quot;Martin&quot;, &quot;Leonard&quot;, &quot;Jean&quot;, &quot;Lewis&quot;, &quot;Timothy&quot;, &quot;Jacob&quot;, &quot;Bartholomew&quot;, &quot;Bernard&quot;, &quot;Rowland&quot;, &quot;Theophilus&quot;, &quot;Giles&quot;, &quot;Jeremiah&quot;, &quot;Joshua&quot;, &quot;Oliver&quot;, &quot;Clement&quot;, &quot;Gabriel&quot;, &quot;Maurice&quot;, &quot;Owen&quot;, &quot;Donald&quot;, &quot;Miles&quot;, &quot;Brian&quot;, &quot;Luke&quot;]&gt;&gt;
 &lt;&lt;set $nbNames to [&quot;Thomas&quot;, &quot;Thomasina&quot;, &quot;Charlotte&quot;, &quot;Charles&quot;, &quot;Philippa&quot;, &quot;Phillip&quot;, &quot;John&quot;, &quot;Joan&quot;]&gt;&gt;
 &lt;&lt;set $childRole to [&quot;son&quot;, &quot;daughter&quot;, &quot;child&quot;]&gt;&gt;
 &lt;&lt;set $article to [&quot;a&quot;, &quot;an&quot;]&gt;&gt;
@@ -1642,7 +1698,40 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;set $remedies.Suppository = { name: &quot;a suppository of a fig filled with salt&quot;, quantity: 0 }&gt;&gt;
 &lt;&lt;set $remedies.Cordial = { name: &quot;a cordial tincture to be drunk for two days after infection&quot;, quantity: 0, cost: 12 }&gt;&gt;. 
 &lt;&lt;set $remedies.Immodium = { name: &quot;an anti-diarrheal posset made of plantain, sorrel, or knot grass&quot;, quantity: 0, cost: 0 }&gt;&gt;
-&lt;&lt;set $quarantine to 0&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="PassageHeader" tags="" position="575,25" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $quarantine to 0&gt;&gt;
+/* &lt;&lt;set $fNames = {
+  Elizabeth:  400,
+  Anne:       370,
+  Mary:       300,
+  Margaret:   230,
+  Jane:       150,
+  Catherine:  190,
+  Agnes:      50,
+  Eleanor:    50,
+  Bridget:    30,
+  Sarah:      30,
+  Isabel:     30,
+  Margery:    28,
+  Lucy:       20,
+  Ursula:     20,
+}&gt;&gt; 
+&lt;&lt;set $mNames = {
+  John:       1500,
+  Thomas:     1300,
+  William:    1300,
+  Richard:    620,
+  Robert:     600,
+  Henry:      500,
+  James:      430,
+  George:     420,
+  Edward:     400,
+  Charles:    210,
+  Francis:    200,
+  Samuel:     200,
+  Alexander:  150,
+  Nicholas:   148,
+  Abraham:    30, 
+}&gt;&gt;*/</tw-passagedata><tw-passagedata pid="11" name="PassageHeader" tags="" position="575,25" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;silently&gt;&gt;
 &lt;&lt;fumigant-check&gt;&gt;
 	&lt;&lt;if tags().includes(&quot;storyline&quot;)&gt;&gt;
@@ -1861,30 +1950,30 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;nobr&gt;&gt;
   &lt;&lt;if $age is &quot;young adult&quot;&gt;&gt;
     &lt;&lt;if $gender is &quot;female&quot;&gt;&gt;
-      &lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;husband&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({name: $mNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;husband&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if $gender is &quot;male&quot;&gt;&gt;
-      &lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;wife&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;wife&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if $gender is &quot;non-binary&quot;&gt;&gt;
       &lt;&lt;set $NPCs.push({name: $nbNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;spouse&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;middle-aged adult&quot;&gt;&gt;
     &lt;&lt;if $gender is &quot;female&quot;&gt;&gt;
-      &lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;husband&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({name: $mNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;husband&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if $gender is &quot;male&quot;&gt;&gt;
-      &lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;wife&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({name: $fNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;wife&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if $gender is &quot;non-binary&quot;&gt;&gt;
       &lt;&lt;set $NPCs.push({name: $nbNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;spouse&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;elderly adult&quot;&gt;&gt;
     &lt;&lt;if $gender is &quot;female&quot;&gt;&gt;
-      &lt;&lt;set $NPCs.push({name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;husband&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({name: $mNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;husband&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if $gender is &quot;male&quot;&gt;&gt;
-      &lt;&lt;set $NPCs.push({name: weightedEither($fNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;wife&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({name: $fNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;wife&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   /* &lt;&lt;if $gender is &quot;non-binary&quot;&gt;&gt;
       &lt;&lt;set $NPCs.push({name: $nbNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;spouse&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
@@ -1898,24 +1987,24 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;widget &quot;addChildNPC&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
   &lt;&lt;if $age is &quot;young adult&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
-      &lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;infant&quot;, &quot;child&quot;), relationship: &quot;daughter&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: either(&quot;infant&quot;, &quot;child&quot;), relationship: &quot;daughter&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: either(&quot;infant&quot;, &quot;child&quot;), relationship: &quot;son&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: either(&quot;infant&quot;, &quot;child&quot;), relationship: &quot;son&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;middle-aged adult&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
-      &lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;adolescent&quot;, relationship: &quot;daughter&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;daughter&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: &quot;adolescent&quot;, relationship: &quot;son&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;son&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if random(1,9) eq 1&gt;&gt;
       &lt;&lt;set $NPCs.push({ name: $nbNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;child&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;elderly adult&quot; or $age is &quot;middle-aged adult&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
-      &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;daughter&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;daughter&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: either(&quot;child&quot;, &quot;young adult&quot;), relationship: &quot;son&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: either(&quot;child&quot;, &quot;young adult&quot;), relationship: &quot;son&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if random(1,9) eq 1&gt;&gt;
       &lt;&lt;set $NPCsExtended.push({ name: $nbNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;child&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
@@ -1927,40 +2016,67 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 /* add parents */
 &lt;&lt;widget &quot;addParentNPC&quot;&gt;&gt;
   &lt;&lt;if $age is &quot;child&quot;&gt;&gt;
-      &lt;&lt;if random(1,4) lte 3&gt;&gt;
-        &lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
-      &lt;&lt;/if&gt;&gt;
-      &lt;&lt;if random(1,4) lte 3&gt;&gt;
-        &lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
-      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 3&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 3&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;adolescent&quot;&gt;&gt;
-      &lt;&lt;if random(1,4) lte 3&gt;&gt;
-        &lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;middle-aged adult&quot;, relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
-      &lt;&lt;/if&gt;&gt;
-      &lt;&lt;if random(1,4) lte 2&gt;&gt;
-        &lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: &quot;middle-aged adult&quot;, relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
-      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 3&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: &quot;middle-aged adult&quot;, relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+    &lt;&lt;if random(1,4) lte 2&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: &quot;middle-aged adult&quot;, relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;young adult&quot;&gt;&gt;
+    &lt;&lt;if $relationship is &quot;single&quot; or $relationship is &quot;engaged&quot;&gt;&gt;
       &lt;&lt;if random(1,3) lte 2&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
       &lt;&lt;if random(1,4) lte 1&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;&lt;if random(1,3) lte 2&gt;&gt;
+        &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+      &lt;&lt;if random(1,4) lte 1&gt;&gt;
+        &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;middle-aged adult&quot;&gt;&gt;
+    &lt;&lt;if $relationship is &quot;single&quot; or $relationship is &quot;widowed&quot;&gt;&gt;
       &lt;&lt;if random(1,10) lte 2&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: &quot;elderly adult&quot;, relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: &quot;elderly adult&quot;, relationship: either(&quot;mother&quot;, &quot;aunt&quot;), health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
       &lt;&lt;if random(1,10) lte 1&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: &quot;elderly adult&quot;, relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: &quot;elderly adult&quot;, relationship: either(&quot;father&quot;, &quot;uncle&quot;), health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
-    &lt;&lt;elseif $age is &quot;elderly adult&quot;&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;&lt;if random(1,10) lte 2&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: &quot;elderly adult&quot;, relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+      &lt;&lt;if random(1,10) lte 1&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: &quot;elderly adult&quot;, relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+  &lt;&lt;elseif $age is &quot;elderly adult&quot;&gt;&gt;
+    &lt;&lt;if $relationship is &quot;single&quot; or $relationship is &quot;widowed&quot;&gt;&gt;
       &lt;&lt;if random(1,20) lte 1&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: &quot;elderly adult&quot;, relationship: &quot;mother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: &quot;elderly adult&quot;, relationship: either(&quot;mother&quot;, &quot;aunt&quot;), health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
       &lt;&lt;if random(1,20) lte 1&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: &quot;elderly adult&quot;, relationship: &quot;father&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: &quot;elderly adult&quot;, relationship: either(&quot;father&quot;, &quot;uncle&quot;), health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
+    &lt;&lt;else&gt;&gt;
+      &lt;&lt;if random(1,20) lte 1&gt;&gt;
+        &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: &quot;elderly adult&quot;, relationship: either(&quot;mother&quot;, &quot;aunt&quot;), health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+      &lt;&lt;if random(1,20) lte 1&gt;&gt;
+        &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: &quot;elderly adult&quot;, relationship: either(&quot;father&quot;, &quot;uncle&quot;), health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
   &lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -1968,9 +2084,9 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 &lt;&lt;widget &quot;addSiblingsNPC&quot;&gt;&gt;
   &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
-      &lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: either(&quot;child&quot;, &quot;adolescent&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: either(&quot;child&quot;, &quot;adolescent&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: either(&quot;child&quot;, &quot;adolescent&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if random(1,20) eq 1&gt;&gt;
       &lt;&lt;set $NPCs.push({ name: $nbNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;sibling&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
@@ -1979,35 +2095,35 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
   &lt;&lt;elseif $age is &quot;young adult&quot;&gt;&gt;
     &lt;&lt;if $relationship is &quot;single&quot;&gt;&gt;
       &lt;&lt;if random(1,2) eq 1&gt;&gt;
-        &lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $fNames.pluck(), age: either(&quot;child&quot;, &quot;adolescent&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;else&gt;&gt;
-        &lt;&lt;set $NPCs.push({ name: weightedEither($mNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCs.push({ name: $mNames.pluck(), age: either(&quot;child&quot;, &quot;adolescent&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
       &lt;&lt;if random(1,20) eq 1&gt;&gt;&lt;&lt;set $NPCs.push({ name: $nbNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;sibling&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
     &lt;&lt;else&gt;&gt;
       &lt;&lt;if random(1,2) eq 1&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;else&gt;&gt;
-        &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+        &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
       &lt;&lt;if random(1,20) eq 1&gt;&gt;&lt;&lt;set $NPCsExtended.push({ name: $nbNames.pluck(), age: &quot;adolescent&quot;, relationship: &quot;sibling&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
       &lt;&lt;/if&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;middle-aged adult&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
-      &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if random(1,20) eq 1&gt;&gt;
       &lt;&lt;set $NPCsExtended.push({ name: $nbNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;sibling&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
   &lt;&lt;elseif $age is &quot;elderly adult&quot;&gt;&gt;
     &lt;&lt;if random(1,2) eq 1&gt;&gt;
-      &lt;&lt;set $NPCsExtended.push({ name: weightedEither($fNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;sister&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;else&gt;&gt;
-      &lt;&lt;set $NPCsExtended.push({ name: weightedEither($mNames), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+      &lt;&lt;set $NPCsExtended.push({ name: $mNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;brother&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if random(1,20) eq 1&gt;&gt;&lt;&lt;set $NPCsExtended.push({ name: $nbNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;) relationship: &quot;sibling&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
     &lt;&lt;/if&gt;&gt;
@@ -2038,17 +2154,19 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 /* add household members for upper class */
 
 &lt;&lt;widget &quot;addServantNPC&quot;&gt;&gt;
-&lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
-  &lt;&lt;set $servants to random(8,12)&gt;&gt;
-&lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;
-  &lt;&lt;set $servants to random(1,3)&gt;&gt;
+  &lt;&lt;if random(1,2) is 1&gt;&gt;&lt;&lt;set $NPCsHH.push({name: $mNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;servant&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
+  &lt;&lt;else&gt;&gt;&lt;&lt;set $NPCsHH.push({name: $fNames.pluck(), age: either(&quot;young adult&quot;, &quot;middle-aged adult&quot;), relationship: &quot;servant&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
 &lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+&lt;&lt;widget &quot;addMasterNPC&quot;&gt;&gt;
+&lt;&lt;set $NPCsHH.push({ name: $mNames.pluck(), age: either(&quot;middle-aged adult&quot;, &quot;elderly adult&quot;), relationship: &quot;master&quot;, health: &quot;healthy&quot;, location: $location})&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 /* set player name based on frequency of names in 1665 */
 &lt;&lt;widget &quot;playerName&quot;&gt;&gt;
-&lt;&lt;if $gender eq &quot;female&quot;&gt;&gt;&lt;&lt;set $name = weightedEither($fNames)&gt;&gt;
-&lt;&lt;elseif $gender eq &quot;male&quot;&gt;&gt;&lt;&lt;set $name = weightedEither($mNames)&gt;&gt;
+&lt;&lt;if $gender eq &quot;female&quot;&gt;&gt;&lt;&lt;set $name = $fNames.pluck()&gt;&gt;
+&lt;&lt;elseif $gender eq &quot;male&quot;&gt;&gt;&lt;&lt;set $name = $mNames.pluck()&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -2080,21 +2198,23 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 
 /* list NPCs in sidebar menu */
 &lt;&lt;widget &quot;ListNPCs&quot;&gt;&gt;
-&lt;&lt;nobr&gt;&gt;Household size: &lt;&lt;set _hhSize to $NPCs.length&gt;&gt; _hhSize&lt;br&gt;&lt;br&gt;
-
+&lt;&lt;nobr&gt;&gt;&lt;&lt;set _hhSize to $NPCs.length+$NPCsHH.length&gt;&gt;
 &#39;&#39;Household:&#39;&#39; &lt;&lt;if $fled is 5&gt;&gt;&#39;&#39;fled to $hhlocation&#39;&#39;&lt;&lt;/if&gt;&gt;&lt;br&gt;
         &lt;&lt;for _i, _idx range $NPCs&gt;&gt;
         $NPCs[_i].name, $NPCs[_i].age $NPCs[_i].relationship: $NPCs[_i].health.&lt;br&gt;
-        &lt;&lt;/for&gt;&gt;
-&lt;br&gt;&lt;br&gt;
+        &lt;&lt;/for&gt;&gt;&lt;br&gt;
+&lt;&lt;if $socio is &quot;nobles&quot; or $socio is &quot;merchants&quot;&gt;&gt;
+Your household also includes $NPCsHH.length servants:&lt;br&gt;&lt;br&gt;
+&lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;
+You work in a household with $NPCsHH.length servants and your master&#39;s family.&lt;br&gt;&lt;br&gt;
+&lt;&lt;/if&gt;&gt;
         &lt;&lt;if $NPCsExtended.length gt 0&gt;&gt;
 &#39;&#39;Extended family:&#39;&#39; &lt;br&gt;&lt;&lt;for _e, _idx range $NPCsExtended&gt;&gt;
 	$NPCsExtended[_e].name, $NPCsExtended[_e].age $NPCsExtended[_e].relationship: $NPCsExtended[_e].health&lt;br&gt;
     &lt;&lt;/for&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-</tw-passagedata><tw-passagedata pid="15" name="impressed" tags="" position="1900,275" size="100,100">&lt;&lt;nobr&gt;&gt;/* NTS: for those not booted out, need to add reputation/money hits */
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="impressed" tags="" position="1900,275" size="100,100">&lt;&lt;nobr&gt;&gt;/* NTS: for those not booted out, need to add reputation/money hits */
 &lt;&lt;if $impressed gte 2&gt;&gt;You&#39;ve been caught again! 
     &lt;&lt;if $age is &quot;child&quot;&gt;&gt;As a child, you won&#39;t be transported to the New World or impressed into His Majesty&#39;s Navy, but you are forced into service with a local merchant.
     &lt;br&gt;&lt;br&gt; /*NTS: insert text here about what happens to children who are impressed as servants */
@@ -2926,7 +3046,7 @@ Lord have mercy! A strange lump has appeared on your
             &lt;/ul&gt;
         &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="highway-widget" tags="widget" position="1600,100" size="100,100">&lt;&lt;widget &quot;highway&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="highway-widget" tags="widget" position="1575,125" size="100,100">&lt;&lt;widget &quot;highway&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
 It&#39;s illegal to beg on the highways, but you wonder if you would have better luck there.
 /* NTS: fix text here to influence choices */
@@ -2938,7 +3058,7 @@ Do you:
 &lt;li&gt;[[hope that you can survive on the resources you have-&gt;survival-mode][$wealth to Math.clamp($wealth - 1, 0, 100)]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="begging-success" tags="" position="1600,225" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;set $beggarsluck to random(0,5)&gt;&gt;&lt;&lt;set $wealth = ($wealth + $beggarsluck)&gt;&gt;Your begging earned you &lt;&lt;if $beggarsluck eq 0&gt;&gt;0 coins.&lt;&lt;else&gt;&gt;&#39;&#39;$beggarsluck&#39;&#39; coin.&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="begging-success" tags="" position="1575,250" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;set $beggarsluck to random(0,5)&gt;&gt;&lt;&lt;set $wealth = ($wealth + $beggarsluck)&gt;&gt;Your begging earned you &lt;&lt;if $beggarsluck eq 0&gt;&gt;0 coins.&lt;&lt;else&gt;&gt;&#39;&#39;$beggarsluck&#39;&#39; coin.&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $wealth lte 1&gt;&gt;Unfortunately, with no extra coins... *NTS: more text here/consequences with no money*
 &lt;&lt;else&gt;&gt;Your coins allow you to purchase food or secure shelter, but at a cost to your reputation...&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
@@ -3565,16 +3685,16 @@ Luckily, there are no plague cases in your parish... yet.
 &lt;li&gt;&lt;&lt;link &quot;Household Status&quot;&gt;&gt;
     &lt;&lt;run Dialog.setup(&quot;Household&quot;, &quot;household&quot;); Dialog.wiki(Story.get(&quot;Household Status&quot;).text); Dialog.open()&gt;&gt;
 &lt;&lt;/link&gt;&gt;&lt;/li&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="socialMedia" tags="" position="150,150" size="100,100"></tw-passagedata><tw-passagedata pid="74" name="Household Status" tags="" position="575,150" size="100,100">Player stats:
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="socialMedia" tags="" position="150,150" size="100,100"></tw-passagedata><tw-passagedata pid="74" name="Household Status" tags="" position="575,150" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;ul&gt;&lt;li&gt;Name: $name&lt;/li&gt;
 &lt;li&gt;Age: $age&lt;/li&gt;
 &lt;li&gt;Social class: $socio&lt;/li&gt;
 &lt;li&gt;Location: $location&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;&lt;ListNPCs&gt;&gt; 
 
-&lt;!-- IMPORTANT! INCLUDE THE CODE BELOW ON ALL STAT PAGES TO MAKE SURE THE LINK RETURNS THE USER TO THE LAST PASSAGE. IF YOU USE A NORMAL RETURN LINK IT WILL SIMPLY LOOP --&gt;</tw-passagedata><tw-passagedata pid="75" name="Stat page 2" tags="" position="175,1250" size="100,100">Your stats go here..
+&lt;!-- IMPORTANT! INCLUDE THE CODE BELOW ON ALL STAT PAGES TO MAKE SURE THE LINK RETURNS THE USER TO THE LAST PASSAGE. IF YOU USE A NORMAL RETURN LINK IT WILL SIMPLY LOOP --&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="75" name="Stat page 2" tags="" position="175,1250" size="100,100">Your stats go here..
 
 &lt;!-- IMPORTAN! INCLUDE THE CODE BELOW ON ALL STAT PAGES TO MAKE SURE THE LINK RETURNS THE USER TO THE LAST PASSAGE. IF YOU USE A NORMAL RETURN LINK IT WILL SIMPLY LOOP --&gt;
 
@@ -4289,22 +4409,45 @@ You have now been in quarantine for over a month, and there is no sign that the 
     &lt;&lt;fumigant&gt;&gt;
     &lt;&lt;health-update&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="test-pq" tags="" position="750,500" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="93" name="test-pq" tags="storyline" position="750,500" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;set $plagueInfection to 1&gt;&gt;
 &lt;&lt;set $quarantine to 1&gt;&gt;
 &lt;&lt;set $money to 10000&gt;&gt;
 &lt;&lt;set $age to &quot;young adult&quot;&gt;&gt;
 &lt;&lt;set $socio to &quot;merchants&quot;&gt;&gt;
 &lt;&lt;set $reputation to 8&gt;&gt;
 &lt;&lt;set $gender to &quot;female&quot;&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;child&quot;, relationship: weightedEither($fRelationships), health: &quot;healthy&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;healthy&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;), relationship: weightedEither($fRelationships), health: &quot;infected&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;infected&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: either(&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;), relationship: weightedEither($fRelationships), health: &quot;infected&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;healthy&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;healthy&quot;})&gt;&gt;
-&lt;&lt;set $NPCs.push({ name: weightedEither($fNames), age: &quot;infant&quot;, relationship: weightedEither($fRelationships), health: &quot;healthy&quot;})&gt;&gt;
-&lt;&lt;/silently&gt;&gt;[[You have fallen ill.-&gt;Sickness]]
+&lt;&lt;set $NPCsExtended.push({ name: $fNames.pluck(), age: &quot;middle-aged adult&quot;, relationship: &quot;mother&quot;, health: &quot;infected&quot;})&gt;&gt;
+&lt;&lt;set $NPCsHH.push({ name: $fNames.pluck(), age: &quot;middle-aged adult&quot;, relationship: &quot;servant&quot;, health: &quot;infected&quot;})&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+&lt;&lt;silently&gt;&gt;
+&lt;&lt;set _infectedFamily = []&gt;&gt;
+&lt;&lt;for _idx, _household range $NPCs&gt;&gt;
+	&lt;&lt;if _household.health is &quot;infected&quot;&gt;&gt;
+    	&lt;&lt;set _infectedFamily.push(_idx)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;set _infectedHH = []&gt;&gt;
+&lt;&lt;for _idx, _nonfam range $NPCsHH&gt;&gt;
+	&lt;&lt;if _nonfam.health is &quot;infected&quot;&gt;&gt;
+    	&lt;&lt;set _infectedHH.push(_idx)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;&lt;set _infectedExtended = []&gt;&gt;
+&lt;&lt;for _idx, _extended range $NPCsExtended&gt;&gt;
+	&lt;&lt;if _extended.health is &quot;infected&quot;&gt;&gt;
+    	&lt;&lt;set _infectedExtended.push(_idx)&gt;&gt;
+    &lt;&lt;/if&gt;&gt;
+&lt;&lt;/for&gt;&gt;&lt;&lt;/silently&gt;&gt;
+
+&lt;&lt;if _infectedHH.length gt 0&gt;&gt;
+A member of your household has fallen ill.
+&lt;&lt;else&gt;&gt;Everyone in your household is healthy.
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if _infectedExtended.length gt 0&gt;&gt;
+A member of your extended family has fallen ill.
+&lt;&lt;else&gt;&gt;Everyone in your extended family is healthy.
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
