@@ -1159,7 +1159,7 @@ But those are worries for the future! For now, it is time to eat, drink, and pla
  On Christmas Eve, you see a comet in the sky and you wonder if it is [[a sign of good things to come-&gt;January 1665]].
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/6c/Comet_1665.png&quot; height=&quot;500px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/6c/Comet_1665.png&quot; width=&quot;100%&quot;&gt;
 //Great Comet of 1665//
 
 &lt;&lt;set $murder =0&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="start" tags="" position="1075,200" size="100,100">This is a text-based adventure game. Click the underlined teal text to advance in the game. Hover over the bold purple text for definitions. Best of luck surviving!
@@ -1168,7 +1168,7 @@ The year is 1664 and you are a resident of the great city of London in England. 
 
 But enough about the king! [[What about you-&gt;identity]]?
 
-&lt;img src=&quot;https://wesleyan-dac-open-access.s3.amazonaws.com/images/DAC_1940-D1-131_001_OA.jpg&quot; width=&quot;900px&quot; height=&quot;500px&quot;&gt;
+&lt;img src=&quot;https://wesleyan-dac-open-access.s3.amazonaws.com/images/DAC_1940-D1-131_001_OA.jpg&quot; width=&quot;100%&quot;&gt;
 //Map of London, before the Fire of 1666 by Wencelaus Holler. Wesleyan University Davison Art Center.//</tw-passagedata><tw-passagedata pid="4" name="identity" tags="" position="1225,200" size="100,100">&lt;&lt;chunkText&gt;&gt;
 You are a &lt;&lt;set _gender = [&quot;female&quot;, &quot;male&quot;, &quot;non-binary&quot;]&gt;&gt;&lt;&lt;listbox &quot;$gender&quot;&gt;&gt;&lt;&lt;optionsfrom _gender&gt;&gt;&lt;&lt;/listbox&gt;&gt; &lt;&lt;set _age = [&quot;child&quot;, &quot;adolescent&quot;, &quot;young adult&quot;, &quot;middle-aged adult&quot;, &quot;elderly adult&quot;]&gt;&gt;&lt;&lt;listbox &quot;$age&quot;&gt;&gt;&lt;&lt;optionsfrom _age&gt;&gt;&lt;&lt;/listbox&gt;&gt;.
 &lt;&lt;next&gt;&gt;
@@ -1185,7 +1185,7 @@ It&#39;s a great city for people like you - &lt;&lt;set _socio = [&quot;day labo
 
 Your home is &lt;&lt;set _location = [&quot;inside the City walls&quot;, &quot;in the western suburbs, specifically Westminster&quot;, &quot;in another part of the western suburbs&quot;, &quot;in the northern suburbs&quot;, &quot;in the eastern suburbs&quot;, &quot;across the river in the southern suburbs&quot;]&gt;&gt;&lt;&lt;listbox &quot;$location&quot;&gt;&gt;&lt;&lt;optionsfrom _location&gt;&gt;&lt;&lt;/listbox&gt;&gt;.
 &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/4/48/Claude_de_Jongh_-_View_of_London_Bridge_-_Google_Art_Project_bridge.jpg&quot; width=&quot;900px&quot; height=&quot;150px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/4/48/Claude_de_Jongh_-_View_of_London_Bridge_-_Google_Art_Project_bridge.jpg&quot; width=&quot;100%&quot;&gt;
 //Claude de Jongh - &quot;View of London Bridge,&quot; 1632.//
 &lt;&lt;/chunkText&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="death" tags="infection-rates" position="675,800" size="100,100">&lt;&lt;nobr&gt;&gt;
 Send not to know for whom the church bells toll. They toll for you. &lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;As a God-fearing Catholic, you know you are destined to spend time in purgatory before you can ascend to heaven but you hope that will not take too long&lt;&lt;if $reputation lte 0&gt;&gt;, despite your poor reputation on earth.&lt;&lt;/if&gt;&gt;&lt;&lt;else&gt;&gt;As a good Protestant, you know that Christ the Redeemer has died for you and your admittance to heaven is guaranteed.&lt;&lt;/if&gt;&gt;
@@ -1235,7 +1235,7 @@ NTS: This is also what happened to your family.
   &lt;&lt;case 3&gt;&gt;
     &lt;&lt;link &quot;Unfortunately, your fever spikes, you grow weak, and you fear for your life.&quot; `passage()`&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;br&gt;&lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/cb/Two_holy_men_lie_side_by_side_affected_by_the_plague_Wellcome_L0073320.jpg&quot; height=&quot;1261px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/cb/Two_holy_men_lie_side_by_side_affected_by_the_plague_Wellcome_L0073320.jpg&quot; width=&quot;100%&quot;&gt;
 //Italian drawing of two men who lie side by side affected by the plague, c. 17th century. Wellcome Images//
 &lt;br&gt;
   &lt;&lt;case 4&gt;&gt;
@@ -1547,7 +1547,7 @@ You are not freezing or starving to death, even if you are always cold and hungr
 /* Noble Story */
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;As &lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt;the child of &lt;&lt;/if&gt;&gt;a minor noble, you spend much of your time inside at the royal Court of King Charles II in hopes of securing more titles, honor, and riches for yourself and your family&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, especially since &lt;span class=&quot;def&quot; title=&quot;Queen Catherine of Braganza was a Portuguese princess who married King Charles II in 1662, becoming the Queen of England, Scotland, and Ireland. After the death of her husband, she returned to her homeland and served as the regent of Portugal until her death. She was unpopular in England due to her strong Catholic faith. Catherine had no children, so Charles was succeeded by his brother, King James II.&quot;&gt;Queen Catherine&lt;/span&gt; and the &lt;span class=&quot;def&quot; title=&quot;The mother of the current monarch. In 1665-7, this was Queen Henrietta Maria, the wife of the executed King Charles I.&quot;&gt;Queen Mother&lt;/span&gt; both share your &lt;span class=&quot;def&quot; title=&quot;Members of the Catholic Church, the royal family is part of this faith&quot;&gt;Catholic&lt;/span&gt; faith&lt;&lt;/if&gt;&gt;. You fill your days traveling among the royal family&#39;s various London palaces--including attending the &lt;span class=&quot;def&quot; title=&quot;The mother of the current monarch. In 1665-7, this was Queen Henrietta Maria, the wife of the executed King Charles I.&quot;&gt;Queen Mother&#39;s&lt;/span&gt; weekly social circle as faithfully as if it were church--and spending money on the latest fashions and trends. But you can’t help but worry about how the war will impact your life.
 &lt;br&gt;&lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/2/2d/Anthony_van_Dyck_-_Queen_Henrietta_Maria_of_England_-_KMSsp240_-_Statens_Museum_for_Kunst.jpg&quot;  height=&quot;720px&quot; width=&quot;556px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/2/2d/Anthony_van_Dyck_-_Queen_Henrietta_Maria_of_England_-_KMSsp240_-_Statens_Museum_for_Kunst.jpg&quot;  width=&quot;100%&quot;&gt;
 &lt;br&gt;
 //Anthony van Dyck, Queen Henrietta Maria of England, c. 1614-1641.//
 &lt;&lt;/if&gt;&gt;
@@ -2178,7 +2178,7 @@ As if war wasn’t bad enough, you begin to hear rumors around the city that sev
 &lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/c4/Lord_haue_mercy_on_London.jpg&quot; height=&quot;654px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/c4/Lord_haue_mercy_on_London.jpg&quot; width=&quot;100%&quot;&gt;
 //Lord haue mercy on London, c. 1665.//</tw-passagedata><tw-passagedata pid="17" name="June 1665" tags="storyline 1665" position="1325,475" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2187,14 +2187,14 @@ As if war wasn’t bad enough, you begin to hear rumors around the city that sev
     &lt;br&gt;&lt;br&gt;
     It takes almost a week, but news finally arrives of a great battle that killed many important men, especially on the ship of the &lt;span class=&quot;def&quot; title=&quot;The younger brother of King Charles II and heir to the English throne, who eventually reigned as King James II from 1685-88. Charles and his wife Catherine of Braganza had no children of their own, although Charles had many illegitimate children by several mistresses. James II was the last Catholic monarch of England and was deposed by his Protestant daughter, Mary, and her husband, William of Orange.&quot;&gt;Duke of York, James Stuart&lt;/span&gt;, the current heir to the throne—at least until the King and Queen manage to have children of their own. According to rumor, the battle came so close to killing the Duke that he was covered with blood and the head of a man named Mr. Boyle flew off and struck down the Duke. You happily repeat the rumors to anyone who will listen as bonfires break out in the street and people make merry, freely sharing their food and wine in celebration.
     &lt;br&gt;&lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/9/99/James_II_by_Peter_Lely.jpg&quot; height=&quot;720&quot; width=&quot;576&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/9/99/James_II_by_Peter_Lely.jpg&quot; width=&quot;100%&quot;&gt;
 &lt;br&gt;
 //Peter Lely, James II, c. 1650-1675//
    &lt;br&gt;&lt;br&gt;
 &lt;&lt;linkappend &quot;That is the last good day of the month, though.&quot;&gt;&gt; The &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; grows worse and the streets are soon filled with coaches and wagons full of people fleeing with their goods to the countryside. The &lt;span class=&quot;def&quot; title=&quot;The mother of the current monarch. In 1665-7, this was Queen Henrietta Maria, the wife of the executed King Charles I.&quot;&gt;Queen Mother&lt;/span&gt; &lt;span class=&quot;def&quot; title=&quot;The mother of King Charles II. Born a French princess, she became the wife of King Charles I of England until his execution in 1649. She then served as an advisor to her son, but her Catholicism and repeated attempts to convert people at court made her unpopular among the Protestant people of England. Charles I ordered that she be referred to in public as Queen Mary, but she disliked this title and signed her name as Henriette.&quot;&gt;Henrietta Maria&lt;/span&gt; moves back to France&lt;&lt;if $religion is &quot;Catholic&quot;&gt;&gt;, much to your dismay, and that of your fellow Catholics who flock to her chapel each week&lt;&lt;else&gt;&gt;, much to your relief, and that of all your fellow God-fearing &lt;span class=&quot;def&quot; title=&quot;Dissidents from the Catholic faith. In England these were most commonly Anglicans (Church of England) or Presbyterians, but there were other smaller groups such as Quakers and Baptists.&quot;&gt;Protestants&lt;/span&gt;&lt;&lt;/if&gt;&gt;. On June 29th, the King packs up his entire &lt;span class=&quot;def&quot; title=&quot;All the people living in a home. If there is an adult male living in the home, he is generally considered the head of the household. Widowed women with young children and single women may also be heads of the household. Members of the household then include the head of household, their spouse, and their children, as well as members of the extended family such as grandparents, siblings, aunts, uncles, nieces, nephews, and cousins. Households may additionally include apprentices, journeymen, and servants.&quot;&gt;household&lt;/span&gt; in 148 carriages and moves 12 miles away, to his palace at &lt;span class=&quot;def&quot; title=&quot;A palace south of London famed for its gardens. Cardinal Wolsey began construction on the palace in the early 16th century and King Henry VIII adopted it as his primary residence. King James I, King Charles I, Lord Protector Oliver Cromwell, King Charles II, and King James II also lived in the palace. After the Glorious Revolution in 1688 the co-monarchs William and Mary commissioned the architect Christopher Wren to build a new baroque-style palace on the site. Later monarchs continued to reside there until the mid-18th century. Queen Victoria opened the palace to the public in 1838 and it remains a popular tourist destination.&quot;&gt;Hampton Court&lt;/span&gt;.
     &lt;br&gt;&lt;br&gt;
     
- &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/4/41/Wilson_%22The_plague...%22%3B_people_fleeing_from_plague_Wellcome_L0016623.jpg&quot; height=&quot;348px&quot; width=&quot;900px&quot;&gt;
+ &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/4/41/Wilson_%22The_plague...%22%3B_people_fleeing_from_plague_Wellcome_L0016623.jpg&quot; width=&quot;100%&quot;&gt;
 //Runaways fleeing from the plague, a woodcut from &#39;A Looking-glasse for City and Countrey&#39;, printed by H. Gosson in 1630 and sold by E. Wright, c. 1630. Wellcome Images//
  &lt;br&gt;&lt;br&gt;
     &lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt; There are still no plague cases in your &lt;span class=&quot;def&quot; title=&quot;The smallest administrative unit of the English church. An official known as the parish clerk kept local records of christenings, burials, and marriages of everyone who lived within the parish. In this period, parish officials were responsible for maintaining the local social safety net, which included supporting and licensing beggars.&quot;&gt;parish&lt;/span&gt;, but everyone knows that it is only a matter of time
@@ -2213,8 +2213,9 @@ As if war wasn’t bad enough, you begin to hear rumors around the city that sev
         &lt;&lt;/if&gt;&gt;
 /* If not in city walls or western suburbs */
     &lt;&lt;elseif $location isnot &quot;in another part of the western suburbs&quot;&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
+    &lt;&lt;/if&gt;&gt;
 /* If location is western suburbs */
-    &lt;&lt;else&gt;&gt;
+    &lt;&lt;if $location is &quot;in another part of the western suburbs&quot;&gt;&gt;
         &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
             &lt;&lt;if $role is &quot;corpsebearer&quot; or $role is &quot;searcher&quot; or $role is &quot;nurse&quot;&gt;&gt;
                 &lt;&lt;plague-work&gt;&gt;
@@ -2236,9 +2237,9 @@ As if war wasn’t bad enough, you begin to hear rumors around the city that sev
                 &lt;&lt;if _fumes gt 0&gt;&gt;
                     &lt;&lt;if random(1,6) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]]&lt;&lt;/if&gt;&gt;
                 &lt;&lt;else&gt;&gt;
-                    &lt;&lt;if random(1,3) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]]
+                    &lt;&lt;if random(1,3) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]] &lt;&lt;/if&gt;&gt;
                 &lt;&lt;/if&gt;&gt;&lt;/li&gt;
-                &lt;li&gt;[[decide to quit and look for other work.-&gt;July 1665][$reputation to Math.clamp($reputation - 3, 0, 10); $role to &quot;quit&quot;]]&lt;/li&gt;
+                	&lt;li&gt;[[decide to quit and look for other work.-&gt;July 1665][$reputation to Math.clamp($reputation - 3, 0, 10); $role to &quot;quit&quot;]]&lt;/li&gt;
                 &lt;/ul&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;&lt;br&gt;
@@ -2261,7 +2262,6 @@ As if war wasn’t bad enough, you begin to hear rumors around the city that sev
             &lt;&lt;late-departure&gt;&gt;
             Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
         &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;/if&gt;&gt;
@@ -2382,7 +2382,7 @@ You look forward to even better things in [[February 1666]].
 &lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/ca/London_welcomes_home_runaways_Wellcome_L0002722.jpg&quot; height=&quot;614px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/c/ca/London_welcomes_home_runaways_Wellcome_L0002722.jpg&quot; width=&quot;100%&quot;&gt;
 //Henry Petowe and Frank Percy Wilson, &quot;London welcomes home her runaways&quot;. Taken from a woodcut in Henry Petowe&#39;s:The Countrie Ague, 1625. Wellcome Images//</tw-passagedata><tw-passagedata pid="24" name="February 1666" tags="storyline 1666" position="1325,775" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2401,7 +2401,7 @@ The Queen of Portugal, mother to England&#39;s beloved &lt;span class=&quot;def&
 
 So much for the city being safe again.&lt;br&gt;
 &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/d/d4/Catherine_of_Braganza_-_Lely_1663-65.jpg&quot; height=&quot;720&quot; width=&quot;588&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/d/d4/Catherine_of_Braganza_-_Lely_1663-65.jpg&quot; width=&quot;100%&quot;&gt;
 &lt;br&gt;
 //Peter Lely, Catherine of Braganza, 1663-5//
 &lt;br&gt;&lt;br&gt;
@@ -2435,7 +2435,7 @@ You hear rumors that the &lt;span class=&quot;def&quot; title=&quot;The English 
 
 One thing is for certain, though. The weather is so hot that &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; cases are on the rise again and you know it will only get worse in [[July 1666]]. 
 &lt;br&gt;&lt;br&gt;
-&lt;img src=&quot;https://collections.rmg.co.uk/media/287/368/bhc0286.jpg&quot; height=&quot;644px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://collections.rmg.co.uk/media/287/368/bhc0286.jpg&quot; width=&quot;100%&quot;&gt;
 //Abraham Storck, The &#39;Royal Prince&#39; and other Vessels at the Four Days Battle, 1–4 June 1666, c. 1670//
 
 &lt;&lt;/if&gt;&gt;
@@ -2508,7 +2508,7 @@ Everyone is still reeling from the shock of the Great Fire at the beginning of [
 &lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/b/b6/Great_Fire_London.jpg&quot; height=&quot;524px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/b/b6/Great_Fire_London.jpg&quot; width=&quot;100%&quot;&gt;
 //Josepha Jane Battlehooke, The Great Fire of London, 1675//</tw-passagedata><tw-passagedata pid="32" name="October 1666" tags="storyline 1666" position="1325,1075" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $plagueInfection eq 1&gt;&gt;&lt;&lt;sickPC&gt;&gt;
 &lt;&lt;elseif _infectedFamily.length gte 1&gt;&gt;&lt;&lt;sickFam&gt;&gt;
@@ -2738,13 +2738,13 @@ Do you:
 They have decided it will be your job to 
 &lt;&lt;if $gender is &quot;male&quot; or $gender is &quot;nonbinary&quot;&gt;&gt;&lt;&lt;set $role to &quot;corpsebearer&quot;&gt;&gt;remove the &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; corpses of anyone who dies.
 &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; height=&quot;1274px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; width=&quot;100%&quot;&gt;
 &lt;br&gt;
 //Printed by R. Price, A corpse bearer; reproduction of an engraving from a series of London Cries, 1655. Wellcome Images//
 &lt;br&gt;&lt;br&gt;
 &lt;&lt;elseif $gender is &quot;female&quot; and $reputation gt 5&gt;&gt;&lt;&lt;set $role to &quot;searcher&quot;&gt;&gt;look at the corpses and determine if they died of &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; or some other cause of death
 &lt;br&gt;
-    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; height=&quot;1600&quot; width=&quot;880&quot;&gt;
+    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; width=&quot;100%&quot;&gt;
     &lt;br&gt;
     //Nathaniel Parr, published by Thomas Astley, Plague in 1665, 1747//
 &lt;&lt;else&gt;&gt;&lt;&lt;set $role to &quot;nurse&quot;&gt;&gt;nurse the sick and dying, despite the risk to your own life.
@@ -2764,12 +2764,12 @@ The graveyards are beginning to overflow and corpses are being flung into the op
 /* NTS: should these descriptions end with a choice to abandon your work? yes */
     &lt;&lt;if $role is &quot;corpsebearer&quot;&gt;&gt;You have tried to slip a few corpses in from your &lt;span class=&quot;def&quot; title=&quot;The smallest administrative unit of the English church. An official known as the parish clerk kept local records of christenings, burials, and marriages of everyone who lived within the parish. In this period, parish officials were responsible for maintaining the local social safety net, which included supporting and licensing beggars.&quot;&gt;parish&lt;/span&gt; and have been turned away. Luckily, their grieving families are still shut into their houses and can&#39;t come out to yell at you over the treatment of the dead.
     &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; height=&quot;1274px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; width=&quot;100%&quot;&gt;
 //Printed by R. Price, A corpse bearer; reproduction of an engraving from a series of London Cries, 1655. Wellcome Images//
 
     &lt;&lt;elseif $role is &quot;searcher&quot;&gt;&gt;People attempt to bribe you to say that their loved ones died of something other than &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt;. 
     &lt;br&gt;
-    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; height=&quot;1600&quot; width=&quot;880&quot;&gt;
+    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; width=&quot;100%&quot;&gt;
     &lt;br&gt;
 //Nathaniel Parr, Three men loading plague victims from the street onto a cart to left, two of them smoking pipes to protect themselves, a figure with a bundle over his shoulder walking under an arch in the background to right; illustration to a &#39;History of England&#39;, c. 1747, published by Thomas Astley. British Museum.//
 &lt;br&gt;
@@ -2789,9 +2789,9 @@ The &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;fumigant&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="FamPesthouse" tags="infection-rates" position="50,500" size="100,100">&lt;&lt;nobr&gt;&gt;
-It is a difficult decision, but you decide it&#39;s for the best to send your sick to the &lt;span class=&quot;def&quot; title=&quot;A hospital used for the treatment and isolation of people infected with Bubonic plague or other infectious diseases&quot;&gt;pesthouse&lt;/span&gt;. 
+It is a difficult decision, but you &lt;&lt;if $age is &quot;child&quot; or if $age is &quot;adolescent&quot;&gt;&gt;and your family &lt;&lt;/if&gt;&gt;decide it&#39;s for the best to send your sick to the &lt;span class=&quot;def&quot; title=&quot;A hospital used for the treatment and isolation of people infected with Bubonic plague or other infectious diseases&quot;&gt;pesthouse&lt;/span&gt;. 
 &lt;br&gt;&lt;br&gt;
-&lt;&lt;if $reputation lte 1&gt;&gt;&lt;&lt;if $murder isnot 1&gt;&gt;To your horror, rumors swirl that you have actually murdered a member of your household and hidden the body! Y&lt;&lt;else&gt;&gt; Remembering the rumors of murder that circulated last time you sent someone to the household, y&lt;&lt;/if&gt;&gt;ou send to the master of the pesthouse to produce a certificate for you that proves the rumor is a lie.
+&lt;&lt;if $reputation lte 1&gt;&gt;&lt;&lt;if $murder isnot 1&gt;&gt;To your horror, rumors swirl that you &lt;&lt;if $age is &quot;child&quot; or if $age is &quot;adolescent&quot;&gt;&gt;and your family &lt;&lt;/if&gt;&gt;have actually murdered a member of your household and hidden the body! Y&lt;&lt;else&gt;&gt; Remembering the rumors of murder that circulated last time you &lt;&lt;if $age is &quot;child&quot; or if $age is &quot;adolescent&quot;&gt;&gt;and your family &lt;&lt;/if&gt;&gt;sent someone to the household, y&lt;&lt;/if&gt;&gt;ou send to the master of the pesthouse to produce a certificate for you that proves the rumor is a lie.
 &lt;&lt;set $reputation -=2&gt;&gt;&lt;&lt;set $murder =1&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;set $money -= 5&gt;&gt;
@@ -2805,7 +2805,7 @@ $NPCs[_z].relationship, $NPCs[_z].name, $NPCs[_z].health
 &lt;br&gt;&lt;br&gt;
 &lt;&lt;storyline-return&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/5/58/The_pest_house_and_plague_pit%2C_Moorfields%2C_London._Wellcome_V0013229.jpg&quot; height=&quot;720px&quot; width=&quot;859px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/5/58/The_pest_house_and_plague_pit%2C_Moorfields%2C_London._Wellcome_V0013229.jpg&quot; width=&quot;100%&quot;&gt;
 &lt;br&gt;
 //The pest house and plague pit, Moorfields, London. Wood engraving. Wellcome Images.//
 </tw-passagedata><tw-passagedata pid="40" name="sick-fam-widget" tags="widget infection-rates" position="50,375" size="100,100">&lt;&lt;widget &quot;sickFam&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
@@ -2915,7 +2915,7 @@ The pesthouse is a terrible place to be confined, with countless sick people all
 &lt;&lt;if $socio is &quot;merchants&quot;&gt;&gt;It occurs to you that perhaps you ought to have written your will, but your reputation is so poor and the pesthouse is so terrifying that no one can be convinced to bring you the writing materials you need.&lt;br&gt;&lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;It occurs to you that perhaps you ought to have written your will, but your reputation is so poor and the pesthouse is so terrifying that you can&#39;t convince a &lt;span class=&quot;def&quot; title=&quot;A person employed to copy or transcribe documents or to write documents for someone else, especially legal documents&quot;&gt;scrivener&lt;/span&gt; to come help you.&lt;br&gt;&lt;br&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if random(1,2) is 1&gt;&gt;Luckily, you will grow too delirious to notice how miserable you are in the hours before your [[death]].&lt;&lt;else&gt;&gt;You spend all your remaining energy in prayer that God will spare you from death. Despite the neglect of the overworked pesthouse staff, after a few days you feel your fever break and your &lt;span class=&quot;def&quot; title=&quot;Painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;buboes&lt;/span&gt; begin to go down. Thanks be to God, you have survived the plague.
 &lt;br&gt;&lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/5/58/The_pest_house_and_plague_pit%2C_Moorfields%2C_London._Wellcome_V0013229.jpg&quot; height=&quot;720px&quot; width=&quot;859px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/5/58/The_pest_house_and_plague_pit%2C_Moorfields%2C_London._Wellcome_V0013229.jpg&quot; width=&quot;100%&quot;&gt;
 &lt;br&gt;
 //The pest house and plague pit, Moorfields, London. Wood engraving. Wellcome Images.//
 &lt;br&gt;&lt;br&gt;
@@ -3005,12 +3005,12 @@ Do you:
     &lt;&lt;if $disability is 0&gt;&gt; and the &lt;span class=&quot;def&quot; title=&quot;Two parish officials elected to administer to the needs of the poor in their parish. These positions were created by the Poor Relief Act of 1597.&quot;&gt;Overseers of the Poor&lt;/span&gt; have decided it will be your job to
         &lt;&lt;if $gender is &quot;male&quot; or $gender is &quot;nonbinary&quot;&gt;&gt;&lt;&lt;set $role to &quot;corpsebearer&quot;&gt;&gt;remove the &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; corpses if anyone dies
         &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; height=&quot;1274px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; width=&quot;100%&quot;&gt;
 //Printed by R. Price, A corpse bearer; reproduction of an engraving from a series of London Cries, 1655. Wellcome Images//
         
         &lt;&lt;elseif $gender is &quot;female&quot; and $reputation gt 5&gt;&gt;&lt;&lt;set $role to &quot;searcher&quot;&gt;&gt;look at the corpses and determine if they died of &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; or some other cause of death
         &lt;br&gt;
-    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; height=&quot;1600&quot; width=&quot;880&quot;&gt;
+    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; width=&quot;100%&quot;&gt;
     //Nathaniel Parr, published by Thomas Astley, Plague in 1665, 1747.//
         
         &lt;&lt;else&gt;&gt;&lt;&lt;set $role to &quot;nurse&quot;&gt;&gt;nurse the sick and dying, despite the risk to your own life
@@ -3429,6 +3429,7 @@ After nearly a month in  &lt;span class=&quot;def&quot; title=&quot;A method of 
     &lt;&lt;health-update&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Fled" tags="fled" position="1250,1225" size="100,100">&lt;&lt;nobr&gt;&gt;
+
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;You&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt; convince your family to&lt;&lt;else&gt;&gt; have decided to&lt;&lt;/if&gt;&gt; &#39;&#39;flee to your country estate&#39;&#39;.
 &lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;
 Your master flees London with you and the rest of your &lt;span class=&quot;def&quot; title=&quot;All the people living in a home. If there is an adult male living in the home, he is generally considered the head of the household. Widowed women with young children and single women may also be heads of the household. Members of the household then include the head of household, their spouse, and their children, as well as members of the extended family such as grandparents, siblings, aunts, uncles, nieces, nephews, and cousins. Households may additionally include apprentices, journeymen, and servants.&quot;&gt;household&lt;/span&gt;. You have only a little time to prepare and say goodbye to your friends before you leave.&lt;br&gt;
@@ -3504,7 +3505,8 @@ It&#39;s also not too late to &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;
 &lt;&lt;elseif $location is &quot;inside the City walls&quot;&gt;&gt;[[Continue to August 1665-&gt;August 1665]]
 &lt;&lt;else&gt;&gt;[[Continue to July 1665-&gt;July 1665]]
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="Household-Fled" tags="fled" position="850,1275" size="100,100">You help your &lt;span class=&quot;def&quot; title=&quot;All the people living in a home. If there is an adult male living in the home, he is generally considered the head of the household. Widowed women with young children and single women may also be heads of the household. Members of the household then include the head of household, their spouse, and their children, as well as members of the extended family such as grandparents, siblings, aunts, uncles, nieces, nephews, and cousins. Households may additionally include apprentices, journeymen, and servants.&quot;&gt;household&lt;/span&gt; to pack up and leave the city for safety.  You promise to meet them should the situation grow worse.
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="Household-Fled" tags="fled" position="850,1275" size="100,100">
+You help your &lt;span class=&quot;def&quot; title=&quot;All the people living in a home. If there is an adult male living in the home, he is generally considered the head of the household. Widowed women with young children and single women may also be heads of the household. Members of the household then include the head of household, their spouse, and their children, as well as members of the extended family such as grandparents, siblings, aunts, uncles, nieces, nephews, and cousins. Households may additionally include apprentices, journeymen, and servants.&quot;&gt;household&lt;/span&gt; to pack up and leave the city for safety.  You promise to meet them should the situation grow worse.
 
 &lt;&lt;storyline-return&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="no-plague-yet" tags="widget" position="900,600" size="100,100">&lt;&lt;widget &quot;no-plague-yet&quot;&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
@@ -3605,12 +3607,12 @@ Luckily, there are no plague cases in your &lt;span class=&quot;def&quot; title=
 &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
 	&lt;&lt;if $role is &quot;corpsebearer&quot;&gt;&gt;As a corpsebearer, every night, you must go round to the locked up houses of your &lt;span class=&quot;def&quot; title=&quot;The smallest administrative unit of the English church. An official known as the parish clerk kept local records of christenings, burials, and marriages of everyone who lived within the parish. In this period, parish officials were responsible for maintaining the local social safety net, which included supporting and licensing beggars.&quot;&gt;parish&lt;/span&gt; and call for them to bring out their dead, while praying to God that you remain safe.
 &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; height=&quot;1274px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; width=&quot;100%&quot;&gt;
 //Printed by R. Price, A corpse bearer; reproduction of an engraving from a series of London Cries, 1655. Wellcome Images//
 
      &lt;&lt;elseif $role is &quot;searcher&quot;&gt;&gt;As a searcher, every time you are called to someone&#39;s house to determine a cause of death, you pray to God to protect you. You are starting to have nightmares about seeing &lt;span class=&quot;def&quot; title=&quot;Painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;buboes&lt;/span&gt; and the tokens of &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; on your neighbors.
     &lt;br&gt;
-    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; height=&quot;1600&quot; width=&quot;880&quot;&gt;
+    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; width=&quot;100%&quot;&gt;
     //Nathaniel Parr, published by Thomas Astley, Plague in 1665, 1747.//
      
      &lt;&lt;elseif $role is &quot;nurse&quot;&gt;&gt;The &lt;span class=&quot;def&quot; title=&quot;Two parish officials elected to administer to the needs of the poor in their parish. These positions were created by the Poor Relief Act of 1597.&quot;&gt;Overseers of the Poor&lt;/span&gt; assign you to your first &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; patient to nurse.
@@ -3621,12 +3623,12 @@ Luckily, there are no plague cases in your &lt;span class=&quot;def&quot; title=
 &lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;
 	&lt;&lt;if $role is &quot;corpsebearer&quot;&gt;&gt;Every night, you go round to the locked up houses of your &lt;span class=&quot;def&quot; title=&quot;The smallest administrative unit of the English church. An official known as the parish clerk kept local records of christenings, burials, and marriages of everyone who lived within the parish. In this period, parish officials were responsible for maintaining the local social safety net, which included supporting and licensing beggars.&quot;&gt;parish and call for them to bring out their dead, while praying to God that you remain safe.
         &lt;br&gt;
-&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; height=&quot;1274px&quot; width=&quot;900px&quot;&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/7/7a/Wilson_%22The_plague...%22%3B_a_corpses_bearer_Wellcome_L0016624.jpg&quot; width=&quot;100%&quot;&gt;
 //Printed by R. Price, A corpse bearer; reproduction of an engraving from a series of London Cries, 1655. Wellcome Images//
     
     &lt;&lt;elseif $role is &quot;searcher&quot;&gt;&gt;Every time you are called to someone&#39;s house to determine a cause of death, you pray to God to protect you. You are starting to have nightmares about seeing &lt;span class=&quot;def&quot; title=&quot;Painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;buboes&lt;/span&gt; and the tokens of &lt;span class=&quot;def&quot; title=&quot;A deadly infection usually spread to humans by fleas infected with the bacterium yersinia pestis. It manifests in several different ways, including bubonic (lymph node), pneumonic (lungs), and septicemic (bloodstream) plague. Bubonic plague was the least deadly form, at only ~50% fatal, while pneumonic plague was 99% fatal and can be spread directly to other people by coughing and septicemic plague was 100% fatal. Plague killed hundreds of millions of people before the development of antibiotic treatments and still kills some people today. Symptoms include fever, headaches, vomiting, weakness, coughing, shortness of breath, chest pain, abdominal pain, swollen lymph nodes, gangrene, meningitis, and most famously, the appearance of large buboes, or painful pus-filled swellings in the thighs, neck, groin, and armpits. They may turn black and rot away or rupture, spreading the infection around the body.&quot;&gt;plague&lt;/span&gt; on your neighbors.
     &lt;br&gt;
-    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; height=&quot;1600&quot; width=&quot;880&quot;&gt;
+    &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/6/67/Plague_in_1665_%28BM_1875%2C0508.1513%29.jpg&quot; width=&quot;100%&quot;&gt;
     //Nathaniel Parr, published by Thomas Astley, Plague in 1665, 1747.//
    
    &lt;&lt;elseif $role is &quot;nurse&quot;&gt;&gt;&lt;span class=&quot;def&quot; title=&quot;The smallest administrative unit of the English church. An official known as the parish clerk kept local records of christenings, burials, and marriages of everyone who lived within the parish. In this period, parish officials were responsible for maintaining the local social safety net, which included supporting and licensing beggars.&quot;&gt;Parish&lt;/span&gt; officials tell you there is a patient for you to nurse.
@@ -3665,6 +3667,7 @@ Luckily, there are no plague cases in your &lt;span class=&quot;def&quot; title=
 
 &lt;center&gt;&lt;&lt;link &quot;Return to game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/center&gt;</tw-passagedata><tw-passagedata pid="76" name="infection-widgets" tags="widget infection-rates" position="150,850" size="100,100">/*Infection Program: determines rate of plague infection based on your location*/ 
 &lt;&lt;widget &quot;infection-program&quot;&gt;&gt;
+
 &lt;&lt;if $location is &quot;inside the City walls&quot;&gt;&gt;&lt;&lt;include [[inside-city]]&gt;&gt;
 &lt;&lt;elseif $location is &quot;in another part of the western suburbs&quot;&gt;&gt;&lt;&lt;include [[Western-infection]]&gt;&gt;
 &lt;&lt;elseif $location is &quot;in the western suburbs, specifically Westminster&quot;&gt;&gt;&lt;&lt;include [[Westminster-infection]]&gt;&gt;
@@ -3797,7 +3800,7 @@ Remaining money: $money&lt;br&gt;
 &lt;&lt;return&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-&lt;img src=&quot;https://iiif.wellcomecollection.org/image/L0064305/full/760%2C/0/default.jpg&quot;&gt;</tw-passagedata><tw-passagedata pid="80" name="preventatives-treatments" tags="widget" position="825,175" size="100,100">&lt;&lt;widget &quot;preventative&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
+&lt;img src=&quot;https://iiif.wellcomecollection.org/image/L0064305/full/760%2C/0/default.jpg&quot; width=&quot;100%&quot;&gt;</tw-passagedata><tw-passagedata pid="80" name="preventatives-treatments" tags="widget" position="825,175" size="100,100">&lt;&lt;widget &quot;preventative&quot;&gt;&gt;&lt;&lt;nobr&gt;&gt;
 &lt;ul&gt;&lt;li&gt;&lt;span id=&quot;church&quot;&gt;&lt;&lt;link &quot;Go to church and pray often&quot;&gt;&gt;&lt;&lt;set $reputation +=1&gt;&gt;&lt;&lt;replace #church&gt;&gt;You go to church and pray regularly through the month. Others admire your piety in the face of such a grave situation!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;eat&quot;&gt;&lt;&lt;link &quot;Avoid eating berries, cabbage, cucumbers, melon, and spinach.&quot;&gt;&gt;&lt;&lt;replace #eat&gt;&gt;You avoid eating berries, cabbage, cucumbers, melons, and spinach. Your neighbors swear by it!&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -3871,7 +3874,7 @@ You have some &lt;span class=&quot;def&quot; title=&quot;A medicine or treatment
         &lt;li&gt;[[not accept the job-&gt;Stay][$reputation -= 1; $fled to 4; $role to &quot;unemployed&quot;]]&lt;/li&gt;
         &lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt;
             &lt;&lt;if $hoh is 1&gt;&gt;&lt;li&gt;[[flee the city and return to your place of origin-&gt;Fled][$fled to 6]]&lt;/li&gt;
-                &lt;&lt;if $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[remain in the city yourself, but send your family back to your place of origin-&gt;Stay][$fled to 5]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
+                &lt;&lt;if $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[remain in the city yourself, but send your family back to your place of origin-&gt;Stay][$fled to 5; $plagueInfection to 0; $infectedFamily to 0]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
             &lt;&lt;else&gt;&gt;&lt;li&gt;[[try to convince your family to flee London and return to your place of origin-&gt;Fled][$fled to 6]]&lt;/li&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/if&gt;&gt;   
@@ -3907,7 +3910,7 @@ You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your famil
     &lt;&lt;if $hoh is 0&gt;&gt;You convince your family to&lt;&lt;else&gt;&gt;You decide to:&lt;&lt;/if&gt;&gt;
         &lt;ul&gt;
             &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&lt;/li&gt;
-            &lt;&lt;if $hoh is 1 and $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[Remain in the city, but send the rest of your household away.-&gt;Stay][$fled to 5; $money -= 560]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
+            &lt;&lt;if $hoh is 1 and $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[Remain in the city, but send the rest of your household away.-&gt;Stay][$fled to 5; $money -= 560; $plagueInfection to 0; $infectedFamily to 0]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
             &lt;li&gt;&lt;&lt;if $reputation gt 5&gt;&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 6; $money -= 1120]]
                 &lt;&lt;else&gt;&gt;
                     &lt;&lt;if random(1,2) eq 1&gt;&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 6; $money -= 1120]]&lt;&lt;else&gt;&gt;[[Flee the city with your entire household.-&gt;Stay][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 7; $money -= 1120]]
@@ -3922,7 +3925,7 @@ You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your famil
 You decide to:
     &lt;ul&gt;
         &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&lt;/li&gt;
-        &lt;li&gt;[[Remain in the city, but send the rest of your household away-&gt;Stay][$fled to 5; $money -= 800]]&lt;/li&gt;
+        &lt;li&gt;[[Remain in the city, but send the rest of your household away-&gt;Stay][$fled to 5; $money -= 800; $plagueInfection to 0; $infectedFamily to 0]]&lt;/li&gt;
         &lt;li&gt;[[Flee the city with your entire household.-&gt;Fled][$fled to 6; $money -= 1600; $reputation to Math.clamp($reputation - 2, 0, 10)]]&lt;/li&gt;
     &lt;/ul&gt;
 &lt;&lt;/if&gt;&gt; 
