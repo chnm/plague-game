@@ -2123,9 +2123,12 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
 
 /* list NPCs in sidebar menu */
 &lt;&lt;widget &quot;ListNPCs&quot;&gt;&gt;
-&lt;&lt;nobr&gt;&gt;Household size: &lt;&lt;set _hhSize to $NPCs.length&gt;&gt; _hhSize&lt;br&gt;&lt;br&gt;
+&lt;&lt;nobr&gt;&gt;Household size: &lt;&lt;if $fled is 5&gt;&gt;&lt;&lt;set _hhSize to $FledFamily.length&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set _hhSize to $NPCs.length&gt;&gt;&lt;&lt;/if&gt;&gt; _hhSize&lt;br&gt;&lt;br&gt;
 
 &#39;&#39;Household:&#39;&#39; &lt;&lt;if $fled is 5&gt;&gt;&#39;&#39;fled to $hhlocation&#39;&#39;&lt;&lt;/if&gt;&gt;&lt;br&gt;
+        &lt;&lt;for _i, _idx range $FledFamily&gt;&gt;
+        $FledFamily[_i].name, $FledFamily[_i].age $FledFamily[_i].relationship: $FledFamily[_i].health.&lt;br&gt;
+        &lt;&lt;/for&gt;&gt;
         &lt;&lt;for _i, _idx range $NPCs&gt;&gt;
         $NPCs[_i].name, $NPCs[_i].age $NPCs[_i].relationship: $NPCs[_i].health.&lt;br&gt;
         &lt;&lt;/for&gt;&gt;
@@ -2136,8 +2139,7 @@ When you go to church on Easter Sunday, you are reminded of how lucky you are as
     &lt;&lt;/for&gt;&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;&lt;/widget&gt;&gt;
-</tw-passagedata><tw-passagedata pid="15" name="impressed" tags="" position="1900,275" size="100,100">&lt;&lt;nobr&gt;&gt;/* NTS: for those not booted out, need to add reputation/money hits */
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="impressed" tags="" position="1900,275" size="100,100">&lt;&lt;nobr&gt;&gt;/* NTS: for those not booted out, need to add reputation/money hits */
 &lt;&lt;if $impressed gte 2&gt;&gt;You&#39;ve been caught again! 
     &lt;&lt;if $age is &quot;child&quot;&gt;&gt;As a child, you won&#39;t be transported to the New World or &lt;span class=&quot;def&quot; title=&quot;The seventeenth-century English Navy (and other militaries) often had labor shortages and had to force men to serve in its ranks. This mostly meant kidnapping, either by force, trickery, or coercion. After being impressed, sailors who were not British could petition to be let back out, but British subjects had to serve their term. Though the Navy typically impressed merchant seamen or fishermen, they sometimes abducted non-sailors. The practice was very unpopular and provoked much protest.&quot;&gt;impressed&lt;/span&gt; into His Majesty&#39;s Navy, but you are forced into service with a local merchant.
     &lt;br&gt;&lt;br&gt; /*NTS: insert text here about what happens to children who are impressed as servants */
@@ -2843,17 +2845,12 @@ As morning dawns, a terrible realization settles over your &lt;span class=&quot;
 &lt;&lt;/widget&gt;&gt;
 
 /* if sending household away or back to place of origin, change their location for status updates */
-&lt;&lt;widget &quot;fled-family&quot;&gt;&gt;
+&lt;&lt;widget &quot;fled-family&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
 &lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt;&lt;&lt;set $hhlocation to $origin&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $hhlocation to &quot;in the countryside&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;set $FledFamily = []&gt;&gt;
-    &lt;&lt;for _f, _family range $NPCs&gt;&gt;
-        &lt;&lt;if _family.relationship isnot &quot;servant&quot;&gt;&gt;
+    &lt;&lt;for _f range $NPCs&gt;&gt;
             &lt;&lt;set $FledFamily.push(_f)&gt;&gt;
-        &lt;&lt;/if&gt;&gt;
     &lt;&lt;/for&gt;&gt;
-    &lt;&lt;for _x range $FledFamily&gt;&gt;
-        &lt;&lt;set $FledFamily[_x].location to $hhlocation&gt;&gt;
-    &lt;&lt;/for&gt;&gt;
+    &lt;&lt;set $NPCs to []&gt;&gt;&lt;&lt;/silently&gt;&gt;
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;health-update&quot;&gt;&gt;
@@ -3874,7 +3871,7 @@ You have some &lt;span class=&quot;def&quot; title=&quot;A medicine or treatment
         &lt;li&gt;[[not accept the job-&gt;Stay][$reputation -= 1; $fled to 4; $role to &quot;unemployed&quot;]]&lt;/li&gt;
         &lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt;
             &lt;&lt;if $hoh is 1&gt;&gt;&lt;li&gt;[[flee the city and return to your place of origin-&gt;Fled][$fled to 6]]&lt;/li&gt;
-                &lt;&lt;if $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[remain in the city yourself, but send your family back to your place of origin-&gt;Stay][$fled to 5; $plagueInfection to 0; $infectedFamily to 0]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
+                &lt;&lt;if $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[remain in the city yourself, but send your family back to your place of origin-&gt;Stay][$fled to 5; $plagueInfection to 0; _infectedFamily to 0]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
             &lt;&lt;else&gt;&gt;&lt;li&gt;[[try to convince your family to flee London and return to your place of origin-&gt;Fled][$fled to 6]]&lt;/li&gt;
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;/if&gt;&gt;   
@@ -3910,7 +3907,7 @@ You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your famil
     &lt;&lt;if $hoh is 0&gt;&gt;You convince your family to&lt;&lt;else&gt;&gt;You decide to:&lt;&lt;/if&gt;&gt;
         &lt;ul&gt;
             &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&lt;/li&gt;
-            &lt;&lt;if $hoh is 1 and $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[Remain in the city, but send the rest of your household away.-&gt;Stay][$fled to 5; $money -= 560; $plagueInfection to 0; $infectedFamily to 0]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
+            &lt;&lt;if $hoh is 1 and $NPCs.length gt 0&gt;&gt;&lt;li&gt;[[Remain in the city, but send the rest of your household away.-&gt;Stay][$fled to 5; $money -= 560; $plagueInfection to 0; _infectedFamily to 0]]&lt;/li&gt;&lt;&lt;/if&gt;&gt;
             &lt;li&gt;&lt;&lt;if $reputation gt 5&gt;&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 6; $money -= 1120]]
                 &lt;&lt;else&gt;&gt;
                     &lt;&lt;if random(1,2) eq 1&gt;&gt;[[Flee the city with your entire household.-&gt;Fled][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 6; $money -= 1120]]&lt;&lt;else&gt;&gt;[[Flee the city with your entire household.-&gt;Stay][$reputation to Math.clamp($reputation - 3, 0, 10); $fled to 7; $money -= 1120]]
@@ -3925,7 +3922,7 @@ You &lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt;try to convince your famil
 You decide to:
     &lt;ul&gt;
         &lt;li&gt;[[Remain in the city with your entire household-&gt;Stay][$fled to 4]]&lt;/li&gt;
-        &lt;li&gt;[[Remain in the city, but send the rest of your household away-&gt;Stay][$fled to 5; $money -= 800; $plagueInfection to 0; $infectedFamily to 0]]&lt;/li&gt;
+        &lt;li&gt;[[Remain in the city, but send the rest of your household away-&gt;Stay][$fled to 5; $money -= 800; $plagueInfection to 0; _infectedFamily to 0]]&lt;/li&gt;
         &lt;li&gt;[[Flee the city with your entire household.-&gt;Fled][$fled to 6; $money -= 1600; $reputation to Math.clamp($reputation - 2, 0, 10)]]&lt;/li&gt;
     &lt;/ul&gt;
 &lt;&lt;/if&gt;&gt; 
@@ -4124,7 +4121,7 @@ The official Thanksgiving Day for the end of the plague is proclaimed in Novembe
 
 Life may go on for the reckless, but it will not be until 1667 that you&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt; and your family&lt;&lt;/if&gt;&gt; finally make your way [[back to the city-&gt;December 1666]].
 &lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="Stay" tags="" position="725,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;&lt;if $fled is 5&gt;&gt;&lt;&lt;if $origin isnot &quot;London&quot;&gt;&gt;&lt;&lt;set $hhlocation to $origin&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;set $hhlocation to &quot;the countryside&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $fled is 5&gt;&gt;&lt;&lt;fled-family&gt;&gt;&lt;&lt;/if&gt;&gt;
     /* Beggars */
     &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
         &lt;&lt;if $fled is 3&gt;&gt;
@@ -4163,16 +4160,6 @@ You&lt;&lt;if $hoh is 0 and $NPCs.length gt 0&gt;&gt; convince your family&lt;&l
 /* Nobles */
 &lt;&lt;if $socio is &quot;nobles&quot;&gt;&gt;
     /* NTS: add text about what nobles do immediately after choosing to stay. */
- &lt;&lt;if $fled is 5&gt;&gt;
- &lt;&lt;set $FledFamily = []&gt;&gt;
-&lt;&lt;for _y, _household range $NPCs&gt;&gt;
-  &lt;&lt;if _household.relationship isnot &quot;servant&quot;&gt;&gt;
-    &lt;&lt;set $FledFamily.push(_y)&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-    &lt;&lt;/for&gt;&gt;
-    &lt;&lt;for _s range $FledFamily&gt;&gt;
-        &lt;&lt;set $NPCs[_s].location to $hhlocation&gt;&gt;&lt;&lt;set $NPCs[_s].health to &quot;safe from harm&quot;&gt;&gt;
-    &lt;&lt;/for&gt;&gt;
  You help your &lt;span class=&quot;def&quot; title=&quot;All the people living in a home. If there is an adult male living in the home, he is generally considered the head of the household. Widowed women with young children and single women may also be heads of the household. Members of the household then include the head of household, their spouse, and their children, as well as members of the extended family such as grandparents, siblings, aunts, uncles, nieces, nephews, and cousins. Households may additionally include apprentices, journeymen, and servants.&quot;&gt;household&lt;/span&gt; to pack up and leave the city for safety in $hhlocation. You send your family with most of the servants, keeping only a few for yourself. You promise to meet them should the situation grow worse.&lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;br&gt;&lt;br&gt;
