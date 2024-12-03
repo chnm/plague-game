@@ -1,6 +1,29 @@
 <h1>Game settings</h1>
-    HOH 0 = not head of household
-    HOH 1 = head of household
+<h2>Status</h2>  
+<ul><li>HOH 0 = not head of household</li>
+<li>HOH 1 = head of household</li>
+</ul>
+
+<h2>Character Generator Settings</h2>
+<h3>Children</h3>
+Childrens' ages are determined based on main character age.
+<ul></li><b>Young Adults</b> can only have infants or young children.</li>
+<li><b>Middle-age adults</b> can have adolescent children, young adults, or middle-age adult children.</li>
+<li><b>Elderly adults</b> can have young adults or middle-aged children.</li>
+</ul><br>
+
+Actual age is determined by a random number generator within a defined range.
+<ul><li>Infant: </li>
+<li>Child: </li>
+<li>Adolescent: </li>
+<li>Young Adult: </li>
+<li>Middle-aged Adult: </li>
+<li>Elderly Adult: </li>
+
+<h3>Parents</h3>
+Determined based on main character age.
+
+<h3>Socioeconomic status</h3>
 
 <h1>Game Decisions</h1>
 <h2>FLEEING THE CITY:</h2><br>
@@ -24,4 +47,6 @@ The "Family Status" sidebar should reflect where the family is. Currently, famil
 <h2>PESTHOUSE</h2>
 
 <h2>FIRE</h2>
+
+<h2>Reputation</h2>
 
