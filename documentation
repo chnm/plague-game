@@ -6,7 +6,8 @@
 <h2>FLEEING THE CITY:</h2><br>
 Choices to flee the city vary based on socioeconomic class, family size, place of origin, and whether you are the head of household. <br>
 
-<b>SERVANTS</b> have an additional choice: they can choose to follow their masters or break from their master's choice. Single players who are also head of household (i.e., not a child) will have the choice to remain in the city with their household, remain in the city alone and send away their family, or flee with their household.<br>
+<b>SERVANTS</b> have an additional choice: they can choose to follow their masters or break from their master's choice. <br>
+Single players who are also head of household (i.e., not a child) will have the choice to remain in the city with their household, remain in the city alone and send away their family, or flee with their household.<br>
 
 Choices: Nos. 1-3 only apply to servants.
     <ul><li>1: Stay with your master</li>
@@ -17,6 +18,8 @@ Choices: Nos. 1-3 only apply to servants.
     <li>6: Flee with your household</li>
     <li>7: You attempt to flee but can't due to lack of funds.
       </ul>
+
+The "Family Status" sidebar should reflect where the family is. Currently, family member status remains unchanged while they are "fled", but future versions may allow them to become infected or fall ill for other reasons.<br>
 
 <h2>PESTHOUSE</h2>
 
