@@ -1,20 +1,24 @@
-<h1>Game Decisions - Settings</h1>
-<h2>FLEEING THE CITY:</h2>
-  Choices to flee the city vary based on socioeconomic class, family size, place of origin, and whether you are the head of household. DAY LABORERS have an additional choice: they can choose to follow their masters or break from their master's choice.
- <ul>
-    <li>Single players who are also head of household (i.e., not a child) will have the choice to remain in the city with their household, remain in the city alone and send away their family, or flee with their household.</li>
-    or flee the city.
-    <li>
-  
-    <ul><li>1: Stay with your master </li>
-    <li>2: Flee with your master (no reputation hit, no income hit)</li>
-    <li>3: Flee without your master: you abandon your duties and take a reputation/income hit.</li>
+<h1>Game settings</h1>
+    HOH 0 = not head of household
+    HOH 1 = head of household
+
+<h1>Game Decisions</h1>
+<h2>FLEEING THE CITY:</h2><br>
+Choices to flee the city vary based on socioeconomic class, family size, place of origin, and whether you are the head of household. <br>
+
+<b>SERVANTS</b> have an additional choice: they can choose to follow their masters or break from their master's choice. Single players who are also head of household (i.e., not a child) will have the choice to remain in the city with their household, remain in the city alone and send away their family, or flee with their household.<br>
+
+Choices: Nos. 1-3 only apply to servants.
+    <ul><li>1: Stay with your master</li>
+    <li>2: Flee with your master (no reputation impact, no income hit)</li>
+    <li>3: Flee <b>without</b> your master: you abandon your duties and take a reputation/income hit.</li>
     <li>4: Stay with your household</li>
     <li>5: Stay but send your household away</li>
     <li>6: Flee with your household</li>
     <li>7: You attempt to flee but can't due to lack of funds.
       </ul>
 
-  <h1>Game settings</h1>
-    HOH 0 = not head of household
-    HOH 1 = head of household
+<h2>PESTHOUSE</h2>
+
+<h2>FIRE</h2>
+
