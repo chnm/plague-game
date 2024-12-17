@@ -25,6 +25,18 @@ $reputation:
 * 3-5: _bad credit is better than none_
 * 3 or lower: _a worthless and base rogue_
 
+### Age
+_<<widget "playerAge">>, found in the passage **char-gen-widgets**_
+
+The main character's age is randomly determined based on the age range players choose when setting up their character. NPCs are given a general range only ("young adult," "adolescent," etc.) 
+
+* Child: 5-9 years
+* Adolescent: 10-15 years
+* Young adult: 16-29 years
+* Middle-aged adult: 30-49 years
+* Elderly adult: 50-76 years
+
+
 ## Household Character Generator Widgets
 _Most of these settings are found in the passage **Char-gen-widgets** and called into the **Bio** passage._
 
