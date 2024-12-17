@@ -1,5 +1,5 @@
-#Game settings
-##Status 
+# Game settings
+## Status 
 *HOH 0 = not head of household
 *HOH 1 = head of household
 
