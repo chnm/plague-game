@@ -1,26 +1,27 @@
 # Game settings
 ## Status 
-*HOH 0 = not head of household
-*HOH 1 = head of household
+* HOH 0 = not head of household
+* HOH 1 = head of household
 
-<h2>Character Generator Settings</h2>
-<h3>Children</h3>
-Childrens' ages are determined based on main character age.
-<ul></li><b>Young Adults</b> can only have infants or young children.</li>
-<li><b>Middle-age adults</b> can have adolescent children, young adults, or middle-age adult children.</li>
-<li><b>Elderly adults</b> can have young adults or middle-aged children.</li>
-</ul><br>
+## Character Generator Settings
+These settings are all controlled in the passage "char-gen-widgets".
 
-Actual age is determined by a random number generator within a defined range.
-<ul><li>Infant: </li>
-<li>Child: </li>
-<li>Adolescent: </li>
-<li>Young Adult: </li>
-<li>Middle-aged Adult: </li>
-<li>Elderly Adult: </li>
+### Children
+Childrens' age ranges are determined based on the main character's age.
+* **Young adults** can only have infants or young children.
+* **Middle-aged adults** can have adolescent children, young adults, or middle-age adult children.
+* **Elderly adults** can have young adult or middle-aged children.
 
-<h3>Parents</h3>
-Determined based on main character age.
+Numerical ages are randomly determined, within a defined range for each bracket.
+* **Infant:**
+* **Child:**
+* **Adolescent:** 
+* **Young Adult: **
+* **Middle-aged Adult:**
+* E**lderly Adult:**
+
+### Parents
+Determined based on the main character's age.
 
 <h3>Socioeconomic status</h3>
 
