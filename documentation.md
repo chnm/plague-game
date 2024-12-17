@@ -1,15 +1,15 @@
 # Game settings
 ## Player Variables
-Most of these are set in the **StoryInit** and **storyMenu** passages.
+Most of these variables and widgets are set in the **StoryInit** and **storyMenu** passages.
 
 ### Head of Household
-The $hoh variable affects the player's ability to make decisions and their experience playing the game. It is primarily determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
+The **$hoh** variable affects the player's ability to make decisions and their experience playing the game. It is primarily determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
 
 * 0 = not head of household
 * 1 = head of household
 
 ### Plague Infection
-The $plagueInfection variable checks whether you are currently healthy, infected, or previously infected and recovered. It runs at the beginning of each monthly passage and quarantine passages to check your status.
+The **$plagueInfection** variable checks whether you are currently healthy, infected, or previously infected and recovered. It runs at the beginning of each monthly passage and quarantine passages to check your status.
 * 0 = not infected
 * 1 = currently infected
 * 2 = infected and recovered 
@@ -23,8 +23,8 @@ $reputation:
 * 3-5: _bad credit is better than none_
 * 3 or lower: _a worthless and base rogue_
 
-## Household Character Generator Settings
-_These settings are found in the passage "char-gen-widgets" and called into the "bio" widget._
+## Household Character Generator Widgets
+_Most of these settings are found in the passage **Char-gen-widgets** and called into the **Bio** passage._
 
 These settings determine the number, age, and status of members of your household, including children, partners, and siblings. They are dependent on the age, marital status, and socioeconomic status of the main character.
 
@@ -43,23 +43,15 @@ The age and gender of the main character's partner is determined by their marita
 
 ### Children
 _<<widget "addChildNPC">>_ 
-The main character's number of children is based on their age, marital status, and socioeconomic status.
 
-Childrens' age ranges are determined based on the main character's age.
+The main character's number of children is based on their age, marital status, and socioeconomic status. Childrens' age ranges are determined based on the main character's age.
 * **Young adults** can only have infants or young children.
 * **Middle-aged adults** can have adolescent children, young adults, or middle-age adult children.
 * **Elderly adults** can have young adult or middle-aged children.
 
-Actual numerical ages are randomly determined, within a defined range for each bracket.
-* **Infant:**
-* **Child:**
-* **Adolescent:** 
-* **Young Adult:**
-* **Middle-aged Adult:**
-* **Elderly Adult:**
-
 ### Parents
 _<<widget "addParentNPC">>_
+
 The age and likelihood of having living parents is determined based on the main character's age. Younger characters are more likely to have both living parents. For characters **middle-aged** or younger, there is a slightly higher chance of only having a living mother.
 
 ### Siblings
