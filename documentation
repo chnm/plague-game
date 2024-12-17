@@ -1,8 +1,7 @@
-<h1>Game settings</h1>
-<h2>Status</h2>  
-<ul><li>HOH 0 = not head of household</li>
-<li>HOH 1 = head of household</li>
-</ul>
+#Game settings
+##Status 
+*HOH 0 = not head of household
+*HOH 1 = head of household
 
 <h2>Character Generator Settings</h2>
 <h3>Children</h3>
