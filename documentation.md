@@ -3,7 +3,9 @@
 Most of these variables and widgets are set in the **StoryInit** and **storyMenu** passages.
 
 ### Head of Household
-The **$hoh** variable affects the player's ability to make decisions and their experience playing the game. It is primarily determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
+_set in the <<playerAge>> widget found in the passage **char-gen-widgets**_
+
+The **$hoh** variable affects the player's ability to make decisions and their experience playing the game. It is currently determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
 
 * 0 = not head of household
 * 1 = head of household
@@ -57,7 +59,7 @@ The age and likelihood of having living parents is determined based on the main 
 ### Siblings
 _<<widget "addSiblingsNPC">>_
 
-Age and number of siblings is determined based on main character age. If the main character is an unmarried **young adult** or younger, siblings may live in their household (added to the total # of household members), or they may 
+Age and number of siblings is determined based on main character age. If the main character is an unmarried **young adult** or younger, siblings may live in their household (added to the total # of household members), or they may be part of an extended family.
 
 # Game Decisions
 ## FLEEING THE CITY
