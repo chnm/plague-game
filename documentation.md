@@ -3,7 +3,7 @@
 Most of these are set in the **StoryInit** and **storyMenu** passages.
 
 ### Head of Household
-The "head of household" status affects the player's ability to make decisions and their experience playing the game. It is primarily determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
+The $hoh variable affects the player's ability to make decisions and their experience playing the game. It is primarily determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
 
 * 0 = not head of household
 * 1 = head of household
