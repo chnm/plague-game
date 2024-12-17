@@ -3,7 +3,7 @@
 Most of these variables and widgets are set in the **StoryInit** and **storyMenu** passages.
 
 ### Head of Household
-_set in the <<playerAge>> widget found in the passage **char-gen-widgets**_
+_set in <<widget "playerAge">>  found in the passage **char-gen-widgets**_
 
 The **$hoh** variable affects the player's ability to make decisions and their experience playing the game. It is currently determined by age, not gender. Players who are not the head of their household may not be able to make certain decisions or need to convince family members to take certain actions.
 
