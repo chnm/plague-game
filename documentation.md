@@ -36,6 +36,12 @@ The main character's age is randomly determined based on the age range players c
 * Middle-aged adult: 30-49 years
 * Elderly adult: 50-76 years
 
+### Location
+_set in <<widget "parish">> in passage **char-gen-widgets**_
+
+Players choose one of five locations to live in London. Depending on their choice, they are assigned a random parish (based on historic London data).
+
+Location directly impacts a player's exposure to plague, including the first occurence in their parish and the level of spread/infection.
 
 ## Household Character Generator Widgets
 _Most of these settings are found in the passage **Char-gen-widgets** and called into the **Bio** passage._
@@ -126,4 +132,27 @@ This passage sets up most of the game variables like character names, prounouns,
 Includes widgets that set up the preventative efforts and remedies players can take to stave off plague infection, treatment options if they or a family member fall ill.
 
 <<widget "fumigant-check">> checks if the player has any type of fumigant on hand (which is depleted month by month). If there are fumigants in the player's inventory, it reduces their usual plague infection chances by 50%.
+
+# List of all widgets & their functions
+* <<widget "addPartnerNPC">>: creates a partner NPC if the player is married or widowed
+* <<widget "addChildNPC">>: creates child NPCs if the player is married or widowed.
+* <<widget "addParentNPC">>: creates parent NPCs based on the player's chosen age. 
+* <<widget "addSiblingNPC">>: creates sibling NPCs based on character's age. If the character is at least a young adult and married or widowed, additional siblings may be added to the "extended" household array ($NPCsExtended)
+* <<widget "addServantNPC">>: randomly assigns a number of servants to noble households (8-12 servants) and merchant households (1-3 servants).
+* <<widget "playerAge">>: sets player age to a random number based on the age range they choose during character setup
+* <<widget "playerName">>
+* <<widget "parish">>: assigns the player a parish in London based on the region they choose to live in
+* <<widget "ListNPCs">>: lists NPCs in a sidebar menu
+
+# List of arrays & variables:
+* $NPCs: array that stores all household family members; $NPCs.relationship, $NPCs.age, $NPCs.health, $NPCs.location
+* $NPCsExtended array: array that stores members of an "extended" household
+* $fled: variable that flags whether a player has chosen to stay or flee the city
+* $plagueInfection: variable that flags whether a player is healthy, actively infected, or recovered
+* $religion: variable, set in **** 
+* $gender: variable, chosen by player
+* $age: variable "child," "adolescent," "young adult," "middle-aged adult," or "elderly adult"
+* $agenum: variable, randomly assigned based on $age
+* $socio: variable, chosen by player
+* $relationship: variable, chosen by player
 
