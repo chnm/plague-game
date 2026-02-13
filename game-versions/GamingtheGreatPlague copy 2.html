@@ -2,7 +2,7 @@
 <html data-init="no-js">
 <head>
 <meta charset="UTF-8" />
-<title>Gaming the Great Plague 2026 v1.1</title>
+<title>Gaming the Great Plague 10</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="application-name" content="SugarCube" />
 <meta name="version" content="2.37.3" />
@@ -2534,7 +2534,6 @@ You
                     &lt;&lt;/if&gt;&gt;&lt;/li&gt;
                     &lt;li&gt;[[refuse to do as you&#39;ve been tasked.-&gt;work-refusal][$reputation to 0]]&lt;/li&gt;
                 &lt;/ul&gt;
-			&lt;&lt;else&gt;&gt;No one has any charity right now for a healthy beggar, but somehow you manage to scrape together enough food to last you to [[July 1665]].
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;
             &lt;&lt;if $role is &quot;corpsebearer&quot; or $role is &quot;searcher&quot; or $role is &quot;nurse&quot;&gt;&gt;
@@ -2548,7 +2547,6 @@ You
                 &lt;&lt;/if&gt;&gt;&lt;/li&gt;
                 	&lt;li&gt;[[decide to quit and look for other work.-&gt;July 1665][$reputation to Math.clamp($reputation - 3, 0, 10); $role to &quot;quit&quot;]]&lt;/li&gt;
                 &lt;/ul&gt;
-			&lt;&lt;else&gt;&gt;So many people are fleeing the city, there&#39;s plenty of work hauling their belongings to and fro... for now anyway. It&#39;s enough to get you through to [[July 1665]].
             &lt;&lt;/if&gt;&gt;
         &lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;&lt;br&gt;
                 /* NTS: include text about option to flee? */
@@ -2597,59 +2595,7 @@ You
 /* If not in city walls or western suburbs */
     &lt;&lt;elseif $location isnot &quot;in another part of the western suburbs&quot;&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
     &lt;&lt;/if&gt;&gt;
-    
-/* If location is western suburbs */
-    &lt;&lt;if $location is &quot;in another part of the western suburbs&quot;&gt;&gt;
-        &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
-            &lt;&lt;if $role is &quot;corpsebearer&quot; or $role is &quot;searcher&quot; or $role is &quot;nurse&quot;&gt;&gt;
-                &lt;&lt;plague-work&gt;&gt;
-                &lt;br&gt;&lt;br&gt;Do you:
-                &lt;ul&gt;&lt;li&gt;
-                    &lt;&lt;if _fumes gt 0&gt;&gt;
-                        &lt;&lt;if random(1,6) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665]]&lt;&lt;/if&gt;&gt;                
-                    &lt;&lt;else&gt;&gt;
-                        &lt;&lt;if random(1,3) eq 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665]]&lt;&lt;/if&gt;&gt;
-                    &lt;&lt;/if&gt;&gt;&lt;/li&gt;
-                    &lt;li&gt;[[refuse to do as you&#39;ve been tasked.-&gt;work-refusal][$reputation to 0]]&lt;/li&gt;
-                &lt;/ul&gt;
-			&lt;&lt;else&gt;&gt;No one has any charity right now for a healthy beggar, but somehow you manage to scrape together enough food to last you to [[July 1665]].
-            &lt;&lt;/if&gt;&gt;
-        &lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;
-            &lt;&lt;if $role is &quot;corpsebearer&quot; or $role is &quot;searcher&quot; or $role is &quot;nurse&quot;&gt;&gt;
-                &lt;&lt;plague-work&gt;&gt;
-                &lt;br&gt;&lt;br&gt;Do you:
-                &lt;ul&gt;&lt;li&gt;
-                &lt;&lt;if _fumes gt 0&gt;&gt;
-                    &lt;&lt;if random(1,6) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]]&lt;&lt;/if&gt;&gt;
-                &lt;&lt;else&gt;&gt;
-                    &lt;&lt;if random(1,3) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]] &lt;&lt;/if&gt;&gt;
-                &lt;&lt;/if&gt;&gt;&lt;/li&gt;
-                	&lt;li&gt;[[decide to quit and look for other work.-&gt;July 1665][$reputation to Math.clamp($reputation - 3, 0, 10); $role to &quot;quit&quot;]]&lt;/li&gt;
-                &lt;/ul&gt;
-			&lt;&lt;else&gt;&gt;So many people are fleeing the city, there&#39;s plenty of work hauling their belongings to and fro... for now anyway. It&#39;s enough to get you through to [[July 1665]].
-            &lt;&lt;/if&gt;&gt;
-        &lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;&lt;br&gt;
-                /* NTS: include text about option to flee? */
-                &lt;&lt;late-departure&gt;&gt;
-                Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-
-/* Artisans */
-        &lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;br&gt;
-            &lt;&lt;late-departure&gt;&gt;
-            Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-
-/* Merchants */ 
-        &lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;
-            &lt;&lt;late-departure&gt;&gt;
-            Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-
-/* Nobles */
-        &lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;Do you:
-            &lt;&lt;late-departure&gt;&gt;
-            Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-        &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkappend&gt;&gt;
+    &lt;&lt;/linkappend&gt;&gt;
 &lt;br&gt;&lt;br&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -2682,59 +2628,7 @@ You
 /* If not in city walls or western suburbs */
     &lt;&lt;elseif $location isnot &quot;in another part of the western suburbs&quot;&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
     &lt;&lt;/if&gt;&gt;
-    
-/* If location is western suburbs */
-    &lt;&lt;if $location is &quot;in another part of the western suburbs&quot;&gt;&gt;
-        &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
-            &lt;&lt;if $role is &quot;corpsebearer&quot; or $role is &quot;searcher&quot; or $role is &quot;nurse&quot;&gt;&gt;
-                &lt;&lt;plague-work&gt;&gt;
-                &lt;br&gt;&lt;br&gt;Do you:
-                &lt;ul&gt;&lt;li&gt;
-                    &lt;&lt;if _fumes gt 0&gt;&gt;
-                        &lt;&lt;if random(1,6) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665]]&lt;&lt;/if&gt;&gt;                
-                    &lt;&lt;else&gt;&gt;
-                        &lt;&lt;if random(1,3) eq 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665]]&lt;&lt;/if&gt;&gt;
-                    &lt;&lt;/if&gt;&gt;&lt;/li&gt;
-                    &lt;li&gt;[[refuse to do as you&#39;ve been tasked.-&gt;work-refusal][$reputation to 0]]&lt;/li&gt;
-                &lt;/ul&gt;
-			&lt;&lt;else&gt;&gt;No one has any charity right now for a healthy beggar, but somehow you manage to scrape together enough food to last you to [[July 1665]].
-            &lt;&lt;/if&gt;&gt;
-        &lt;&lt;elseif $socio is &quot;day labourers&quot;&gt;&gt;
-            &lt;&lt;if $role is &quot;corpsebearer&quot; or $role is &quot;searcher&quot; or $role is &quot;nurse&quot;&gt;&gt;
-                &lt;&lt;plague-work&gt;&gt;
-                &lt;br&gt;&lt;br&gt;Do you:
-                &lt;ul&gt;&lt;li&gt;
-                &lt;&lt;if _fumes gt 0&gt;&gt;
-                    &lt;&lt;if random(1,6) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]]&lt;&lt;/if&gt;&gt;
-                &lt;&lt;else&gt;&gt;
-                    &lt;&lt;if random(1,3) is 1&gt;&gt;[[swallow your fears and go to do your Christian duty.-&gt;July 1665][$plagueInfection to 1]]&lt;&lt;else&gt;&gt;[[swallow your fears and go to do your Christian duty-&gt;July 1665]] &lt;&lt;/if&gt;&gt;
-                &lt;&lt;/if&gt;&gt;&lt;/li&gt;
-                	&lt;li&gt;[[decide to quit and look for other work.-&gt;July 1665][$reputation to Math.clamp($reputation - 3, 0, 10); $role to &quot;quit&quot;]]&lt;/li&gt;
-                &lt;/ul&gt;
-			&lt;&lt;else&gt;&gt;So many people are fleeing the city, there&#39;s plenty of work hauling their belongings to and fro... for now anyway. It&#39;s enough to get you through to [[July 1665]].
-            &lt;&lt;/if&gt;&gt;
-        &lt;&lt;elseif $socio is &quot;servants&quot;&gt;&gt;&lt;br&gt;
-                /* NTS: include text about option to flee? */
-                &lt;&lt;late-departure&gt;&gt;
-                Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-
-/* Artisans */
-        &lt;&lt;elseif $socio is &quot;artisans&quot;&gt;&gt;&lt;br&gt;
-            &lt;&lt;late-departure&gt;&gt;
-            Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-
-/* Merchants */ 
-        &lt;&lt;elseif $socio is &quot;merchants&quot;&gt;&gt;
-            &lt;&lt;late-departure&gt;&gt;
-            Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-
-/* Nobles */
-        &lt;&lt;elseif $socio is &quot;nobles&quot;&gt;&gt;Do you:
-            &lt;&lt;late-departure&gt;&gt;
-            Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
-        &lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkappend&gt;&gt;
+    &lt;&lt;/linkappend&gt;&gt;
 &lt;br&gt;&lt;br&gt;
 &lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;
 &lt;&lt;else&gt;&gt;
@@ -2761,7 +2655,10 @@ You
 /* If not in city walls or western suburbs */
     &lt;&lt;elseif $location isnot &quot;in another part of the western suburbs&quot;&gt;&gt;[[Worse, the first case of plague has appeared in your parish.-&gt;First Plague Day]]
     &lt;&lt;/if&gt;&gt;
-    
+    &lt;&lt;/linkappend&gt;&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;
 /* If location is western suburbs */
     &lt;&lt;if $location is &quot;in another part of the western suburbs&quot;&gt;&gt;
         &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
@@ -2813,11 +2710,6 @@ You
             Otherwise, you can [[remain in the city with your entire household.-&gt;July 1665]]&lt;br&gt;&lt;br&gt;
         &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkappend&gt;&gt;
-&lt;br&gt;&lt;br&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;
-
 &lt;&lt;/if&gt;&gt;
 
 
@@ -4980,14 +4872,14 @@ After nearly a month in  &lt;span class=&quot;def&quot; data-def=&quot;A method 
         /* NTS: update text here for variety from past weeks */
         &lt;&lt;if _deceased.length gt 0&gt;&gt;Despite your care, your 
             &lt;&lt;for _x, _d range _deceased&gt;&gt;
-                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; _deceased.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
+                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; deceased4.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
                 &lt;&lt;/if&gt;&gt;       
             &lt;&lt;/for&gt;&gt;
         &lt;br&gt;&lt;br&gt; 
         &lt;&lt;/if&gt;&gt;
         
         /* show which family members recovered */
-        &lt;&lt;if _recovered.length gt 0&gt;&gt;&lt;&lt;if _deceased.length gt 0&gt;&gt;There is some good news, though. &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your
+        &lt;&lt;if _recovered4.length gt 0&gt;&gt;&lt;&lt;if _deceased4.length gt 0&gt;&gt;There is some good news, though. &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your
             &lt;&lt;for _r, _d range _recovered&gt;&gt;
                 &lt;&lt;if _recovered.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has started to recover from their illness.
                 &lt;&lt;elseif _r &lt; _recovered.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name
@@ -5720,9 +5612,7 @@ The official Thanksgiving Day for the end of the plague is proclaimed in Novembe
 
 Life may go on for the reckless, but it will not be until 1667 that you&lt;&lt;if $age is &quot;child&quot; or $age is &quot;adolescent&quot;&gt;&gt; and your family&lt;&lt;/if&gt;&gt; finally make your way [[back to the city-&gt;December 1666]].
 &lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="Stay" tags="" position="725,1100" size="100,100">&lt;&lt;nobr&gt;&gt;
-&lt;&lt;set _fleeBlocked to false&gt;&gt;&lt;&lt;if $fled is 5&gt;&gt;&lt;&lt;silently&gt;&gt;&lt;&lt;for _npc range $NPCs&gt;&gt;&lt;&lt;if _npc.health is &quot;infected&quot;&gt;&gt;&lt;&lt;set _fleeBlocked to true&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/for&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;if _fleeBlocked&gt;&gt;&lt;&lt;set $fled to 4&gt;&gt;You prepare your household to flee the city. It takes some time to sort out the travel logistics, but finally everything is in order. They will leave tomorrow.&lt;br&gt;&lt;br&gt;
-&lt;&lt;sickFam&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;fled-family&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;if not _fleeBlocked&gt;&gt;
+&lt;&lt;if $fled is 5&gt;&gt;&lt;&lt;fled-family&gt;&gt;&lt;&lt;/if&gt;&gt;
     /* Beggars */
     &lt;&lt;if $socio is &quot;beggars&quot;&gt;&gt;
         &lt;&lt;if $fled is 3&gt;&gt;
@@ -5769,7 +5659,6 @@ While you remain in the city, you can take measures to protect yourself&lt;&lt;i
 You can also visit the &#39;&#39;&lt;span class=&quot;def&quot; data-def=&quot;A person who prepares and sells drugs for medicinal purposes. Also the shop where such activities take place&quot;&gt;Apothecary&lt;/span&gt;&#39;&#39;, who sells remedies to prevent you from getting sick or to treat those who have fallen ill.
     &lt;&lt;first-plague-day-continue&gt;&gt;
 
-&lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="90" name="Failed-Flight" tags="" position="925,1125" size="100,100">You have attempted to flee the city! Unfortunately, your reputation precedes you, and no one will take you in. You are forced to return to London, shamed, and many shillings poorer.
 
 &lt;&lt;first-plague-day-continue&gt;&gt;</tw-passagedata><tw-passagedata pid="91" name="Quarantine, Week 5" tags="quarantine" position="450,375" size="100,100">&lt;&lt;nobr&gt;&gt;
@@ -5838,14 +5727,14 @@ You have now been in  &lt;span class=&quot;def&quot; data-def=&quot;A method of 
         /* NTS: update text here for variety from past weeks */
         &lt;&lt;if _deceased.length gt 0&gt;&gt;Despite your care, your 
             &lt;&lt;for _x, _d range _deceased&gt;&gt;
-                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; _deceased.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
+                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; deceased5.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
                 &lt;&lt;/if&gt;&gt;       
             &lt;&lt;/for&gt;&gt;
         &lt;br&gt;&lt;br&gt; 
         &lt;&lt;/if&gt;&gt;
         
         /* show which family members recovered */
-        &lt;&lt;if _recovered.length gt 0&gt;&gt;&lt;&lt;if _deceased.length gt 0&gt;&gt;There is some good news, though. &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your
+        &lt;&lt;if _recovered.length gt 0&gt;&gt;&lt;&lt;if _deceased5.length gt 0&gt;&gt;There is some good news, though. &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your
             &lt;&lt;for _r, _d range _recovered&gt;&gt;
                 &lt;&lt;if _recovered.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has started to recover from their illness.
                 &lt;&lt;elseif _r &lt; _recovered.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name
@@ -5940,15 +5829,15 @@ You enter your sixth week of  &lt;span class=&quot;def&quot; data-def=&quot;A me
         /* NTS: update text here for variety from past weeks */
         &lt;&lt;if _deceased.length gt 0&gt;&gt;Despite your care, your 
             &lt;&lt;for _x, _d range _deceased&gt;&gt;
-                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; _deceased.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
+                &lt;&lt;if _deceased.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has died.&lt;&lt;elseif _x &lt; deceased6.length - 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name,&lt;&lt;else&gt;&gt;and $NPCs[_d].relationship $NPCs[_d].name have died.
                 &lt;&lt;/if&gt;&gt;       
             &lt;&lt;/for&gt;&gt;
         &lt;br&gt;&lt;br&gt; 
         &lt;&lt;/if&gt;&gt;
         
         /* show which family members recovered */
-        &lt;&lt;if _recovered.length gt 0&gt;&gt;
-            &lt;&lt;if _deceased.length gt 0&gt;&gt;There is some good news, though.
+        &lt;&lt;if _recovered6.length gt 0&gt;&gt;
+            &lt;&lt;if _deceased6.length gt 0&gt;&gt;There is some good news, though.
             &lt;&lt;/if&gt;&gt;The treatments seem to be helping, and your
             &lt;&lt;for _r, _d range _recovered&gt;&gt;
                 &lt;&lt;if _recovered.length eq 1&gt;&gt;$NPCs[_d].relationship $NPCs[_d].name has started to recover from their illness.
