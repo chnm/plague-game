@@ -1,6 +1,6 @@
 # plague-game
 
-This is the repository for the Gaming the Great Plague of London, 1664-7 project
+This is the repository for the Gaming the Great Plague of London, 1664-7 project. Additional development work is currently being done in https://github.com/jmotis/agentic-experiment and intermittently transferred here.
 
 # bibliography
 
